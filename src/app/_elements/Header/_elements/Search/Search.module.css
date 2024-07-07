@@ -1,0 +1,11 @@
+.search {
+  display: flex;
+  gap: var(--spacing);
+  padding: var(--spacing);
+  width: 400px;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+}

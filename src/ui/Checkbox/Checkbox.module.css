@@ -1,0 +1,43 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing);
+}
+
+.checkbox {
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--gray);
+  border: 2px solid var(--gray);
+  border-radius: 3px;
+}
+
+.checkbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 6px;
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: solid var(--primary);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}

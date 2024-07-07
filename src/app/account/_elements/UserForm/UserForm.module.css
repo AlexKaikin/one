@@ -1,0 +1,9 @@
+.container {
+  max-width: 500px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing));
+}

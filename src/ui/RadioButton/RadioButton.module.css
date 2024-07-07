@@ -1,0 +1,41 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing);
+}
+
+.radio {
+  position: relative;
+  cursor: pointer;
+}
+
+.radio::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -3px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--gray);
+  border: 2px solid var(--gray);
+  border-radius: 50%;
+}
+
+.radio:checked::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 1px;
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+}

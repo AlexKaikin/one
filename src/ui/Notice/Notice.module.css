@@ -1,0 +1,87 @@
+.notifyContaner {
+  position: fixed;
+  top: calc(var(--spacing) / 2);
+  right: 0;
+}
+
+.container {
+  overflow: hidden;
+  max-height: 200px;
+  transition: max-height 0.3s ease-out;
+}
+
+.container:not(:last-child) {
+  margin-bottom: calc(var(--spacing) / 2);
+}
+
+.container.shrink {
+  max-height: 0;
+}
+
+.notification {
+  max-width: 430px;
+  max-height: 200px;
+  overflow: hidden;
+  padding: calc(var(--spacing)) 48px calc(var(--spacing)) calc(var(--spacing));
+  margin-right: calc(var(--spacing) / 2);
+  z-index: 99;
+  position: relative;
+  border-radius: var(--radius);
+  transition: transform 0.3s ease-out;
+}
+
+.notification:not(:last-child) {
+  margin-bottom: var(--spacing);
+}
+
+.notification.info {
+  background-color: var(--info);
+}
+
+.notification.success {
+  background-color: var(--success);
+}
+
+.notification.warning {
+  background-color: var(--warning);
+}
+
+.notification.error {
+  background-color: var(--error);
+}
+
+.notification .closeButton {
+  position: absolute;
+  top: calc(var(--spacing) / 2);
+  right: calc(var(--spacing) / 2);
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.notification,
+.notification .closeButton {
+  color: #fff;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.notification.slideIn {
+  animation-name: slideIn;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+}
+
+.notification.slideOut {
+  transform: translateX(150%);
+  flex: 0;
+}

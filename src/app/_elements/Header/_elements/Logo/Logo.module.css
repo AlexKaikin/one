@@ -1,0 +1,6 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing) / 2);
+  padding: var(--spacing);
+}

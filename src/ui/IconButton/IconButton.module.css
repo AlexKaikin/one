@@ -1,0 +1,59 @@
+.btn {
+  padding: 5px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-property: background-color, color, active, transform;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+
+  &:disabled {
+    opacity: 0.7;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.primary {
+  background-color: var(--primary);
+}
+
+.secondary {
+  background-color: var(--secondary);
+}
+
+.success {
+  background-color: var(--success);
+}
+
+.warning {
+  background-color: var(--warning);
+}
+
+.error {
+  background-color: var(--error);
+}
+
+.info {
+  background-color: var(--info);
+}
+
+.contained {
+  background-color: var(--primary);
+}
+
+.outlined {
+  background-color: transparent;
+  box-shadow: 0 0 0 2px var(--primary) inset;
+  color: var(--primary);
+}
+
+.text {
+  color: var(--text);
+  background-color: transparent;
+  padding: 0;
+}

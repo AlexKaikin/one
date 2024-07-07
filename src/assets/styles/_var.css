@@ -1,0 +1,25 @@
+:root,
+html[data-theme='light'] {
+  --dark: black;
+  --light: white;
+  --gray: rgb(180, 180, 180);
+  --gold: #ebcd27;
+  --primary: rgb(0, 0, 0);
+  --secondary: rgb(255 255 255 / 10%);
+  --success: rgb(86, 143, 69);
+  --warning: rgb(143, 126, 69);
+  --error: rgb(143, 69, 69);
+  --info: #566fdc;
+
+  --spacing: 15px;
+  --radius: 5px;
+  --bg: rgb(255, 255, 255);
+  --text: black;
+  --border: 1px solid rgb(212, 212, 212);
+}
+
+html[data-theme='dark'] {
+  --bg: rgb(13 20 33);
+  --text: white;
+  --border: 1px solid rgb(212, 212, 212);
+}

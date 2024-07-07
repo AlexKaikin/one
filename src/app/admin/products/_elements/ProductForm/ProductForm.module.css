@@ -1,0 +1,42 @@
+.container {
+  max-width: 500px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing));
+}
+
+.groupButtons {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing);
+}
+
+.gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing);
+}
+
+.imgContainer {
+  position: relative;
+  width: 130px;
+}
+
+.img {
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.removeImg {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

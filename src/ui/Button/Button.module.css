@@ -1,0 +1,85 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--spacing) / 2);
+  padding: var(--spacing) calc(var(--spacing) * 2);
+  border-radius: var(--radius);
+  background-color: var(--primary);
+  border: 0;
+  color: white;
+  width: max-content;
+  user-select: none;
+  transition-property: background-color, box-shadow, color, transform;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+  cursor: pointer;
+  height: max-content;
+
+  &:disabled {
+    opacity: 0.7;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.primary {
+  background-color: var(--primary);
+}
+
+.secondary {
+  background-color: var(--secondary);
+}
+
+.success {
+  background-color: var(--success);
+}
+
+.warning {
+  background-color: var(--warning);
+}
+
+.error {
+  background-color: var(--error);
+}
+
+.info {
+  background-color: var(--info);
+}
+
+.small {
+  padding: calc(var(--spacing) / 2) var(--spacing);
+  font-size: 0.8rem;
+}
+
+.medium {
+  padding: var(--spacing) calc(var(--spacing) * 2);
+}
+
+.large {
+  padding: var(--spacing) calc(var(--spacing) * 3);
+  font-size: 1.2rem;
+}
+
+.contained {
+  background-color: var(--primary);
+}
+
+.outlined {
+  background-color: transparent;
+  box-shadow: 0 0 0 2px var(--primary) inset;
+  color: var(--primary);
+}
+
+.text {
+  display: initial;
+  color: var(--text);
+  background-color: transparent;
+  padding: 0;
+}
+
+.fullWidth {
+  width: 100%;
+}

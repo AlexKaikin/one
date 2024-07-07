@@ -1,0 +1,29 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 20px 0;
+}
+
+.page {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.5s ease 0s;
+  color: var(--dark);
+
+  &.active {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  &.disabled {
+    opacity: 0.3;
+  }
+}
