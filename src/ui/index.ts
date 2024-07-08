@@ -16,7 +16,7 @@ export {
 export { Widget, WidgetGroup } from './Widget/Widget'
 export { List, ListItem } from './List/List'
 export { Icon } from './Icon/Icon'
-export { Menu, MenuItem } from './Menu/Menu'
+export { Menu, MenuItem, SubMenu } from './Menu/Menu'
 export { Divider } from './Divider/Divider'
 export { IconButton } from './IconButton/IconButton'
 export { NoticeProvider, type NoticeContextType } from './Notice/NoticeProvider'

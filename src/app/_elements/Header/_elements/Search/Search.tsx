@@ -2,32 +2,50 @@
 
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Icon, IconButton, Input } from '@/ui'
+import { SCREEN_LG } from '@/constants'
+import { useWindowDimensions } from '@/hooks'
+import { Icon, IconButton, Input, Menu, MenuItem } from '@/ui'
 import styles from './Search.module.css'
 
 export function Search() {
-  const [value, setValue] = useState('')
+  const { width } = useWindowDimensions()
+
+  if (!width) return null
+
+  return (
+    <div className={styles.search}>
+      {width < SCREEN_LG ? <MobileSearch /> : <DesktopSearch />}
+    </div>
+  )
+}
+
+function MobileSearch() {
+  return (
+    <Menu trigger={<Icon name="search" />}>
+      <MenuItem>
+        <DesktopSearch />
+      </MenuItem>
+    </Menu>
+  )
+}
+
+const style = { padding: '10px', marginRight: '5px' }
+
+function DesktopSearch() {
   const searchParams = useSearchParams()
-  const router = useRouter()
   const params = new URLSearchParams(searchParams)
+  const [value, setValue] = useState('')
+  const router = useRouter()
 
   const endIcon = (
     <div className={styles.group}>
       {value !== '' && (
-        <IconButton
-          variant="text"
-          style={{ padding: '10px', marginRight: '5px' }}
-          onClick={onClean}
-        >
+        <IconButton variant="text" style={style} onClick={onClean}>
           <Icon name="close" height={20} width={20} />
         </IconButton>
       )}
 
-      <IconButton
-        color="primary"
-        style={{ padding: '10px', marginRight: '5px' }}
-        onClick={onSubmit}
-      >
+      <IconButton color="primary" style={style} onClick={onSubmit}>
         <Icon name="search" height={20} width={20} color="white" />
       </IconButton>
     </div>
@@ -49,13 +67,11 @@ export function Search() {
   }
 
   return (
-    <div className={styles.search}>
-      <Input
-        value={value}
-        onChange={e => setValue(e.target.value)}
-        endIcon={endIcon}
-        placeholder="Search..."
-      />
-    </div>
+    <Input
+      value={value}
+      onChange={e => setValue(e.target.value)}
+      endIcon={endIcon}
+      placeholder="Search..."
+    />
   )
 }

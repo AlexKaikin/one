@@ -1,10 +1,12 @@
 'use client'
 
 import { ComponentProps } from 'react'
+import IconArrowDropDown from '@/assets/svg/arrowDropDown.svg'
 import IconChevronLeft from '@/assets/svg/chevronLeft.svg'
 import IconChevronRight from '@/assets/svg/chevronRight.svg'
 import IconClose from '@/assets/svg/close.svg'
 import IconGalaxy from '@/assets/svg/galaxy.svg'
+import IconList from '@/assets/svg/list.svg'
 import IconPlus from '@/assets/svg/plus.svg'
 import IconSearch from '@/assets/svg/search.svg'
 import IconTrash from '@/assets/svg/trash.svg'
@@ -18,6 +20,8 @@ type IconType =
   | 'close'
   | 'chevronLeft'
   | 'chevronRight'
+  | 'list'
+  | 'arrowDropDown'
 
 export function Icon({ name, ...rest }: Props) {
   const icons = {
@@ -28,6 +32,8 @@ export function Icon({ name, ...rest }: Props) {
     close: <IconClose {...rest} />,
     chevronLeft: <IconChevronLeft {...rest} />,
     chevronRight: <IconChevronRight {...rest} />,
+    list: <IconList {...rest} />,
+    arrowDropDown: <IconArrowDropDown {...rest} />,
   }
   const icon = icons[name]
   return icon

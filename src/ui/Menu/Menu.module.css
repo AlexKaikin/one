@@ -1,5 +1,22 @@
 .trigger {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.triggerButton {
+  display: flex;
+  align-items: center;
+}
+
+.subTrigger {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--spacing);
+  padding: calc(var(--spacing) / 2) calc(var(--spacing) / 2)
+    calc(var(--spacing) / 2) var(--spacing);
 }
 
 .menuItems {
@@ -9,19 +26,34 @@
   flex-direction: column;
   gap: calc(var(--spacing) / 2);
   background-color: var(--bg);
-  min-width: 200px;
+  min-width: 240px;
   box-shadow: 0 0 100px 1px #b2b2b2;
   border-radius: var(--radius);
+  overflow: auto;
+  max-height: 80vh;
+  padding-top: var(--spacing);
+  padding-bottom: var(--spacing);
+}
+
+.menuSubItems {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) / 2);
+  background-color: var(--bg);
+  /* min-width: 200px; */
+  border-radius: var(--radius);
+  margin-left: var(--spacing);
 }
 
 .menuItem {
-  padding: 0 var(--spacing) 0 var(--spacing);
+  padding: calc(var(--spacing) / 2) var(--spacing) calc(var(--spacing) / 2)
+    var(--spacing);
+}
 
-  &:first-child {
+/* &:first-child {
     padding-top: var(--spacing);
   }
 
   &:last-child {
     padding-bottom: var(--spacing);
-  }
-}
+  } */

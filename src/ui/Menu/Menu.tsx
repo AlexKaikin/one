@@ -1,28 +1,59 @@
 'use client'
 
-import { ReactNode, useRef, useState } from 'react'
+import { ReactNode, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import Link from 'next/link'
 import { useOnClickOutside } from '@/hooks'
+import { Icon } from '../Icon/Icon'
+import { IconButton } from '../IconButton/IconButton'
 import styles from './Menu.module.css'
+import { MenuContext, MenuContextType, MenuProvider } from './context'
 
-type Props = { trigger: ReactNode; children: ReactNode }
+type MenuProps = {
+  trigger?: ReactNode
+  children: ReactNode
+  href?: string
+}
+type Props = { trigger: ReactNode; href?: string; children: ReactNode }
 
-export function Menu({ trigger, children }: Props) {
-  const [open, setOpen] = useState(false)
+export function Menu(props: MenuProps) {
+  return (
+    <MenuProvider>
+      <MenuWithContext {...props} />
+    </MenuProvider>
+  )
+}
+
+export function MenuWithContext({ trigger, href, children }: MenuProps) {
+  const { open, setOpen } = useContext(MenuContext) as MenuContextType
+
   const ref = useRef<any | null>(null)
 
   useOnClickOutside(ref, () => setOpen(false))
 
   return (
-    <div>
-      <div ref={ref} onClick={() => setOpen(!open)} className={styles.trigger}>
-        {trigger}
+    <div ref={ref} className={styles.menu}>
+      <div className={styles.trigger}>
+        {href ? (
+          <Link href={href || '#'} onClick={() => setOpen(false)}>
+            {trigger}
+          </Link>
+        ) : (
+          <div className={styles.triggerButton} onClick={() => setOpen(!open)}>
+            {trigger}
+          </div>
+        )}
+
+        {!!href && (
+          <IconButton variant="text" onClick={() => setOpen(!open)}>
+            <Icon name="arrowDropDown" />
+          </IconButton>
+        )}
       </div>
+
       {open &&
         createPortal(
-          <div className={styles.menuItems} onClick={() => setOpen(false)}>
-            {children}
-          </div>,
+          <div className={styles.menuItems}>{children}</div>,
           ref.current
         )}
     </div>
@@ -30,5 +61,36 @@ export function Menu({ trigger, children }: Props) {
 }
 
 export function MenuItem({ children }: { children: ReactNode }) {
-  return <div className={styles.menuItem}>{children}</div>
+  const { setOpen } = useContext(MenuContext) as MenuContextType
+
+  return (
+    <div className={styles.menuItem} onClick={() => setOpen(false)}>
+      {children}
+    </div>
+  )
+}
+
+export function SubMenu({ trigger, href, children }: Props) {
+  const { setOpen } = useContext(MenuContext) as MenuContextType
+  const [openSub, setOpenSub] = useState(false)
+
+  function onClick() {
+    setOpenSub(!openSub)
+  }
+
+  return (
+    <div>
+      <div onClick={onClick} className={styles.subTrigger}>
+        <Link href={href || '#'} onClick={() => setOpen(false)}>
+          {trigger}
+        </Link>
+
+        <IconButton variant="text">
+          <Icon name="arrowDropDown" />
+        </IconButton>
+      </div>
+
+      {openSub && <div className={styles.menuSubItems}>{children}</div>}
+    </div>
+  )
 }

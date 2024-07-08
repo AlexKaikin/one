@@ -1,5 +1,14 @@
 .list {
   display: flex;
-  flex-direction: column;
+
   gap: calc(var(--spacing));
+}
+
+.horizontal {
+  flex-direction: row;
+  align-items: center;
+}
+
+.vertical {
+  flex-direction: column;
 }
