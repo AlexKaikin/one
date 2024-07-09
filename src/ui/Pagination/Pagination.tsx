@@ -25,7 +25,7 @@ export function Pagination({ totalCount }: { totalCount: string }) {
     router.push(path)
   }
 
-  if (pages.length === 1) return null
+  if (pages.length < 2) return null
 
   return (
     <div className={styles.pagination}>

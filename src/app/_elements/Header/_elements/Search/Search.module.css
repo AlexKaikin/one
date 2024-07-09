@@ -1,3 +1,7 @@
+.container {
+  padding: 0 var(--spacing);
+}
+
 .search {
   display: flex;
   gap: var(--spacing);
@@ -11,4 +15,6 @@
 .group {
   display: flex;
   flex-direction: row;
+  min-width: 100px;
+  justify-content: flex-end;
 }

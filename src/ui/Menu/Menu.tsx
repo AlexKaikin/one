@@ -3,7 +3,8 @@
 import { ReactNode, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
-import { useOnClickOutside } from '@/hooks'
+import { useSearchParams } from 'next/navigation'
+import { useOnClickOutside, useWindowDimensions } from '@/hooks'
 import { Icon } from '../Icon/Icon'
 import { IconButton } from '../IconButton/IconButton'
 import styles from './Menu.module.css'
@@ -26,10 +27,42 @@ export function Menu(props: MenuProps) {
 
 export function MenuWithContext({ trigger, href, children }: MenuProps) {
   const { open, setOpen } = useContext(MenuContext) as MenuContextType
+  const { height, width } = useWindowDimensions()
+  const [style, setStyle] = useState({})
 
   const ref = useRef<any | null>(null)
+  const portalRef = useRef<any | null>(null)
 
   useOnClickOutside(ref, () => setOpen(false))
+
+  const searchParams = useSearchParams()
+  const search = searchParams.get('search')
+
+  useEffect(() => {
+    setOpen(false)
+  }, [search, setOpen])
+
+  useEffect(() => {
+    if (open && portalRef.current && height && width) {
+      const portalRect = portalRef.current.getBoundingClientRect()
+
+      if (portalRect.right > width) {
+        setStyle(prev => ({ ...prev, right: `10px` }))
+      }
+
+      if (portalRect.bottom > height) {
+        setStyle(prev => ({ ...prev, bottom: `10px` }))
+      }
+
+      if (portalRect.left < 0) {
+        setStyle(prev => ({ ...prev, left: `10px` }))
+      }
+
+      if (portalRect.top < 0) {
+        setStyle(prev => ({ ...prev, top: `10px` }))
+      }
+    }
+  }, [height, width, style, open])
 
   return (
     <div ref={ref} className={styles.menu}>
@@ -53,7 +86,9 @@ export function MenuWithContext({ trigger, href, children }: MenuProps) {
 
       {open &&
         createPortal(
-          <div className={styles.menuItems}>{children}</div>,
+          <div ref={portalRef} className={styles.menuItems} style={style}>
+            {children}
+          </div>,
           ref.current
         )}
     </div>

@@ -22,9 +22,9 @@ export function Search() {
 function MobileSearch() {
   return (
     <Menu trigger={<Icon name="search" />}>
-      <MenuItem>
+      <div className={styles.container}>
         <DesktopSearch />
-      </MenuItem>
+      </div>
     </Menu>
   )
 }
@@ -34,7 +34,7 @@ const style = { padding: '10px', marginRight: '5px' }
 function DesktopSearch() {
   const searchParams = useSearchParams()
   const params = new URLSearchParams(searchParams)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(searchParams.get('search') || '')
   const router = useRouter()
 
   const endIcon = (
