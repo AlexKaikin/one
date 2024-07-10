@@ -1,3 +1,27 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--spacing);
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing);
+}
+
+.groupItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sortActive {
+  color: var(--primary);
+}
+
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));

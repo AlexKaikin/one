@@ -14,4 +14,15 @@ body {
   font-size: 18px;
   font-weight: 500;
   min-width: 320px;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+input {
+  color: var(--text);
+
+  &::placeholder {
+    color: var(--text);
+    opacity: .5;
+  }
 }

@@ -6,6 +6,7 @@ const defaultValues = {
   id: '',
   title: '',
   imageUrls: [],
+  translations: { ru: { title: '' } },
 } as unknown as ProductType
 
 export default function NewProductPage() {

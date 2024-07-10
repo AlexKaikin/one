@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { Jost } from 'next/font/google'
+import { cookies } from 'next/headers'
 import { Providers } from '@/providers'
 import { Layout } from '@/ui'
 import '../assets/styles/globals.css'
@@ -18,8 +19,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const theme = cookies().get('theme')
+
   return (
-    <html lang="en">
+    <html lang="en" data-theme={theme?.value || 'light'}>
       <body className={jost.className}>
         <Providers>
           <Suspense>

@@ -19,6 +19,7 @@ button {
   cursor: pointer;
   width: max-content;
   font-weight: inherit;
+  color: inherit;
 }
 
 h1,

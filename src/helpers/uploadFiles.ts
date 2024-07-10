@@ -20,7 +20,7 @@ export async function uploadFile(
         { resource_type: 'auto', folder: 'upload' },
         async (err, result) => {
           if (err) reject(err.message)
-          console.log(result)
+
           resolve(result)
         }
       )

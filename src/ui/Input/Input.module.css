@@ -26,20 +26,13 @@
   font-size: 0.7rem;
   padding: 0;
   border-radius: calc(var(--radius) / 2);
-  color: var(--dark);
 }
 
 .input {
   outline: none;
   border: 0;
   width: 100%;
-  color: var(--dark);
   padding: var(--spacing);
-
-  &::placeholder {
-    color: var(--dark);
-    opacity: 0.5;
-  }
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {

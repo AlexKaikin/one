@@ -1,7 +1,7 @@
 import { ApiError } from '@/helpers'
 import { ProductService } from '@/services'
 import { UrlParams } from '@/types'
-import { Page, PageContent, PageHeader, Pagination } from '@/ui'
+import { Icon, Page, PageContent, PageHeader, Pagination } from '@/ui'
 import { ProductPreview } from './_elements'
 import styles from './page.module.css'
 
@@ -28,7 +28,19 @@ export default async function Shop(urlParams: UrlParams) {
 
   return (
     <Page>
-      <PageHeader>Shop</PageHeader>
+      <PageHeader>
+        <div className={styles.header}>
+          <div>Shop</div>
+          <div className={styles.group}>
+            <div className={styles.groupItem}>
+              <Icon name="filter" /> Filter
+            </div>
+            <div className={styles.groupItem}>
+              <Icon name="sort" /> Sorting: <span className={styles.sortActive}>new</span>
+            </div>
+          </div>
+        </div>
+      </PageHeader>
       <PageContent>
         <div className={styles.products}>
           {products.map(product => (

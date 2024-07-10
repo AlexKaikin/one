@@ -1,5 +1,21 @@
 .card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
   border: var(--border);
   padding: var(--spacing);
   border-radius: var(--radius);
+}
+
+.imgContainer {
+  overflow: hidden;
+  position: relative;
+  padding: 0 0 100% 0;
+  border-radius: var(--radius);
+}
+
+.img {
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
 }

@@ -14,6 +14,8 @@ import {
   FormInput,
   Icon,
   IconButton,
+  Tab,
+  Tabs,
   useNotify,
 } from '@/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -31,6 +33,7 @@ const schema = z.object({
   files: z
     .instanceof(typeof window === 'undefined' ? File : FileList)
     .optional(),
+  translation: z.object({ ru: z.object({ title: z.string().optional() }) }),
 })
 
 type Props = {
@@ -110,8 +113,17 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
     reset(defaultValues)
   }, [defaultValues, reset])
 
+  console.log(watch())
+
   return (
     <Form id="productForm" formMethods={formMethods} onSubmit={onSubmit}>
+      {/* <Tabs>
+        <Tab></Tab>
+      </Tabs> */}
+      <div>
+        <Button variant="outlined">EN</Button>{' '}
+        <Button variant="outlined">RU</Button>
+      </div>
       <div className={styles.container}>
         <div className={styles.fields}>
           <FormInput name="title" label="Title" />

@@ -27,6 +27,7 @@ export function Button(props: Props) {
 
   return (
     <button
+      type="button"
       className={cn(styles.btn, {
         [styles.fullWidth]: isFullWidth,
         [styles[size || 'medium']]: size,

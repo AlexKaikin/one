@@ -9,12 +9,20 @@ export type Product = {
   imageUrls: string[]
   createdAt: string
   updatedAt: string
+  translations: { ru: { title: string } }
+}
+
+const translationSchema = {
+  ru: {
+    title: { type: String },
+  },
 }
 
 const schema = new Schema(
   {
     title: { type: String, require: true },
     imageUrls: [{ type: String }],
+    translations: translationSchema,
   },
   {
     timestamps: true,

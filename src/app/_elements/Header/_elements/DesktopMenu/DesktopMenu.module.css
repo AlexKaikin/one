@@ -1,0 +1,9 @@
+.accountName {
+  display: flex;
+  flex-direction: column;
+}
+
+.email {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}

@@ -74,7 +74,6 @@
 }
 
 .text {
-  display: initial;
   color: var(--text);
   background-color: transparent;
   padding: 0;
