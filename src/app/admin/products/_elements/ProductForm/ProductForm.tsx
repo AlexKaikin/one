@@ -33,7 +33,7 @@ const schema = z.object({
   files: z
     .instanceof(typeof window === 'undefined' ? File : FileList)
     .optional(),
-  translation: z.object({ ru: z.object({ title: z.string().optional() }) }),
+  translations: z.object({ ru: z.object({ title: z.string().optional() }) }),
 })
 
 type Props = {
@@ -50,7 +50,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
     Product & { files: FileList | null; destroyImageUrls: string[] }
   >({ defaultValues, resolver: zodResolver(schema) })
   const { formState, getValues, setValue, watch, reset } = formMethods
-  const { isDirty } = formState
+  const { isDirty, errors } = formState
 
   const isFilesLimit =
     getValues('imageUrls').length + filePreviews.length >= MAX_FILES
@@ -111,72 +111,86 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
 
   useEffect(() => {
     reset(defaultValues)
+    setFilePreviews([])
   }, [defaultValues, reset])
 
-  console.log(watch())
+  // console.log(watch(), errors)
+  //console.log(defaultValues)
 
   return (
     <Form id="productForm" formMethods={formMethods} onSubmit={onSubmit}>
-      {/* <Tabs>
-        <Tab></Tab>
-      </Tabs> */}
       <div>
-        <Button variant="outlined">EN</Button>{' '}
-        <Button variant="outlined">RU</Button>
-      </div>
-      <div className={styles.container}>
-        <div className={styles.fields}>
-          <FormInput name="title" label="Title" />
-          <div className={styles.gallery}>
-            {[...watch('imageUrls'), ...filePreviews].map((src, index) => (
-              <div key={index} className={styles.imgContainer}>
-                <Image
-                  fill
-                  sizes="(max-width: 1800px) 50vw"
-                  src={src}
-                  alt="фото"
-                  className={styles.img}
-                />
-                <div className={styles.removeImg}>
-                  <IconButton
-                    color="error"
-                    type="button"
-                    onClick={() => removeFile(src, index)}
-                  >
-                    <Icon name="trash" color="white" />
-                  </IconButton>
+        <div className={styles.col}>
+          <Tabs>
+            <Tab title="En" active>
+              <div className={styles.container}>
+                <div className={styles.fields}>
+                  <FormInput name="title" label="Title" />
                 </div>
               </div>
-            ))}
-          </div>
-          <FormFile
-            maxSizeMb={MAX_SIZE_FILE}
-            maxFiles={filesLimit}
-            disabled={isFilesLimit}
-            onChange={handleChangeFile}
-            accept="image/*"
-            multiple
-          />
-          <div>
-            Image max size {MAX_SIZE_FILE} Mb, max limit {MAX_FILES}
-          </div>
+            </Tab>
+            <Tab title="Ru">
+              <FormInput name="translations.ru.title" label="Title" />
+            </Tab>
+          </Tabs>
 
-          <div className={styles.groupButtons}>
-            <Button type="submit" disabled={!isDirty}>
-              Submit
-            </Button>
-            {isUpdateMode && (
-              <Button
-                type="button"
-                variant="outlined"
-                onClick={handleDeleteProduct}
-              >
-                Delete
-              </Button>
-            )}
+          <div className={styles.imagescontainer}>
+            <div className={styles.fields}>
+              <div>Images</div>
+              <div className={styles.gallery}>
+                {[...watch('imageUrls'), ...filePreviews].map((src, index) => (
+                  <div key={index} className={styles.imgContainer}>
+                    <Image
+                      fill
+                      sizes="(max-width: 1800px) 50vw"
+                      src={src}
+                      alt="фото"
+                      className={styles.img}
+                    />
+                    <div className={styles.removeImg}>
+                      <IconButton
+                        color="error"
+                        type="button"
+                        onClick={() => removeFile(src, index)}
+                      >
+                        <Icon name="trash" color="white" />
+                      </IconButton>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <FormFile
+                maxSizeMb={MAX_SIZE_FILE}
+                maxFiles={filesLimit}
+                disabled={isFilesLimit}
+                onChange={handleChangeFile}
+                accept="image/*"
+                multiple
+              />
+              <div>
+                Image max size {MAX_SIZE_FILE} Mb, max limit {MAX_FILES}
+              </div>
+            </div>
           </div>
         </div>
-        <div></div>
+      </div>
+
+      <div>
+        <div className={styles.groupButtons}>
+          <Button type="submit" disabled={!isDirty}>
+            Submit
+          </Button>
+
+          {isUpdateMode && (
+            <Button
+              type="button"
+              variant="outlined"
+              onClick={handleDeleteProduct}
+            >
+              Delete
+            </Button>
+          )}
+        </div>
       </div>
     </Form>
   )

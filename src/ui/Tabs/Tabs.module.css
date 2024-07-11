@@ -1,0 +1,28 @@
+.tabsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 2);
+  width: 100%;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing);
+  background-color: color-mix(in srgb, var(--bg) 90%, var(--text) 10%);
+  border-radius: var(--radius);
+  padding: calc(var(--spacing) / 2);
+  width: max-content;
+}
+
+.tab {
+  cursor: pointer;
+  padding: calc(var(--spacing) / 2) calc(var(--spacing) * 2);
+  border-radius: var(--radius);
+}
+
+.active {
+  background-color: var(--primary);
+  color: white;
+}

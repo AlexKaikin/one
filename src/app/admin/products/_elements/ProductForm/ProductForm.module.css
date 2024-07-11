@@ -1,5 +1,20 @@
+.col {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing);
+}
+
 .container {
+  width: 100%;
   max-width: 500px;
+}
+
+.imagescontainer {
+  width: 100%;
+  max-width: 500px;
+  border: var(--border);
+  padding: var(--spacing);
+  border-radius: var(--radius);
 }
 
 .fields {

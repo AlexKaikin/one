@@ -8,6 +8,7 @@ import IconClose from '@/assets/svg/close.svg'
 import IconFilter from '@/assets/svg/filter.svg'
 import IconGalaxy from '@/assets/svg/galaxy.svg'
 import IconList from '@/assets/svg/list.svg'
+import IconLoading from '@/assets/svg/loading.svg'
 import IconMoon from '@/assets/svg/moon.svg'
 import IconPlus from '@/assets/svg/plus.svg'
 import IconSearch from '@/assets/svg/search.svg'
@@ -30,6 +31,7 @@ type IconType =
   | 'moon'
   | 'filter'
   | 'sort'
+  | 'loading'
 
 export function Icon({ name, ...rest }: Props) {
   const icons = {
@@ -46,6 +48,7 @@ export function Icon({ name, ...rest }: Props) {
     moon: <IconMoon {...rest} />,
     filter: <IconFilter {...rest} />,
     sort: <IconSort {...rest} />,
+    loading: <IconLoading {...rest} />,
   }
   const icon = icons[name]
   return icon

@@ -2,7 +2,7 @@
 html[data-theme='light'] {
   --dark: black;
   --light: white;
-  --gray: rgb(180, 180, 180);
+  --gray: rgb(223, 223, 223);
   --gold: #ebcd27;
   --primary: rgb(92 76 152);
   --secondary: rgb(255 255 255 / 10%);

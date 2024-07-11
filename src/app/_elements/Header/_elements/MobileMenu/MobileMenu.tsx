@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { Icon, Menu, MenuItem, SubMenu } from '@/ui'
 import { SignOutLink } from '../SignOutLink/SignOutLink'
+import { Theme } from '../Theme/Theme'
 import styles from './MobileMenu.module.css'
 
 export function MobileMenu() {
@@ -77,7 +78,9 @@ export function MobileMenu() {
 
             <MenuItem>RU language</MenuItem>
 
-            <MenuItem>Light theme</MenuItem>
+            <MenuItem>
+              <Theme />
+            </MenuItem>
 
             <MenuItem>
               <SignOutLink />

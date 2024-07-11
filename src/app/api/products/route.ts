@@ -16,8 +16,9 @@ export async function POST(request: Request) {
       img => `/upload/${img?.display_name}.${img?.format}`
     )
     const title = data.get('title')
-
-    const newProduct = { title, imageUrls }
+    const titleRu = data.get('translations[ru][title]')
+    const translations = { ru: { title: titleRu } }
+    const newProduct = { title, imageUrls, translations } as Product
 
     const product = await ProductModel.create(newProduct)
 

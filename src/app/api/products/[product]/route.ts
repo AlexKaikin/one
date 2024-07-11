@@ -1,8 +1,7 @@
-import { NextResponse } from 'next/server';
-import { connectDB } from '@/config/db';
-import { deleteFiles, uploadFiles } from '@/helpers';
-import { Product, ProductModel } from '../model';
-
+import { NextResponse } from 'next/server'
+import { connectDB } from '@/config/db'
+import { deleteFiles, toObject, uploadFiles } from '@/helpers'
+import { Product, ProductModel } from '../model'
 
 type Params = {
   product: string
@@ -41,16 +40,18 @@ export async function PATCH(request: Request, context: { params: Params }) {
       img => `/upload/${img?.display_name}.${img?.format}`
     )
     const destroyImageUrls =
-      (data.getAll('destroyImageUrls[]') as string[]) || [] 
+      (data.getAll('destroyImageUrls[]') as string[]) || []
 
     if (destroyImageUrls.length) await deleteFiles(destroyImageUrls)
 
     const title = data.get('title')
+    const titleRu = data.get('translations[ru][title]')
+    const translations = { ru: { title: titleRu } }
     const imageUrls = data.getAll('imageUrls[]')
       ? [...data.getAll('imageUrls[]'), ...newImageUrls]
       : [...newImageUrls]
 
-    const updatedProduct = { title, imageUrls }
+    const updatedProduct = { title, imageUrls, translations }
 
     const product = await ProductModel.findByIdAndUpdate(id, updatedProduct, {
       new: true,
@@ -89,3 +90,26 @@ export async function DELETE(_: Request, context: { params: Params }) {
     )
   }
 }
+
+// function parseDeepFormData(formData) {
+//     let result = {};
+
+//     for (let pair of formData.entries()) {
+//         let keys = pair[0].split('[');
+//         let value = pair[1];
+//         let current = result;
+
+//         for (let i = 0; i < keys.length; i++) {
+//             let key = keys[i].replace(']', '');
+
+//             if (i === keys.length - 1) {
+//                 current[key] = value;
+//             } else {
+//                 current[key] = current[key] || {};
+//                 current = current[key];
+//             }
+//         }
+//     }
+
+//     return result;
+// }
