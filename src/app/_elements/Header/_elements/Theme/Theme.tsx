@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react'
 import { getCookie, setCookie } from '@/helpers'
 import { Button, Icon } from '@/ui'
+import { useTranslation } from '@/store'
 
 export function Theme() {
+  const { t } = useTranslation()
   const [theme, setTheme] = useState<string | null>(null)
   const name = theme === 'light' ? 'moon' : 'sun'
 
@@ -34,7 +36,7 @@ export function Theme() {
       startIcon={<Icon name={name} width={20} height={20} />}
       onClick={themeChange}
     >
-      {name === 'moon' ? 'Dark theme' : 'Light theme'}
+      {name === 'moon' ? t('darkTheme') : t('lightTheme')}
     </Button>
   )
 }

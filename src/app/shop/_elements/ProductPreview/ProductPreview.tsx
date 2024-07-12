@@ -1,10 +1,14 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { Product } from '@/app/api/products/model'
+import { useTranslation } from '@/store'
 import styles from './ProductPreview.module.css'
 
 export function ProductPreview({ product }: { product: Product }) {
   const { id, title, imageUrls } = product
+  const { tAPI } = useTranslation()
   const url = imageUrls[0]
 
   return (
@@ -21,8 +25,7 @@ export function ProductPreview({ product }: { product: Product }) {
           />
         </div>
       )}
-
-      {title}
+      {tAPI('title', product)}
     </Link>
   )
 }

@@ -2,60 +2,63 @@
 
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useTranslation } from '@/store'
 import { Icon, Menu, MenuItem, SubMenu } from '@/ui'
+import { Lang } from '../Lang/Lang'
 import { SignOutLink } from '../SignOutLink/SignOutLink'
 import { Theme } from '../Theme/Theme'
 import styles from './MobileMenu.module.css'
 
 export function MobileMenu() {
+  const { t } = useTranslation()
   const { data } = useSession()
 
   return (
     <Menu trigger={<Icon name="list" />}>
       <MenuItem>
-        <Link href={'/'}>Home</Link>
+        <Link href={'/'}>{t('home')}</Link>
       </MenuItem>
 
-      <SubMenu trigger={'Shop'} href={'/shop'}>
-        <SubMenu trigger={'Products'} href={'/shop'}>
+      <SubMenu trigger={t('shop')} href={'/shop'}>
+        <SubMenu trigger={t('products')} href={'/shop'}>
           <MenuItem>
-            <Link href={'/shop'}>Tea</Link>
+           <Link href={'/shop'}>{t('tea')}</Link>
           </MenuItem>
 
           <MenuItem>
-            <Link href={'/shop'}>Coffee</Link>
+           <Link href={'/shop'}>{t('coffee')}</Link>
           </MenuItem>
         </SubMenu>
 
         <MenuItem>
-          <Link href={'/shop'}>Favorites</Link>
+           <Link href={'/shop'}>{t('favorites')}</Link>
         </MenuItem>
 
         <MenuItem>
-          <Link href={'/shop'}>Compare</Link>
+         <Link href={'/shop'}>{t('compare')}</Link>
         </MenuItem>
 
         <MenuItem>
-          <Link href={'/shop'}>Cart</Link>
+         <Link href={'/shop'}>{t('cart')}</Link>
         </MenuItem>
       </SubMenu>
 
       <MenuItem>
-        <Link href={'/blog'}>Blog</Link>
+         <Link href={'/blog'}>{t('blog')}</Link>
       </MenuItem>
 
       <MenuItem>
-        <Link href={'/club'}>Club</Link>
+       <Link href={'/club'}>{t('club')}</Link>
       </MenuItem>
 
-      <SubMenu trigger={'Account'}>
+      <SubMenu trigger={t('account')}>
         {!data?.user && (
           <>
             <MenuItem>
-              <Link href={'/login'}>Login</Link>
+               <Link href={'/login'}>{t('login')}</Link>
             </MenuItem>
             <MenuItem>
-              <Link href={'/register'}>Registration</Link>
+              <Link href={'/register'}>{t('registration')}</Link>
             </MenuItem>
           </>
         )}
@@ -69,14 +72,16 @@ export function MobileMenu() {
             </MenuItem>
 
             <MenuItem>
-              <Link href={'/account'}>Personal Area</Link>
+                <Link href={'/account'}>{t('lk')}</Link>
             </MenuItem>
 
             <MenuItem>
-              <Link href={'/admin'}>Admin</Link>
+              <Link href={'/admin'}>{t('admin')}</Link>
             </MenuItem>
 
-            <MenuItem>RU language</MenuItem>
+            <MenuItem>
+              <Lang />
+            </MenuItem>
 
             <MenuItem>
               <Theme />

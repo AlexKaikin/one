@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { SCREEN_LG } from '@/constants'
 import { useWindowDimensions } from '@/hooks'
+import { useTranslation } from '@/store'
 import { Icon, IconButton, Input, Menu, MenuItem } from '@/ui'
 import styles from './Search.module.css'
 
@@ -32,6 +33,7 @@ function MobileSearch() {
 const style = { padding: '10px', marginRight: '5px' }
 
 function DesktopSearch() {
+  const { t } = useTranslation()
   const searchParams = useSearchParams()
   const params = new URLSearchParams(searchParams)
   const [value, setValue] = useState(searchParams.get('search') || '')
@@ -71,7 +73,7 @@ function DesktopSearch() {
       value={value}
       onChange={e => setValue(e.target.value)}
       endIcon={endIcon}
-      placeholder="Search..."
+      placeholder={`${t('search')}...`}
     />
   )
 }

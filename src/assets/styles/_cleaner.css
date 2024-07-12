@@ -20,6 +20,8 @@ button {
   width: max-content;
   font-weight: inherit;
   color: inherit;
+  font-size: inherit;
+  font-family: inherit;
 }
 
 h1,
@@ -30,6 +32,7 @@ h5,
 h6 {
   margin-top: 0;
   margin-bottom: 0;
+  font-weight: inherit;
 }
 
 .input {
@@ -50,7 +53,6 @@ h6 {
     caret-color: var(--dark);
   }
 }
-
 
 ::-webkit-scrollbar {
   width: 10px;

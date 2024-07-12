@@ -2,54 +2,57 @@
 
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useTranslation } from '@/store'
 import { List, Menu, MenuItem, SubMenu } from '@/ui'
+import { Lang } from '../Lang/Lang'
 import { SignOutLink } from '../SignOutLink/SignOutLink'
 import { Theme } from '../Theme/Theme'
 import styles from './DesktopMenu.module.css'
 
 export function DesktopMenu() {
+  const { t } = useTranslation()
   const { data } = useSession()
 
   return (
     <List align="horizontal">
-      <Link href={'/'}>Home</Link>
+      <Link href={'/'}>{t('home')}</Link>
 
-      <Menu trigger={'Shop'} href={'/shop'}>
-        <SubMenu trigger={'Products'} href={'/shop'}>
+      <Menu trigger={t('shop')} href={'/shop'}>
+        <SubMenu trigger={t('products')} href={'/shop'}>
           <MenuItem>
-            <Link href={'/shop'}>Tea</Link>
+            <Link href={'/shop'}>{t('tea')}</Link>
           </MenuItem>
 
           <MenuItem>
-            <Link href={'/shop'}>Coffee</Link>
+            <Link href={'/shop'}>{t('coffee')}</Link>
           </MenuItem>
         </SubMenu>
 
         <MenuItem>
-          <Link href={'/shop'}>Favorites</Link>
+          <Link href={'/shop'}>{t('favorites')}</Link>
         </MenuItem>
 
         <MenuItem>
-          <Link href={'/shop'}>Compare</Link>
+          <Link href={'/shop'}>{t('compare')}</Link>
         </MenuItem>
 
         <MenuItem>
-          <Link href={'/shop'}>Cart</Link>
+          <Link href={'/shop'}>{t('cart')}</Link>
         </MenuItem>
       </Menu>
 
-      <Link href={'/blog'}>Blog</Link>
+      <Link href={'/blog'}>{t('blog')}</Link>
 
-      <Link href={'/club'}>Club</Link>
+      <Link href={'/club'}>{t('club')}</Link>
 
-      <Menu trigger={'Account'} href={'/account'}>
+      <Menu trigger={t('account')} href={'/account'}>
         {!data?.user && (
           <>
             <MenuItem>
-              <Link href={'/login'}>Login</Link>
+              <Link href={'/login'}>{t('login')}</Link>
             </MenuItem>
             <MenuItem>
-              <Link href={'/register'}>Registration</Link>
+              <Link href={'/register'}>{t('registration')}</Link>
             </MenuItem>
           </>
         )}
@@ -63,11 +66,11 @@ export function DesktopMenu() {
             </MenuItem>
 
             <MenuItem>
-              <Link href={'/account'}>Personal Area</Link>
+              <Link href={'/account'}>{t('lk')}</Link>
             </MenuItem>
 
             <MenuItem>
-              <Link href={'/admin'}>Admin</Link>
+              <Link href={'/admin'}>{t('admin')}</Link>
             </MenuItem>
 
             <MenuItem>
@@ -76,7 +79,9 @@ export function DesktopMenu() {
           </>
         )}
 
-        <MenuItem>RU language</MenuItem>
+        <MenuItem>
+          <Lang />
+        </MenuItem>
 
         <MenuItem>
           <Theme />
