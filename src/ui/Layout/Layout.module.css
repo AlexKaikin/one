@@ -2,8 +2,13 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  height: calc(100vh - 83.2px);
+
+  height: 100%;
   width: 100%;
+
+  @media (max-width: 768px) {
+    display: inline-block;
+  }
 }
 
 .container {
@@ -16,8 +21,6 @@
 .main {
   width: 100%;
   height: 100%;
-
-  overflow: auto;
 }
 
 .header {

@@ -17,12 +17,6 @@
   border-radius: var(--radius);
 }
 
-.fields {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--spacing));
-}
-
 .groupButtons {
   display: flex;
   flex-direction: row;
@@ -54,4 +48,8 @@
   position: absolute;
   top: 5px;
   right: 5px;
+}
+
+.inputIcon {
+  padding-left: var(--spacing);
 }

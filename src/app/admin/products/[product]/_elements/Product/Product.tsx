@@ -13,8 +13,12 @@ export function Product({ defaultValues }: { defaultValues: ProductType }) {
   const { notify } = useNotify()
   const router = useRouter()
 
-  const onSubmit = async (data: ProductType) => {
-    setLoading(true)
+  const onSubmit = async (
+    data: ProductType & { files: FileList | null; destroyImageUrls: string[] }
+  ) => {
+    if (!!data.files?.length) {
+      setLoading(true)
+    }
 
     try {
       const { id, ...body } = data

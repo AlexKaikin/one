@@ -33,19 +33,6 @@
   border: 0;
   width: 100%;
   padding: var(--spacing);
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-}
-
-.input:-webkit-autofill {
-  transition-delay: 9999s;
-  transition-property: background-color;
-  -webkit-text-fill-color: var(--dark);
-  caret-color: var(--dark);
 }
 
 .left {

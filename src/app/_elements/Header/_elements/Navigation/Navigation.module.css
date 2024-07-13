@@ -3,29 +3,13 @@
   display: flex;
   gap: var(--spacing);
   padding: var(--spacing);
-  
 }
 
 .links {
   display: flex;
   gap: var(--spacing);
   padding: var(--spacing);
-
-
-  /* @media (max-width: 768px) {
-    display: none;
-
-    &.show {
-      position: absolute;
-      z-index: 1;
-
-      display: flex;
-      background-color: var(--bg);
-    }
-  } */
 }
-
-
 
 .mobileBtn {
   display: none;

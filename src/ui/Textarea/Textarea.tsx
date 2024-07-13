@@ -17,8 +17,9 @@ function ForwardRef(props: Props, ref: Ref<HTMLTextAreaElement>) {
 
   return (
     <div className={styles.wrapper}>
+      {label && <label className={styles.label}>{label}</label>}
+
       <div className={cn(styles.field, { [styles.focus]: focus })}>
-        {label && <label className={styles.label}>{label}</label>}
         <textarea
           className={cn(styles.textarea)}
           ref={ref}
@@ -27,6 +28,7 @@ function ForwardRef(props: Props, ref: Ref<HTMLTextAreaElement>) {
           onBlur={() => setFocus(false)}
         />
       </div>
+      
       {errorState?.message ? <FormFieldErrors error={errorState} /> : null}
     </div>
   )

@@ -1,12 +1,6 @@
 import { create } from 'zustand'
 import { getLocalStorage } from '@/helpers'
-import {
-  Langs,
-  Translate,
-  translate,
-  Translation,
-  TranslationKeys,
-} from '@/langs'
+import { Langs, Translate, translate, TranslationKeys } from '@/langs'
 
 type Lang = {
   lang: Langs

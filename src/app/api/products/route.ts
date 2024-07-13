@@ -15,10 +15,16 @@ export async function POST(request: Request) {
     const imageUrls = response.map(
       img => `/upload/${img?.display_name}.${img?.format}`
     )
-    const title = data.get('title')
-    const titleRu = data.get('translations[ru][title]')
-    const translations = { ru: { title: titleRu } }
-    const newProduct = { title, imageUrls, translations } as Product
+    const newProduct = {
+      title: data.get('title'),
+      description: data.get('description'),
+      inStock: data.get('inStock'),
+      volume: data.get('volume'),
+      price: data.get('price'),
+      published: data.get('published'),
+      translations: { ru: { title: data.get('translations[ru][title]') } },
+      imageUrls,
+    }
 
     const product = await ProductModel.create(newProduct)
 

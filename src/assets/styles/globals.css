@@ -4,7 +4,7 @@
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+
   height: 100%;
 }
 
@@ -16,13 +16,15 @@ body {
   min-width: 320px;
   background-color: var(--bg);
   color: var(--text);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-input {
-  color: var(--text);
-
-  &::placeholder {
-    color: var(--text);
-    opacity: .5;
-  }
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }

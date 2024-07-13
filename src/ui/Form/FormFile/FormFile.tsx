@@ -1,6 +1,8 @@
-'use client'
+'use client';
 
-import { Button, Icon } from '@/ui'
+import { useTranslation } from '@/store';
+import { Button, Icon } from '@/ui';
+
 
 type Props = {
   accept: HTMLInputElement['accept']
@@ -19,6 +21,8 @@ export function FormFile({
   maxFiles = 10,
   disabled = false,
 }: Props) {
+  const { t } = useTranslation()
+
   function handleFiles(files: FileList | null) {
     if (!files?.length) {
       return
@@ -62,7 +66,7 @@ export function FormFile({
         onClick={() => selectFile({ contentType: accept, multiple })}
         disabled={disabled}
       >
-        image
+        {t('image')}
       </Button>
     </div>
   )

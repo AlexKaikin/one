@@ -1,54 +1,74 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { z } from 'zod'
-import { Product } from '@/app/api/products/model'
-import { ProductService } from '@/services'
-import {
-  Button,
-  Form,
-  FormFile,
-  FormInput,
-  Icon,
-  IconButton,
-  Tab,
-  Tabs,
-  useNotify,
-} from '@/ui'
-import { zodResolver } from '@hookform/resolvers/zod'
-import styles from './ProductForm.module.css'
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+import { Product } from '@/app/api/products/model';
+import { ProductService } from '@/services';
+import { useTranslation } from '@/store';
+import { Button, Form, FormCheckbox, FormFile, FormInput, FormTextarea, Icon, IconButton, Stack, Tab, Tabs, useNotify } from '@/ui';
+import { zodResolver } from '@hookform/resolvers/zod';
+import styles from './ProductForm.module.css';
 
-const required_error = 'Required'
+
 const MAX_SIZE_FILE = 1
 const MAX_FILES = 10
 
-const schema = z.object({
-  id: z.string(),
-  title: z.string({ required_error }).min(1, { message: required_error }),
-  imageUrls: z.string().array(),
-  destroyImageUrls: z.string().array().optional(),
-  files: z
-    .instanceof(typeof window === 'undefined' ? File : FileList)
-    .optional(),
-  translations: z.object({ ru: z.object({ title: z.string().optional() }) }),
-})
+function getSchema(t: Function) {
+  const more0 = t('more0')
+  const required_error = t('required')
+  const invalid_type_error = required_error
+
+  const schema = z.object({
+    id: z.string(),
+    title: z.string({ required_error }).min(1, { message: required_error }),
+    description: z
+      .string({ required_error })
+      .min(1, { message: required_error }),
+    price: z.coerce
+      .number({ required_error, invalid_type_error })
+      .gte(1, { message: more0 }),
+    inStock: z.coerce
+      .number({ required_error, invalid_type_error })
+      .gte(0, { message: more0 }),
+    volume: z
+      .string({ required_error, invalid_type_error })
+      .min(1, { message: required_error }),
+    imageUrls: z.string().array(),
+    destroyImageUrls: z.string().array().optional(),
+    published: z.boolean(),
+    files: z
+      .instanceof(typeof window === 'undefined' ? File : FileList)
+      .optional(),
+    translations: z.object({
+      ru: z.object({
+        title: z.string().optional(),
+        description: z.string().optional(),
+      }),
+    }),
+  })
+
+  return schema
+}
 
 type Props = {
   defaultValues: Product
-  onSubmit: (value: Product) => void
+  onSubmit: (
+    value: Product & { files: FileList | null; destroyImageUrls: string[] }
+  ) => void
 }
 
 export function ProductForm({ defaultValues, onSubmit }: Props) {
+  const { t } = useTranslation()
   const [filePreviews, setFilePreviews] = useState<string[]>([])
   const { notify } = useNotify()
   const router = useRouter()
   const isUpdateMode = !!defaultValues.id.length
   const formMethods = useForm<
     Product & { files: FileList | null; destroyImageUrls: string[] }
-  >({ defaultValues, resolver: zodResolver(schema) })
+  >({ defaultValues, resolver: zodResolver(getSchema(t)) })
   const { formState, getValues, setValue, watch, reset } = formMethods
   const { isDirty, errors } = formState
 
@@ -114,7 +134,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
     setFilePreviews([])
   }, [defaultValues, reset])
 
-  // console.log(watch(), errors)
+  console.log(watch(), errors)
   //console.log(defaultValues)
 
   return (
@@ -124,19 +144,52 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
           <Tabs>
             <Tab title="En" active>
               <div className={styles.container}>
-                <div className={styles.fields}>
-                  <FormInput name="title" label="Title" />
-                </div>
+                <Stack flexDirection="column" gap={1}>
+                  <FormInput name="title" label={t('title')} />
+                  <FormTextarea name="description" label={t('description')} rows={7} />
+
+                  <Stack gap={1}>
+                    <FormInput
+                      name="inStock"
+                      type="number"
+                      label={t('inStock')}
+                    />
+
+                    <FormInput
+                      name="price"
+                      type="number"
+                      label={t('price')}
+                      startIcon={<div className={styles.inputIcon}>$</div>}
+                    />
+
+                    <FormInput name="volume" label={t('volume')} />
+                  </Stack>
+
+                  <FormCheckbox
+                    name="published"
+                    defaultChecked={getValues('published')}
+                    label={t('published')}
+                  />
+                </Stack>
               </div>
             </Tab>
             <Tab title="Ru">
-              <FormInput name="translations.ru.title" label="Title" />
+              <div className={styles.container}>
+                <Stack flexDirection="column" gap={1}>
+                  <FormInput name="translations.ru.title" label={t('title')} />
+                  <FormTextarea
+                    name="translations.ru.description"
+                    label={t('description')}
+                  />
+                </Stack>
+              </div>
             </Tab>
           </Tabs>
 
           <div className={styles.imagescontainer}>
-            <div className={styles.fields}>
-              <div>Images</div>
+            <Stack flexDirection="column" gap={1}>
+              <div>{t('images')}</div>
+
               <div className={styles.gallery}>
                 {[...watch('imageUrls'), ...filePreviews].map((src, index) => (
                   <div key={index} className={styles.imgContainer}>
@@ -168,9 +221,14 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
                 multiple
               />
               <div>
-                Image max size {MAX_SIZE_FILE} Mb, max limit {MAX_FILES}
+                <p>
+                  {t('maxSize')} {MAX_SIZE_FILE} Mb
+                </p>
+                <p>
+                  {t('MaxLimit')} {MAX_FILES}
+                </p>
               </div>
-            </div>
+            </Stack>
           </div>
         </div>
       </div>
@@ -178,7 +236,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
       <div>
         <div className={styles.groupButtons}>
           <Button type="submit" disabled={!isDirty}>
-            Submit
+            {t('save')}
           </Button>
 
           {isUpdateMode && (
@@ -187,7 +245,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
               variant="outlined"
               onClick={handleDeleteProduct}
             >
-              Delete
+              {t('delete')}
             </Button>
           )}
         </div>

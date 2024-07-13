@@ -35,7 +35,10 @@ h6 {
   font-weight: inherit;
 }
 
-.input {
+input,
+textarea {
+  font-family: inherit;
+  color: var(--text);
   outline: none;
   border: 0;
   width: 100%;
@@ -49,8 +52,26 @@ h6 {
   &:-webkit-autofill {
     transition-delay: 9999s;
     transition-property: background-color;
-    -webkit-text-fill-color: var(--dark);
-    caret-color: var(--dark);
+    -webkit-text-fill-color: var(--text);
+    caret-color: var(--text);
+  }
+
+  &::placeholder {
+    color: var(--text);
+    opacity: 0.5;
+  }
+}
+
+label,
+h1,
+input,
+textarea,
+p,
+div,
+a {
+  &::selection {
+    background: color-mix(in srgb, var(--primary), transparent 30%);
+    color: #fff;
   }
 }
 

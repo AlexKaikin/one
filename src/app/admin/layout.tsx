@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { Aside, List, Widget } from '@/ui'
+import { Aside, Widget } from '@/ui'
+import { AdminMenu } from './_elements'
 
 export const metadata: Metadata = {
   title: 'Admin',
@@ -16,10 +16,7 @@ export default function AdminLayout({
     <>
       <Aside>
         <Widget>
-          <List>
-            <Link href={'/admin'}>Dashboard</Link>
-            <Link href={'/admin/products'}>Products</Link>
-          </List>
+          <AdminMenu />
         </Widget>
       </Aside>
       {children}

@@ -28,6 +28,7 @@ function ForwardRef(props: Props, ref: Ref<HTMLInputElement>) {
   return (
     <div className={styles.wrapper}>
       {label && <label className={cn(styles.label)}>{label}</label>}
+
       <div
         className={cn({
           [styles.field]: rest.type !== 'hidden',
@@ -35,6 +36,7 @@ function ForwardRef(props: Props, ref: Ref<HTMLInputElement>) {
         })}
       >
         {startIcon && startIcon}
+
         <input
           onFocus={() => setFocus(true)}
           className={cn(styles.input, { [styles[align]]: align })}
@@ -42,6 +44,7 @@ function ForwardRef(props: Props, ref: Ref<HTMLInputElement>) {
           {...rest}
           onBlur={() => setFocus(false)}
         />
+        
         {endIcon && endIcon}
       </div>
       {errorState?.message ? <FormFieldErrors error={errorState} /> : null}

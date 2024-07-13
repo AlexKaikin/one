@@ -18,7 +18,6 @@ export function Navigation() {
   return (
     <div className={styles.navigation}>
       {width < SCREEN_LG ? <MobileMenu /> : <DesktopMenu />}
-      {/* <MobileMenu /> */}
     </div>
   )
 }

@@ -11,6 +11,14 @@ export function Layout({ children, ...rest }: Props) {
   )
 }
 
+export function Container({ children, ...rest }: { children: ReactNode }) {
+  return (
+    <div className={styles.container} {...rest}>
+      {children}
+    </div>
+  )
+}
+
 export function Page({ children, ...rest }: { children: ReactNode }) {
   return (
     <main className={styles.main} {...rest}>

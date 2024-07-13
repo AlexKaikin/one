@@ -44,14 +44,25 @@ export async function PATCH(request: Request, context: { params: Params }) {
 
     if (destroyImageUrls.length) await deleteFiles(destroyImageUrls)
 
-    const title = data.get('title')
-    const titleRu = data.get('translations[ru][title]')
-    const translations = { ru: { title: titleRu } }
+    // const title = data.get('title')
+    // const titleRu = data.get('translations[ru][title]')
+    // const translations = { ru: { title: titleRu } }
     const imageUrls = data.getAll('imageUrls[]')
       ? [...data.getAll('imageUrls[]'), ...newImageUrls]
       : [...newImageUrls]
 
-    const updatedProduct = { title, imageUrls, translations }
+    //const updatedProduct = { title, imageUrls, translations }
+
+    const updatedProduct = {
+      title: data.get('title'),
+      description: data.get('description'),
+      inStock: data.get('inStock'),
+      volume: data.get('volume'),
+      price: data.get('price'),
+      published: data.get('published'),
+      translations: { ru: { title: data.get('translations[ru][title]') } },
+      imageUrls,
+    }
 
     const product = await ProductModel.findByIdAndUpdate(id, updatedProduct, {
       new: true,

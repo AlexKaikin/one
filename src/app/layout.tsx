@@ -7,7 +7,11 @@ import { Layout } from '@/ui'
 import '../assets/styles/globals.css'
 import { Header } from './_elements'
 
-const jost = Jost({ weight: '500', subsets: ['latin'], display: 'swap' })
+const font = Jost({
+  weight: '500',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'One',
@@ -23,7 +27,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-theme={theme?.value || 'light'}>
-      <body className={jost.className}>
+      <body className={font.className}>
         <Providers>
           <Suspense>
             <Header />

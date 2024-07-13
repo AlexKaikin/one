@@ -1,0 +1,25 @@
+.shopMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--spacing) * 2);
+
+  @media (max-width: 768px) {
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    align-items: flex-end;
+    justify-content: space-between;
+    background-color: var(--bg);
+    padding: calc(var(--spacing) / 2);
+    width: calc(100vw - calc(var(--spacing)*2));
+  }
+}
+
+.button {
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0;
+    font-size: 0.7rem;
+  }
+}

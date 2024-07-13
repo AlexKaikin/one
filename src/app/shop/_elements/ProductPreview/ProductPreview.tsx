@@ -7,7 +7,7 @@ import { useTranslation } from '@/store'
 import styles from './ProductPreview.module.css'
 
 export function ProductPreview({ product }: { product: Product }) {
-  const { id, title, imageUrls } = product
+  const { id, title, imageUrls, price } = product
   const { tAPI } = useTranslation()
   const url = imageUrls[0]
 
@@ -25,7 +25,10 @@ export function ProductPreview({ product }: { product: Product }) {
           />
         </div>
       )}
-      {tAPI('title', product)}
+      <div className={styles.info}>
+        <h2>{tAPI('title', product)}</h2>
+        <span className={styles.price}>$ {price}</span>
+      </div>
     </Link>
   )
 }
