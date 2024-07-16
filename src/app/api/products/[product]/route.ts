@@ -44,14 +44,9 @@ export async function PATCH(request: Request, context: { params: Params }) {
 
     if (destroyImageUrls.length) await deleteFiles(destroyImageUrls)
 
-    // const title = data.get('title')
-    // const titleRu = data.get('translations[ru][title]')
-    // const translations = { ru: { title: titleRu } }
     const imageUrls = data.getAll('imageUrls[]')
       ? [...data.getAll('imageUrls[]'), ...newImageUrls]
       : [...newImageUrls]
-
-    //const updatedProduct = { title, imageUrls, translations }
 
     const updatedProduct = {
       title: data.get('title'),
@@ -60,7 +55,12 @@ export async function PATCH(request: Request, context: { params: Params }) {
       volume: data.get('volume'),
       price: data.get('price'),
       published: data.get('published'),
-      translations: { ru: { title: data.get('translations[ru][title]') } },
+      translations: {
+        ru: {
+          title: data.get('translations[ru][title]'),
+          description: data.get('translations[ru][description]'),
+        },
+      },
       imageUrls,
     }
 
@@ -101,26 +101,3 @@ export async function DELETE(_: Request, context: { params: Params }) {
     )
   }
 }
-
-// function parseDeepFormData(formData) {
-//     let result = {};
-
-//     for (let pair of formData.entries()) {
-//         let keys = pair[0].split('[');
-//         let value = pair[1];
-//         let current = result;
-
-//         for (let i = 0; i < keys.length; i++) {
-//             let key = keys[i].replace(']', '');
-
-//             if (i === keys.length - 1) {
-//                 current[key] = value;
-//             } else {
-//                 current[key] = current[key] || {};
-//                 current = current[key];
-//             }
-//         }
-//     }
-
-//     return result;
-// }

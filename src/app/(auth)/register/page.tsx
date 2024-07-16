@@ -8,30 +8,44 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { UserService } from '@/services'
+import { useTranslation } from '@/store'
 import { UserRegistration } from '@/types'
-import { Button, Form, FormInput, Page, PageContent } from '@/ui'
+import {
+  Button,
+  Form,
+  FormInput,
+  Page,
+  PageContent,
+  Stack,
+  Typography,
+} from '@/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import styles from './page.module.css'
 
-const required_error = 'Required'
+function getSchema(t: Function) {
+  const required_error = t('required')
 
-const schema = z.object({
-  email: z
-    .string({ required_error })
-    .min(1, { message: required_error })
-    .email('no correct'),
-  password: z
-    .string({ required_error })
-    .min(8, { message: 'min 8' })
-    .max(32, { message: 'max 32' }),
-})
+  const schema = z.object({
+    email: z
+      .string({ required_error })
+      .min(1, { message: required_error })
+      .email('no correct'),
+    password: z
+      .string({ required_error })
+      .min(8, { message: t('min8') })
+      .max(32, { message: t('max32') }),
+  })
+
+  return schema
+}
 
 export default function Register() {
+  const { t } = useTranslation()
   const session = useSession()
   const [error, setError] = useState<string | null>(null)
   const formMethods = useForm<UserRegistration>({
     defaultValues: { email: '', password: '' },
-    resolver: zodResolver(schema),
+    resolver: zodResolver(getSchema(t)),
   })
 
   const handleSubmit = async (data: UserRegistration) => {
@@ -54,22 +68,26 @@ export default function Register() {
       <PageContent style={{ height: '100%' }}>
         <div className={styles.col}>
           <div className={styles.content}>
-            <h1>Registration</h1>
+            <Typography variant="h2">{t('registration')}</Typography>
             <Form
               id="registerForm"
               formMethods={formMethods}
               onSubmit={handleSubmit}
             >
-              <FormInput name="email" label="Email" />
-              <FormInput name="password" label="Password" type="password" />
+              <FormInput name="email" label={t('email')} />
+              <FormInput
+                name="password"
+                label={t('password')}
+                type="password"
+              />
               {error && <div>{error}</div>}
-              <div>
-                Already have an account?{' '}
+              <Stack spacing={1}>
+                {t('haveAccount')}
                 <Link href="/login" style={{ textDecoration: 'underline' }}>
-                  Login
+                  {t('login')}
                 </Link>
-              </div>
-              <Button type="submit">Submit</Button>
+              </Stack>
+              <Button type="submit">{t('send')}</Button>
             </Form>
           </div>
         </div>

@@ -1,0 +1,49 @@
+.product {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.labels {
+  display: flex;
+  flex-direction: row;
+  border-radius: calc(var(--radius));
+  overflow: hidden;
+  height: max-content;
+}
+
+.new {
+  display: flex;
+  align-items: center;
+  background-color: var(--info);
+  color: white;
+  padding: calc(var(--spacing));
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+.pop {
+  display: flex;
+  align-items: center;
+  background-color: var(--gold);
+  color: white;
+  padding: calc(var(--spacing) / 2) calc(var(--spacing));
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+.inStock {
+  display: flex;
+  align-items: center;
+  color: var(--success);
+}
+
+.ended {
+  display: flex;
+  align-items: center;
+  color: var(--error);
+}

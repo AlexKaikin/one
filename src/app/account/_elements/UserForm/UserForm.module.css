@@ -5,5 +5,5 @@
 .fields {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--spacing));
+  gap: calc(var(--spacing) * 2);
 }

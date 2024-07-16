@@ -22,7 +22,7 @@ export function Search() {
 
 function MobileSearch() {
   return (
-    <Menu trigger={<Icon name="search" />}>
+    <Menu trigger={<Icon name="search" width={25} height={25} />}>
       <div className={styles.container}>
         <DesktopSearch />
       </div>

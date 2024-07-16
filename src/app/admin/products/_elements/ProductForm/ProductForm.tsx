@@ -1,17 +1,29 @@
-'use client';
+'use client'
 
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { z } from 'zod';
-import { Product } from '@/app/api/products/model';
-import { ProductService } from '@/services';
-import { useTranslation } from '@/store';
-import { Button, Form, FormCheckbox, FormFile, FormInput, FormTextarea, Icon, IconButton, Stack, Tab, Tabs, useNotify } from '@/ui';
-import { zodResolver } from '@hookform/resolvers/zod';
-import styles from './ProductForm.module.css';
-
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { z } from 'zod'
+import { Product } from '@/app/api/products/model'
+import { ProductService } from '@/services'
+import { useTranslation } from '@/store'
+import {
+  Button,
+  Form,
+  FormCheckbox,
+  FormFile,
+  FormInput,
+  FormTextarea,
+  Icon,
+  IconButton,
+  Stack,
+  Tab,
+  Tabs,
+  useNotify,
+} from '@/ui'
+import { zodResolver } from '@hookform/resolvers/zod'
+import styles from './ProductForm.module.css'
 
 const MAX_SIZE_FILE = 1
 const MAX_FILES = 10
@@ -70,7 +82,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
     Product & { files: FileList | null; destroyImageUrls: string[] }
   >({ defaultValues, resolver: zodResolver(getSchema(t)) })
   const { formState, getValues, setValue, watch, reset } = formMethods
-  const { isDirty, errors } = formState
+  const { isDirty } = formState
 
   const isFilesLimit =
     getValues('imageUrls').length + filePreviews.length >= MAX_FILES
@@ -134,9 +146,6 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
     setFilePreviews([])
   }, [defaultValues, reset])
 
-  console.log(watch(), errors)
-  //console.log(defaultValues)
-
   return (
     <Form id="productForm" formMethods={formMethods} onSubmit={onSubmit}>
       <div>
@@ -144,11 +153,15 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
           <Tabs>
             <Tab title="En" active>
               <div className={styles.container}>
-                <Stack flexDirection="column" gap={1}>
+                <Stack flexDirection="column" spacing={2}>
                   <FormInput name="title" label={t('title')} />
-                  <FormTextarea name="description" label={t('description')} rows={7} />
+                  <FormTextarea
+                    name="description"
+                    label={t('description')}
+                    rows={7}
+                  />
 
-                  <Stack gap={1}>
+                  <Stack spacing={1}>
                     <FormInput
                       name="inStock"
                       type="number"
@@ -175,11 +188,12 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
             </Tab>
             <Tab title="Ru">
               <div className={styles.container}>
-                <Stack flexDirection="column" gap={1}>
+                <Stack flexDirection="column" spacing={1}>
                   <FormInput name="translations.ru.title" label={t('title')} />
                   <FormTextarea
                     name="translations.ru.description"
                     label={t('description')}
+                    rows={7}
                   />
                 </Stack>
               </div>
@@ -187,7 +201,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
           </Tabs>
 
           <div className={styles.imagescontainer}>
-            <Stack flexDirection="column" gap={1}>
+            <Stack flexDirection="column" spacing={1}>
               <div>{t('images')}</div>
 
               <div className={styles.gallery}>
@@ -206,7 +220,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
                         type="button"
                         onClick={() => removeFile(src, index)}
                       >
-                        <Icon name="trash" color="white" />
+                        <Icon name="trash" color="white" width={20} height={20} />
                       </IconButton>
                     </div>
                   </div>

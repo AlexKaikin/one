@@ -1,14 +1,14 @@
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
-import { Jost } from 'next/font/google'
+import { Noto_Sans } from 'next/font/google'
 import { cookies } from 'next/headers'
 import { Providers } from '@/providers'
 import { Layout } from '@/ui'
 import '../assets/styles/globals.css'
-import { Header } from './_elements'
+import { Footer, Header } from './_elements'
 
-const font = Jost({
-  weight: '500',
+const font = Noto_Sans({
+  weight: '600',
   subsets: ['latin'],
   display: 'swap',
 })
@@ -33,6 +33,7 @@ export default function RootLayout({
             <Header />
           </Suspense>
           <Layout>{children}</Layout>
+          <Footer />
         </Providers>
       </body>
     </html>

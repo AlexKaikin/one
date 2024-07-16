@@ -5,7 +5,7 @@ import { toFormData } from 'axios'
 import { useRouter } from 'next/navigation'
 import { Product as ProductType } from '@/app/api/products/model'
 import { ProductService } from '@/services'
-import { ImageLoader, useNotify } from '@/ui'
+import { ImageLoader, PageHeader, useNotify } from '@/ui'
 import { ProductForm } from '../../../_elements'
 
 export function Product({ defaultValues }: { defaultValues: ProductType }) {

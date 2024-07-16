@@ -1,9 +1,10 @@
+'use client'
+
 import { ComponentProps, CSSProperties, ReactNode } from 'react'
-import cn from 'classnames'
 
 type Props = ComponentProps<'div'> & {
   children: ReactNode
-  gap?: number
+  spacing?: number
   isWide?: boolean
   display?: CSSProperties['display']
   flexWrap?: CSSProperties['flexWrap']
@@ -19,8 +20,9 @@ export function Stack(props: Props) {
     display,
     flexDirection,
     justifyContent,
-    gap,
-    className,
+    alignItems,
+    overflow,
+    spacing,
     style,
     isWide,
     ...rest
@@ -32,7 +34,9 @@ export function Stack(props: Props) {
         display: display || 'flex',
         flexDirection,
         justifyContent,
-        gap: gap ? `calc(var(--spacing) * ${gap})` : '0',
+        alignItems,
+        overflow,
+        gap: spacing ? `calc(var(--spacing) * ${spacing})` : '0',
         width: isWide ? '100%' : 'auto',
         ...style,
       }}

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
-import { Icon } from '@/ui'
-import { ShopMenu, Sorting } from './_elements'
+import { ShopMenu, SortAndFilter } from './_elements'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -17,14 +16,7 @@ export default function AdminLayout({
     <div className={styles.layout}>
       <div className={styles.header}>
         <ShopMenu />
-
-        <div className={styles.group}>
-          <Sorting />
-
-          <div className={styles.groupItem}>
-            <Icon name="filter" width={25} height={25} /> Filter
-          </div>
-        </div>
+        <SortAndFilter />
       </div>
       {children}
     </div>

@@ -1,8 +1,11 @@
 .header {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: var(--border);
+  background-color: var(--bg);
+  box-shadow: var(--shadow);
 }
 
 .container {

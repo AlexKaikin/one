@@ -1,8 +1,9 @@
-'use server'
+'use server';
 
-import 'mongoose'
-import mongoose, { Schema, model } from 'mongoose'
-import { schemaConfig } from '@/config'
+import 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
+import { schemaConfig } from '@/config';
+
 
 export type Product = {
   id: string
@@ -11,6 +12,8 @@ export type Product = {
   price: number
   inStock: number
   volume: string
+  ratingCount: number
+  rating: number
   imageUrls: string[]
   property: { key: string; value: string }[]
   category: string
@@ -39,6 +42,8 @@ const schema = new Schema(
     price: { type: Number, require: true },
     inStock: { type: Number, require: true },
     volume: { type: String, require: true },
+    rating: { type: Number, default: 0 },
+    ratingCount: { type: Number, default: 0 },
     imageUrls: [{ type: String }],
     property: [propertySchema],
     category: { type: String, require: true },

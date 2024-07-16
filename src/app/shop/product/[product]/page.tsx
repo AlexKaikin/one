@@ -1,7 +1,8 @@
 import { ApiError } from '@/helpers'
 import { ProductService } from '@/services'
 import { UrlParams } from '@/types'
-import { Page, PageContent, PageHeader } from '@/ui'
+import { Page, PageContent } from '@/ui'
+import { Product } from './_elements/Product/Product'
 
 async function getProduct(id: string) {
   try {
@@ -19,12 +20,11 @@ export default async function ProductPage(urlParams: UrlParams) {
     return null
   }
 
-  const { title } = product
-
   return (
     <Page>
-      <PageHeader>{title}</PageHeader>
-      <PageContent>{urlParams.params!.product}</PageContent>
+      <PageContent>
+        <Product product={product} />
+      </PageContent>
     </Page>
   )
 }

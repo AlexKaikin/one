@@ -6,13 +6,14 @@
 
   @media (max-width: 768px) {
     position: fixed;
+    left: 0;
     bottom: 0;
     z-index: 1;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: space-around;
     background-color: var(--bg);
     padding: calc(var(--spacing) / 2);
-    width: calc(100vw - calc(var(--spacing)*2));
+    width: 100%;
   }
 }
 

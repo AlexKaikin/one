@@ -2,7 +2,7 @@ import { ApiError } from '@/helpers'
 import { ProductService } from '@/services'
 import { UrlParams } from '@/types'
 import { Page, PageContent, PageHeader } from '@/ui'
-import { Product } from './_elements'
+import { Product, Title } from './_elements'
 
 async function getProduct(id: string) {
   try {
@@ -22,7 +22,7 @@ export default async function ProductPage(urlParams: UrlParams) {
 
   return (
     <Page>
-      <PageHeader>Update product</PageHeader>
+      <PageHeader><Title /></PageHeader>
       <PageContent>
         <Product defaultValues={product} />
       </PageContent>

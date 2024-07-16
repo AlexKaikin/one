@@ -14,7 +14,7 @@ export function MobileMenu() {
   const { data } = useSession()
 
   return (
-    <Menu trigger={<Icon name="list" />}>
+    <Menu trigger={<Icon name="list" width={25} height={25} />}>
       <MenuItem>
         <Link href={'/'}>{t('home')}</Link>
       </MenuItem>

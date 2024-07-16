@@ -11,7 +11,7 @@
   align-items: center;
   gap: 5px;
   width: 100%;
-  border: var(--border);
+  background-color: color-mix(in srgb, var(--text), transparent 95%);
   border-radius: var(--radius);
 }
 

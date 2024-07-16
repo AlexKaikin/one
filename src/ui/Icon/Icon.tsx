@@ -17,10 +17,13 @@ import IconList from '@/assets/svg/list.svg'
 import IconListCheck from '@/assets/svg/listCheck.svg'
 import IconLoading from '@/assets/svg/loading.svg'
 import IconLogo from '@/assets/svg/logo.svg'
+import IconMinus from '@/assets/svg/minus.svg'
 import IconMoon from '@/assets/svg/moon.svg'
 import IconPlus from '@/assets/svg/plus.svg'
 import IconSearch from '@/assets/svg/search.svg'
 import IconSort from '@/assets/svg/sort.svg'
+import IconStar from '@/assets/svg/star.svg'
+import IconStarOutline from '@/assets/svg/starOutline.svg'
 import IconSun from '@/assets/svg/sun.svg'
 import IconTrash from '@/assets/svg/trash.svg'
 
@@ -48,6 +51,9 @@ type IconType =
   | 'apps'
   | 'listCheck'
   | 'logo'
+  | 'minus'
+  | 'starOutline'
+  | 'star'
 
 export function Icon({ name, ...rest }: Props) {
   const icons = {
@@ -73,6 +79,9 @@ export function Icon({ name, ...rest }: Props) {
     apps: <IconApps {...rest} />,
     listCheck: <IconListCheck {...rest} />,
     logo: <IconLogo {...rest} />,
+    minus: <IconMinus {...rest} />,
+    starOutline: <IconStarOutline {...rest} />,
+    star: <IconStar {...rest} />,
   }
   const icon = icons[name]
   return icon

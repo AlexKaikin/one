@@ -1,0 +1,42 @@
+.slider {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing);
+  width: 100%;
+}
+
+.previews {
+  flex: 0 0 50px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+}
+
+.previewContainer {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.imgContainer {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  cursor: pointer;
+}
+
+.active {
+  box-shadow: 0 0 0 4px var(--primary);
+}
+
+.img {
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+  border-radius: var(--radius);
+  overflow: hidden;
+}

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--text), transparent 90%);
   overflow: hidden;
   position: relative;
   z-index: 0;
@@ -33,6 +33,5 @@
   gap: var(--spacing);
   padding: var(--spacing);
   width: 100%;
-
   background-color: var(--bg);
 }

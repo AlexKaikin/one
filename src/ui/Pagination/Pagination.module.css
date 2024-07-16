@@ -10,8 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
+  padding: calc(var(--spacing) / 2) var(--spacing);
   border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.5s ease 0s;
@@ -19,9 +18,5 @@
   &.active {
     background-color: var(--primary);
     color: white;
-  }
-
-  &.disabled {
-    opacity: 0.3;
   }
 }

@@ -22,7 +22,12 @@ export async function POST(request: Request) {
       volume: data.get('volume'),
       price: data.get('price'),
       published: data.get('published'),
-      translations: { ru: { title: data.get('translations[ru][title]') } },
+      translations: {
+        ru: {
+          title: data.get('translations[ru][title]'),
+          description: data.get('translations[ru][description]'),
+        },
+      },
       imageUrls,
     }
 

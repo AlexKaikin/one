@@ -1,0 +1,25 @@
+.quantityTitle,
+.priceTitle {
+  opacity: 0.5;
+}
+
+.quantityContent {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.5s ease 0s;
+  height: 44px;
+  width: 200px;
+}
+
+.quantity__number {
+  margin: 0 10px;
+  display: inline-block;
+  width: 25px;
+  text-align: center;
+}
+
+.priceNumber {
+  font-size: 2rem;
+  line-height: 44px;
+}
