@@ -23,7 +23,10 @@ export const authOptions = {
 
             if (!user) throw new Error('Wrong credentials')
 
-            const isPasswordCorrect = await bcrypt.compare(password, user.password)
+            const isPasswordCorrect = await bcrypt.compare(
+              password,
+              user.password
+            )
 
             if (!isPasswordCorrect) throw new Error('Wrong credentials')
 
@@ -45,6 +48,7 @@ export const authOptions = {
         token.firstName = user.firstName
         token.email = user.email
         token.id = user.id
+        token.role = user.role
       }
 
       return token
@@ -55,6 +59,7 @@ export const authOptions = {
         session.user.firstName = token.firstName
         session.user.email = token.email
         session.user.id = token.id
+        session.user.role = token.role
       }
 
       return session

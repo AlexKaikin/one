@@ -18,11 +18,11 @@ export function ShopMenu() {
   const { t } = useTranslation()
   const router = useRouter()
 
-  const onCart = () => (cartItems.length ? router.push('/shop/cart') : null)
+  const onCart = () => (!!cartItems.length ? router.push('/shop/cart') : null)
   const onFavorites = () =>
-    favoritesItems.length ? router.push('/shop/favorites') : null
+    !!favoritesItems.length ? router.push('/shop/favorites') : null
   const onCompare = () =>
-    compareItems.length ? router.push('/shop/compare') : null
+    !!compareItems.length ? router.push('/shop/compare') : null
 
   return (
     <div className={styles.shopMenu}>
@@ -67,10 +67,11 @@ export function ShopMenu() {
         className={styles.button}
         variant="text"
         startIcon={
-          <Badge value={compareItems.length} variant="dot" onClick={onCompare}>
+          <Badge value={compareItems.length} variant="dot">
             <Icon name="barChart" width={25} height={25} />
           </Badge>
         }
+        onClick={onCompare}
       >
         {t('compare')}
       </Button>
@@ -79,10 +80,11 @@ export function ShopMenu() {
         className={styles.button}
         variant="text"
         startIcon={
-          <Badge value={cartItems.length} variant="dot" onClick={() => onCart}>
+          <Badge value={cartItems.length} variant="dot">
             <Icon name="cart" width={25} height={25} />
           </Badge>
         }
+        onClick={onCart}
       >
         {t('cart')}
       </Button>

@@ -2,6 +2,8 @@
 
 import 'mongoose'
 import mongoose, { Schema, model } from 'mongoose'
+import { schemaConfig } from '@/config'
+import { Roles } from '@/entities'
 
 export type User = {
   id: string
@@ -9,6 +11,7 @@ export type User = {
   firstName: string
   email: string
   password: string
+  role: string
   createdAt: string
   updatedAt: string
 }
@@ -19,18 +22,14 @@ const schema = new Schema(
     firstName: { type: String, require: true },
     email: { type: String, require: true },
     password: { type: String, require: true },
-  },
-  {
-    timestamps: true,
-    toJSON: {
-      transform: (_, ret) => {
-        ret.id = ret._id.toString()
-        delete ret._id
-        return ret
-      },
-      versionKey: false,
+    role: {
+      type: String,
+      enum: Object.values(Roles),
+      default: Roles.user,
+      require: true,
     },
-  }
+  },
+  schemaConfig
 )
 
 export const UserModel = mongoose.models.User || model<User>('User', schema)
