@@ -13,7 +13,7 @@ export type Favorites = {
 export const useFavoriteProducts = create<Favorites>()(set => ({
   favoritesItems: [],
   getFavoriteProducts: () =>
-    set(() => ({ favoritesItems: getLocalStorage('favorites') })),
+    set(() => ({ favoritesItems: getLocalStorage('favorites') || [] })),
   toggleFavorite: product => {
     set(() => ({
       favoritesItems: handleToggleFavorite(product),

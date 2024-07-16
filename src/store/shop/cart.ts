@@ -20,7 +20,7 @@ export const useCart = create<Cart>()(set => ({
   totalCost: 0,
   getCart: () =>
     set(() => ({
-      cartItems: getLocalStorage('cart'),
+      cartItems: getLocalStorage('cart') || [],
       totalCost: getTotalCost(),
     })),
   setCart: product => {
@@ -61,7 +61,7 @@ function addToCart(product: CartItem) {
 }
 
 function getTotalCost() {
-  const cartItems = getLocalStorage('cart')
+  const cartItems = getLocalStorage('cart') || []
 
   return cartItems.reduce(
     (totalCost: number, item: CartItem) => totalCost + item.cost,
@@ -70,7 +70,7 @@ function getTotalCost() {
 }
 
 function deleteItem(id: string) {
-  const cartItems: CartItem[] = getLocalStorage('cart')
+  const cartItems: CartItem[] = getLocalStorage('cart') || []
   const findProduct = cartItems.find(item => item.id === id)
   findProduct && cartItems.splice(cartItems.indexOf(findProduct), 1)
   localStorage.setItem('cart', JSON.stringify(cartItems))
@@ -79,7 +79,7 @@ function deleteItem(id: string) {
 }
 
 function handleChangeQuantity(id: string, quantity: number) {
-  const cartItems: CartItem[] = getLocalStorage('cart')
+  const cartItems: CartItem[] = getLocalStorage('cart') || []
   const findProduct = cartItems.find(item => item.id === id)
   if (findProduct) {
     if (quantity > findProduct.inStock || quantity < 1) {
@@ -97,7 +97,7 @@ function handleChangeQuantity(id: string, quantity: number) {
 }
 
 function handleIncrement(id: string) {
-  const cartItems: CartItem[] = getLocalStorage('cart')
+  const cartItems: CartItem[] = getLocalStorage('cart') || []
   const findProduct = cartItems.find(item => item.id === id)
 
   if (findProduct && findProduct.quantity < findProduct.inStock) {
@@ -111,7 +111,7 @@ function handleIncrement(id: string) {
 }
 
 function handleDecriment(id: string) {
-  const cartItems: CartItem[] = getLocalStorage('cart')
+  const cartItems: CartItem[] = getLocalStorage('cart') || []
   const findProduct = cartItems.find(item => item.id === id)
 
   if (findProduct && findProduct.quantity > 1) {
