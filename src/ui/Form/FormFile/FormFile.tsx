@@ -1,8 +1,7 @@
-'use client';
+'use client'
 
-import { useTranslation } from '@/store';
-import { Button, Icon } from '@/ui';
-
+import { useTranslation } from '@/store'
+import { Button, Icon } from '@/ui'
 
 type Props = {
   accept: HTMLInputElement['accept']

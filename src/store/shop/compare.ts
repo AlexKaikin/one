@@ -12,7 +12,8 @@ export type Compare = {
 
 export const useCompareProducts = create<Compare>()(set => ({
   compareItems: [],
-  getCompare: () => set(() => ({ compareItems: getLocalStorage('compare') || [] })),
+  getCompare: () =>
+    set(() => ({ compareItems: getLocalStorage('compare') || [] })),
   toggleCompare: product => {
     set(() => ({
       compareItems: handleToggleCompare(product),

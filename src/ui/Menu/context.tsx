@@ -24,14 +24,12 @@ export function MenuProvider({ children }: { children: ReactNode }) {
     if (open) {
       // document.body.style.overflowY = 'hidden'
       // document.body.style.paddingRight = '10px'
-
       // let div = document.createElement('div')
       // div.className = 'wrapper'
       // document.body.append(div)
     } else {
       // document.body.style.overflowY = 'scroll'
       // document.body.style.paddingRight = '0px'
-
       // let div = document.querySelector('.wrapper')
       // div?.remove()
     }

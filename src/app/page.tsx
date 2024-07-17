@@ -17,7 +17,12 @@ export default function Home() {
     <Page>
       <PageContent className={styles.container}>
         <div className={styles.col}>
-          <Stack isWide flexDirection="column" justifyContent="center" spacing={2}>
+          <Stack
+            isWide
+            flexDirection="column"
+            justifyContent="center"
+            spacing={2}
+          >
             <Typography variant="h1">{t('homeTitle')}</Typography>
             <Typography variant="p">{t('homeDescription')}</Typography>
 

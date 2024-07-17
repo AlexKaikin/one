@@ -28,7 +28,7 @@ function ForwardRef(props: Props, ref: Ref<HTMLTextAreaElement>) {
           onBlur={() => setFocus(false)}
         />
       </div>
-      
+
       {errorState?.message ? <FormFieldErrors error={errorState} /> : null}
     </div>
   )

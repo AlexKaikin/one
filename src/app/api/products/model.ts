@@ -1,9 +1,8 @@
-'use server';
+'use server'
 
-import 'mongoose';
-import mongoose, { Schema, model } from 'mongoose';
-import { schemaConfig } from '@/config';
-
+import 'mongoose'
+import mongoose, { Schema, model } from 'mongoose'
+import { schemaConfig } from '@/config'
 
 export type Product = {
   id: string

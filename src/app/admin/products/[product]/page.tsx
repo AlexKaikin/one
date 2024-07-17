@@ -22,7 +22,9 @@ export default async function ProductPage(urlParams: UrlParams) {
 
   return (
     <Page>
-      <PageHeader><Title /></PageHeader>
+      <PageHeader>
+        <Title />
+      </PageHeader>
       <PageContent>
         <Product defaultValues={product} />
       </PageContent>

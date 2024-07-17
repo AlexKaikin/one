@@ -2,6 +2,7 @@
 
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { Roles } from '@/entities'
 import { useTranslation } from '@/store'
 import { List, Menu, MenuItem, SubMenu } from '@/ui'
 import { Lang } from '../Lang/Lang'
@@ -68,15 +69,19 @@ export function DesktopMenu() {
             <MenuItem>
               <Link href={'/account'}>{t('lk')}</Link>
             </MenuItem>
-
-            <MenuItem>
-              <Link href={'/admin'}>{t('admin')}</Link>
-            </MenuItem>
-
-            <MenuItem>
-              <SignOutLink />
-            </MenuItem>
           </>
+        )}
+
+        {data?.user.role === Roles.admin && (
+          <MenuItem>
+            <Link href={'/admin'}>{t('admin')}</Link>
+          </MenuItem>
+        )}
+
+        {data?.user && (
+          <MenuItem>
+            <SignOutLink />
+          </MenuItem>
         )}
 
         <MenuItem>

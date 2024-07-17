@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth'
+import { Roles } from '@/entities'
 
 declare module 'next-auth' {
   interface Session {
@@ -7,6 +8,7 @@ declare module 'next-auth' {
       lastName: string
       firstName: string
       email: string
+      role: Roles
     }
   }
 }

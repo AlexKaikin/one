@@ -44,7 +44,7 @@ function ForwardRef(props: Props, ref: Ref<HTMLInputElement>) {
           {...rest}
           onBlur={() => setFocus(false)}
         />
-        
+
         {endIcon && endIcon}
       </div>
       {errorState?.message ? <FormFieldErrors error={errorState} /> : null}

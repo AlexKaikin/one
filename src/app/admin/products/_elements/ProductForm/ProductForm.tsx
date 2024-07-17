@@ -220,7 +220,12 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
                         type="button"
                         onClick={() => removeFile(src, index)}
                       >
-                        <Icon name="trash" color="white" width={20} height={20} />
+                        <Icon
+                          name="trash"
+                          color="white"
+                          width={20}
+                          height={20}
+                        />
                       </IconButton>
                     </div>
                   </div>

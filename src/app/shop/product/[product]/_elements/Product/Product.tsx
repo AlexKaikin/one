@@ -6,9 +6,9 @@ import { Product as ProductType } from '@/app/api/products/model'
 import { useTranslation } from '@/store'
 import { Rating, Stack, Typography } from '@/ui'
 import { Actions } from '../Actions/Actions'
+import { NotAvailable } from '../NotAvailable/NotAvailable'
 import { Slider } from '../Slider/Slider'
 import styles from './Product.module.css'
-import { NotAvailable } from '../NotAvailable/NotAvailable'
 
 export function Product({ product }: { product: ProductType }) {
   const { t, tAPI } = useTranslation()

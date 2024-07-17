@@ -5,7 +5,7 @@ export function toFormData<Type extends object>(
 ): Type {
   Object.entries(obj).forEach(([key, value]) => {
     const fieldName = prevKey
-      ? `${prevKey}[${value instanceof File  ? '' : key}]`
+      ? `${prevKey}[${value instanceof File ? '' : key}]`
       : key
 
     if (

@@ -33,7 +33,7 @@ export function ShopMenu() {
             className={styles.button}
             variant="clean"
           >
-            {t('products')}
+              {t('products')}
           </Button>
         }
       >
@@ -49,16 +49,12 @@ export function ShopMenu() {
       <Button
         variant="clean"
         startIcon={
-          <Badge
-            value={favoritesItems.length}
-            onClick={onFavorites}
-            variant="dot"
-          >
+          <Badge value={favoritesItems.length} variant="dot">
             <Icon name="bookmarks" width={25} height={25} />
           </Badge>
         }
         className={styles.button}
-        onClick={() => router.push('/shop/favorites')}
+        onClick={onFavorites}
       >
         {t('favorites')}
       </Button>

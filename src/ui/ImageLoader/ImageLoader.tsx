@@ -10,7 +10,12 @@ export function ImageLoader({ loading }: { loading: boolean }) {
       {loading &&
         createPortal(
           <div className={styles.loader}>
-            <Icon name="loading" height={150} width={150} color='var(--primary)' />
+            <Icon
+              name="loading"
+              height={150}
+              width={150}
+              color="var(--primary)"
+            />
           </div>,
           document.body
         )}
