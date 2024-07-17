@@ -15,9 +15,7 @@ export default function AdminLayout({
   return (
     <>
       <Aside>
-        <Widget>
-          <AdminMenu />
-        </Widget>
+        <AdminMenu />
       </Aside>
       {children}
     </>

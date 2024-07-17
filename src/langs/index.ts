@@ -82,6 +82,7 @@ export const translate = {
     invalidCredentials: 'Invalid credentials',
     maximum: 'Maximum',
     minimum: 'Minimum',
+    profile: 'Profile',
   },
   ru: {
     admin: 'Админ',
@@ -152,6 +153,7 @@ export const translate = {
     invalidCredentials: 'Неверные учетные данные',
     maximum: 'Максимум',
     minimum: 'Минимум',
+    profile: 'Профиль',
   },
 }
 

@@ -61,31 +61,31 @@ export function Sorting() {
   return (
     <Menu
       trigger={
-        <Button variant="text" startIcon={<Icon name="sort" />}>
+        <Button variant="clean" startIcon={<Icon name="sort" />}>
           {t('sorting')}: {getSortActive()}
         </Button>
       }
     >
       <MenuItem>
-        <Button variant="text" onClick={() => changeSortActive('new')}>
+        <Button variant="clean" onClick={() => changeSortActive('new')}>
           {t('new')}
         </Button>
       </MenuItem>
 
       <MenuItem>
-        <Button variant="text" onClick={() => changeSortActive('pop')}>
+        <Button variant="clean" onClick={() => changeSortActive('pop')}>
           {t('pop')}
         </Button>
       </MenuItem>
 
       <MenuItem>
-        <Button variant="text" onClick={() => changeSortActive('priceAsc')}>
+        <Button variant="clean" onClick={() => changeSortActive('priceAsc')}>
           {t('priceAsc')}
         </Button>
       </MenuItem>
 
       <MenuItem>
-        <Button variant="text" onClick={() => changeSortActive('priceDesc')}>
+        <Button variant="clean" onClick={() => changeSortActive('priceDesc')}>
           {t('priceDesc')}
         </Button>
       </MenuItem>

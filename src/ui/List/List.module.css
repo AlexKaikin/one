@@ -1,6 +1,25 @@
 .list {
   display: flex;
-  gap: calc(var(--spacing)*2);
+}
+
+.spacing1 {
+  gap: calc(var(--spacing) * 1);
+}
+
+.spacing2 {
+  gap: calc(var(--spacing) * 2);
+}
+
+.spacing3 {
+  gap: calc(var(--spacing) * 3);
+}
+
+.spacing4 {
+  gap: calc(var(--spacing) * 4);
+}
+
+.spacing5 {
+  gap: calc(var(--spacing) * 5);
 }
 
 .horizontal {

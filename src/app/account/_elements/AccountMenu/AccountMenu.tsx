@@ -5,20 +5,17 @@ import { usePathname } from 'next/navigation'
 import { useTranslation } from '@/store'
 import { Menu, MenuItem } from '@/ui'
 
-export function AdminMenu() {
+export function AccountMenu() {
   const { t } = useTranslation()
-  const category = usePathname().split('/')[2]
-  console.log(category)
-  const menu = [
-    { title: t('dashboard'), path: undefined },
-    { title: t('products'), path: 'products' },
-  ]
+  const category = usePathname()
+
+  const menu = [{ title: t('profile'), path: '/account' }]
 
   return (
     <Menu>
       {menu.map(({ title, path }) => (
         <MenuItem key={title} variant="sidebar" active={category === path}>
-          <Link href={`/admin/${path || ''}`}>{title}</Link>
+          <Link href={path}>{title}</Link>
         </MenuItem>
       ))}
     </Menu>

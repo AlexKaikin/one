@@ -1,8 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { Langs } from '@/langs'
 import { useTranslation } from '@/store'
-import { Button } from '@/ui'
 
 export function Lang() {
   const { lang, setLang } = useTranslation()
@@ -10,8 +10,8 @@ export function Lang() {
     lang === 'en' ? setLang(Langs.RU) : setLang(Langs.EN)
 
   return (
-    <Button variant='text' onClick={handleToggle}>
+    <Link href="#" onClick={handleToggle}>
       {lang === 'en' ? 'RU language' : 'EN language'}
-    </Button>
+    </Link>
   )
 }

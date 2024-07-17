@@ -9,7 +9,7 @@ export function Products({ products }: { products: Product[] }) {
   const { tAPI } = useTranslation()
 
   return (
-    <List>
+    <List spacing={2}>
       {products.map(product => (
         <Link key={product.id} href={`/admin/products/${product.id}`}>
           {tAPI('title', product)}

@@ -1,8 +1,7 @@
 'use client'
 
-import cn from 'classnames'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Icon, IconButton } from '@/ui'
+import { Button, Icon, IconButton } from '@/ui'
 import styles from './Pagination.module.css'
 
 export function Pagination({ totalCount }: { totalCount: string }) {
@@ -37,13 +36,13 @@ export function Pagination({ totalCount }: { totalCount: string }) {
       </IconButton>
 
       {pages?.map(page => (
-        <button
+        <Button
           key={page}
+          variant={currentPage === page ? 'contained' : 'text'}
           onClick={() => currentPage !== page && changePage(page)}
-          className={cn(styles.page, { [styles.active]: currentPage === page })}
         >
           {page}
-        </button>
+        </Button>
       ))}
 
       <IconButton

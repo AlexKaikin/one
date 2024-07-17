@@ -2,6 +2,7 @@
 
 import { ReactNode, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import cn from 'classnames'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useOnClickOutside, useWindowDimensions } from '@/hooks'
@@ -84,6 +85,8 @@ export function MenuWithContext({ trigger, href, children }: MenuProps) {
         )}
       </div>
 
+      {!trigger && <div>{children}</div>}
+
       {open &&
         createPortal(
           <div ref={portalRef} className={styles.menuItems} style={style}>
@@ -95,11 +98,23 @@ export function MenuWithContext({ trigger, href, children }: MenuProps) {
   )
 }
 
-export function MenuItem({ children }: { children: ReactNode }) {
+type MenuItemProps = {
+  children: ReactNode
+  active?: boolean
+  variant?: 'sidebar'
+}
+
+export function MenuItem({ children, active = false, variant }: MenuItemProps) {
   const { setOpen } = useContext(MenuContext) as MenuContextType
 
   return (
-    <div className={styles.menuItem} onClick={() => setOpen(false)}>
+    <div
+      className={cn(styles.menuItem, {
+        [styles['active']]: active,
+        [styles[variant || '']]: !!variant,
+      })}
+      onClick={() => setOpen(false)}
+    >
       {children}
     </div>
   )

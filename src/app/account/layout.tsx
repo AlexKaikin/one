@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { Aside, Layout, Widget } from '@/ui'
+import { Aside } from '@/ui'
+import { AccountMenu } from './_elements'
 
 export const metadata: Metadata = {
   title: 'Account',
@@ -15,9 +15,7 @@ export default function AccountLayout({
   return (
     <>
       <Aside>
-        <Widget>
-          <Link href={'/account'}>Profile</Link>
-        </Widget>
+        <AccountMenu />
       </Aside>
       {children}
     </>

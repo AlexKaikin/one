@@ -31,7 +31,7 @@ export function ShopMenu() {
           <Button
             startIcon={<Icon name="apps" width={20} height={20} />}
             className={styles.button}
-            variant="text"
+            variant="clean"
           >
             {t('products')}
           </Button>
@@ -47,7 +47,7 @@ export function ShopMenu() {
       </Menu>
 
       <Button
-        variant="text"
+        variant="clean"
         startIcon={
           <Badge
             value={favoritesItems.length}
@@ -65,7 +65,7 @@ export function ShopMenu() {
 
       <Button
         className={styles.button}
-        variant="text"
+        variant="clean"
         startIcon={
           <Badge value={compareItems.length} variant="dot">
             <Icon name="barChart" width={25} height={25} />
@@ -78,7 +78,7 @@ export function ShopMenu() {
 
       <Button
         className={styles.button}
-        variant="text"
+        variant="clean"
         startIcon={
           <Badge value={cartItems.length} variant="dot">
             <Icon name="cart" width={25} height={25} />

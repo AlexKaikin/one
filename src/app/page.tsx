@@ -44,6 +44,7 @@ export default function Home() {
               alt="community"
               sizes="(max-width: 1800px) 50vw"
               fill
+              priority
             />
           </Stack>
         </div>

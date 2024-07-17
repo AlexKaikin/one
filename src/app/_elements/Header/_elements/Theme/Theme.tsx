@@ -1,9 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { getCookie, setCookie } from '@/helpers'
-import { Button, Icon } from '@/ui'
 import { useTranslation } from '@/store'
+import { Button, Icon, Stack } from '@/ui'
 
 export function Theme() {
   const { t } = useTranslation()
@@ -31,12 +32,11 @@ export function Theme() {
   if (!theme) return null
 
   return (
-    <Button
-      variant="text"
-      startIcon={<Icon name={name} width={20} height={20} />}
-      onClick={themeChange}
-    >
-      {name === 'moon' ? t('darkTheme') : t('lightTheme')}
-    </Button>
+    <Link href="#" onClick={themeChange}>
+      <Stack flexDirection='row' spacing={1}>
+        <Icon name={name} width={20} height={20} />
+        {name === 'moon' ? t('darkTheme') : t('lightTheme')}
+      </Stack>
+    </Link>
   )
 }

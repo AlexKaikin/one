@@ -22,40 +22,40 @@ export function MobileMenu() {
       <SubMenu trigger={t('shop')} href={'/shop'}>
         <SubMenu trigger={t('products')} href={'/shop'}>
           <MenuItem>
-           <Link href={'/shop'}>{t('tea')}</Link>
+            <Link href={'/shop'}>{t('tea')}</Link>
           </MenuItem>
 
           <MenuItem>
-           <Link href={'/shop'}>{t('coffee')}</Link>
+            <Link href={'/shop'}>{t('coffee')}</Link>
           </MenuItem>
         </SubMenu>
 
         <MenuItem>
-           <Link href={'/shop'}>{t('favorites')}</Link>
+          <Link href={'/shop'}>{t('favorites')}</Link>
         </MenuItem>
 
         <MenuItem>
-         <Link href={'/shop'}>{t('compare')}</Link>
+          <Link href={'/shop'}>{t('compare')}</Link>
         </MenuItem>
 
         <MenuItem>
-         <Link href={'/shop'}>{t('cart')}</Link>
+          <Link href={'/shop'}>{t('cart')}</Link>
         </MenuItem>
       </SubMenu>
 
       <MenuItem>
-         <Link href={'/blog'}>{t('blog')}</Link>
+        <Link href={'/blog'}>{t('blog')}</Link>
       </MenuItem>
 
       <MenuItem>
-       <Link href={'/club'}>{t('club')}</Link>
+        <Link href={'/club'}>{t('club')}</Link>
       </MenuItem>
 
       <SubMenu trigger={t('account')}>
         {!data?.user && (
           <>
             <MenuItem>
-               <Link href={'/login'}>{t('login')}</Link>
+              <Link href={'/login'}>{t('login')}</Link>
             </MenuItem>
             <MenuItem>
               <Link href={'/register'}>{t('registration')}</Link>
@@ -72,26 +72,26 @@ export function MobileMenu() {
             </MenuItem>
 
             <MenuItem>
-                <Link href={'/account'}>{t('lk')}</Link>
+              <Link href={'/account'}>{t('lk')}</Link>
             </MenuItem>
 
             <MenuItem>
               <Link href={'/admin'}>{t('admin')}</Link>
             </MenuItem>
-
-            <MenuItem>
-              <Lang />
-            </MenuItem>
-
-            <MenuItem>
-              <Theme />
-            </MenuItem>
-
-            <MenuItem>
-              <SignOutLink />
-            </MenuItem>
           </>
         )}
+
+        <MenuItem>
+          <SignOutLink />
+        </MenuItem>
+
+        <MenuItem>
+          <Lang />
+        </MenuItem>
+
+        <MenuItem>
+          <Theme />
+        </MenuItem>
       </SubMenu>
     </Menu>
   )

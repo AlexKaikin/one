@@ -76,6 +76,11 @@
 .text {
   color: var(--text);
   background-color: transparent;
+}
+
+.clean {
+  color: var(--text);
+  background-color: transparent;
   padding: 0;
 }
 
