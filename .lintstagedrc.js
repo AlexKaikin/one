@@ -11,6 +11,5 @@ const buildPrettierCommand = filenames =>
     .join(' --file ')}`
 
 export default {
-  '*.{js,jsx,ts,tsx}': [buildEslintCommand],
-  '*.{js,jsx,ts,tsx}': [buildPrettierCommand],
+  '*.{js,jsx,ts,tsx}': [buildEslintCommand, buildPrettierCommand],
 }
