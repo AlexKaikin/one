@@ -188,7 +188,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
             </Tab>
             <Tab title="Ru">
               <div className={styles.container}>
-                <Stack flexDirection="column" spacing={1}>
+                <Stack flexDirection="column" spacing={2}>
                   <FormInput name="translations.ru.title" label={t('title')} />
                   <FormTextarea
                     name="translations.ru.description"

@@ -15,14 +15,14 @@ html[data-theme='light'] {
   --radius: 5px;
 
   --bg: rgb(255, 255, 255);
-  --text: black;
+  --text: var(--dark);
   --border: 1px solid rgba(0, 0, 0, 0.2);
   --shadow: 0 0 200px 1px rgba(0, 0, 0, 0.1);
 }
 
 html[data-theme='dark'] {
   --bg: rgb(13 20 33);
-  --text: white;
+  --text: var(--light);
   --border: 1px solid rgba(255, 255, 255, 0.1);
   --shadow: 0 0 200px 1px rgba(255, 255, 255, 0.1);
 }

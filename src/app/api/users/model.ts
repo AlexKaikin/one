@@ -9,6 +9,7 @@ export type User = {
   id: string
   lastName: string
   firstName: string
+  avatarUrl: string
   email: string
   password: string
   role: string
@@ -21,6 +22,7 @@ const schema = new Schema(
     lastName: { type: String, require: true },
     firstName: { type: String, require: true },
     email: { type: String, require: true },
+    avatarUrl: { type: String },
     password: { type: String, require: true },
     role: {
       type: String,

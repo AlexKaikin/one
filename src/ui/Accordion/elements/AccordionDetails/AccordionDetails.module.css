@@ -1,0 +1,11 @@
+.accordion-details {
+  overflow: hidden;
+  transition-property: height, padding;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+  width: 100%;
+
+  &.expanded {
+    padding-top: calc(var(--spacing) * 2);
+  }
+}

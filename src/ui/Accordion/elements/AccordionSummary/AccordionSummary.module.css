@@ -1,0 +1,14 @@
+.accordion-summary {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
+  }
+}

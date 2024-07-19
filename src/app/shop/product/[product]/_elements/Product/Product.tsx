@@ -1,16 +1,20 @@
 'use client'
 
 import dayjs from 'dayjs'
-import Image from 'next/image'
 import { Product as ProductType } from '@/app/api/products/model'
+import { Review as ReviewType } from '@/app/api/reviews/model'
 import { useTranslation } from '@/store'
 import { Rating, Stack, Typography } from '@/ui'
 import { Actions } from '../Actions/Actions'
+import { AddReview } from '../AddReview/AddReview'
 import { NotAvailable } from '../NotAvailable/NotAvailable'
+import { Review } from '../Review/Review'
 import { Slider } from '../Slider/Slider'
 import styles from './Product.module.css'
 
-export function Product({ product }: { product: ProductType }) {
+type Props = { product: ProductType; reviews: ReviewType[] }
+
+export function Product({ product, reviews }: Props) {
   const { t, tAPI } = useTranslation()
   const newProduct =
     dayjs(new Date()).diff(dayjs(product.createdAt), 'month') < 15
@@ -50,9 +54,15 @@ export function Product({ product }: { product: ProductType }) {
           <Typography variant="p">{tAPI('description', product)}</Typography>
         </Stack>
 
-        {/* <Stack flexDirection="column" spacing={1}>
-          <Typography variant="h3">{t('reviews')}</Typography>
-        </Stack> */}
+        <Stack flexDirection="column" spacing={1}>
+          <AddReview product={product} />
+
+          <Stack flexDirection="column" spacing={2}>
+            {reviews.map(review => (
+              <Review key={review.id} review={review} />
+            ))}
+          </Stack>
+        </Stack>
       </Stack>
     </div>
   )

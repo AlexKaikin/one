@@ -28,13 +28,11 @@ function handleToggleCompare(product: Product) {
   if (!findProduct) {
     compareItems.push(product)
     localStorage.setItem('compare', JSON.stringify(compareItems))
-    // notify('Added for comparison')
 
     return [...compareItems]
   } else {
     compareItems.splice(compareItems.indexOf(findProduct), 1)
     localStorage.setItem('compare', JSON.stringify(compareItems))
-    // toast.info('Excluded from the comparison')
 
     return [...compareItems]
   }

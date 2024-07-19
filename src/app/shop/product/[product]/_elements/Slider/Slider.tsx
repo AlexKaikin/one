@@ -39,6 +39,7 @@ export function Slider({ imageUrls }: { imageUrls: string[] }) {
             src={activeUrl}
             alt={`Product image`}
             className={styles.img}
+            priority
           />
         </div>
       </Stack>

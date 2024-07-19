@@ -15,7 +15,7 @@ export function DesktopMenu() {
   const { data } = useSession()
 
   return (
-    <List align="horizontal">
+    <List align="horizontal" spacing={2}>
       <Link href={'/'}>{t('home')}</Link>
 
       <Menu trigger={t('shop')} href={'/shop'}>

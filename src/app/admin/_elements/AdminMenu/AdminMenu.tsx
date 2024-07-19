@@ -8,7 +8,7 @@ import { Menu, MenuItem } from '@/ui'
 export function AdminMenu() {
   const { t } = useTranslation()
   const category = usePathname().split('/')[2]
-  console.log(category)
+  
   const menu = [
     { title: t('dashboard'), path: undefined },
     { title: t('products'), path: 'products' },

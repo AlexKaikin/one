@@ -33,7 +33,7 @@ export function ShopMenu() {
             className={styles.button}
             variant="clean"
           >
-              {t('products')}
+            {t('products')}
           </Button>
         }
       >

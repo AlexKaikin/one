@@ -21,9 +21,10 @@ export default function Home() {
             isWide
             flexDirection="column"
             justifyContent="center"
-            spacing={2}
+             spacing={2}
           >
             <Typography variant="h1">{t('homeTitle')}</Typography>
+            <Typography variant="h5">{t('homeSubTitle')}</Typography>
             <Typography variant="p">{t('homeDescription')}</Typography>
 
             {status === 'unauthenticated' && (

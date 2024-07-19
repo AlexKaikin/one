@@ -64,7 +64,9 @@ export const translate = {
     published: 'Published',
     updateProduct: 'Update product',
     reviews: 'Reviews',
+    review: 'Review',
     homeTitle: 'International community',
+    homeSubTitle: 'We unite and become stronger',
     homeDescription:
       'Welcome to the ONE community space. Here we are interested in the care of health, beauty and longevity. All users have access to such services as e-shop, blog, social network. Every day we are getting bigger. We`ll be glad to see you in the community, and help you reach your goals.',
     policy: 'Confidentiality Policy',
@@ -83,6 +85,13 @@ export const translate = {
     maximum: 'Maximum',
     minimum: 'Minimum',
     profile: 'Profile',
+    choose: 'Choose',
+    sentReview: 'Review sent for moderation',
+    globalError: 'Something went wrong, try again later',
+    rating: 'Rating',
+    yourRating: 'Your rating',
+    unrated: 'Unrated',
+    onlyAuthorized: 'Available only to authorized users',
   },
   ru: {
     admin: 'Админ',
@@ -135,7 +144,9 @@ export const translate = {
     published: 'Опубликовать',
     updateProduct: 'Обновление товара',
     reviews: 'Отзывы',
+    review: 'Отзыв',
     homeTitle: 'Международное сообщество',
+    homeSubTitle: 'Мы объединяемся и становимся сильнее',
     homeDescription:
       'Добро пожаловать в сообщество ONE. Здесь нас интересует забота о здоровье, красоте и долголетии. Все пользователи имеют доступ к таким сервисам, как интернет-магазин, блог, социальная сеть. С каждым днем нас становится больше. Мы будем рады видеть вас в сообществе и помочь вам в достижении ваших целей.',
     policy: 'Политика конфиденциальности',
@@ -154,6 +165,13 @@ export const translate = {
     maximum: 'Максимум',
     minimum: 'Минимум',
     profile: 'Профиль',
+    choose: 'Выбрать',
+    sentReview: 'Отзыв отправлен на модерацию',
+    globalError: 'Что-то пошло не так, попробуйте позже',
+    rating: 'Рейтинг',
+    yourRating: 'Ваш рейтинг',
+    unrated: 'Без рейтинга',
+    onlyAuthorized: 'Доступно только авторизованным',
   },
 }
 
