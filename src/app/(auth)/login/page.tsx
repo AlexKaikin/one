@@ -38,7 +38,7 @@ function getSchema(t: Function) {
   return schema
 }
 
-export default function Register() {
+export default function Login() {
   const { t } = useTranslation()
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
@@ -54,6 +54,7 @@ export default function Register() {
     try {
       await signIn('credentials', { ...data, redirect: false })
       router.replace(`/${from}`)
+      router.refresh()
     } catch (error) {
       setError(t('invalidCredentials'))
     }
