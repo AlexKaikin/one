@@ -18,7 +18,7 @@ async function getProducts(urlParams: UrlParams) {
   }
 }
 
-export default async function Shop(urlParams: UrlParams) {
+export default async function ProductsPage(urlParams: UrlParams) {
   const data = await getProducts(urlParams)
 
   if (!data) {

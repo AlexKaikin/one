@@ -1,0 +1,28 @@
+.table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 600px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+
+  &:nth-child(odd) {
+    background: color-mix(in srgb, var(--text), transparent 95%);
+    border-radius: var(--radius);
+  }
+}
+
+.cell {
+  flex: 1;
+  padding: var(--spacing);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link {
+  cursor: pointer;
+}

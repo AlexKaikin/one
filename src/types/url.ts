@@ -4,6 +4,7 @@ export type UrlParams = {
     post?: string
     product?: string
     category?: string
+    review?: string
   }
   searchParams: {
     _page?: string
@@ -11,5 +12,6 @@ export type UrlParams = {
     category?: string
     q?: string
     by?: string
+    populate?: string
   }
 }
