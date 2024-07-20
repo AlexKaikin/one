@@ -3,9 +3,8 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { isAxiosError } from 'axios'
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 import { UserService } from '@/services'
 import { useTranslation } from '@/store'
@@ -41,7 +40,7 @@ function getSchema(t: Function) {
 
 export default function Register() {
   const { t } = useTranslation()
-  const session = useSession()
+  const router = useRouter()
   const [error, setError] = useState<string | null>(null)
   const formMethods = useForm<UserRegistration>({
     defaultValues: { email: '', password: '' },
@@ -51,6 +50,7 @@ export default function Register() {
   const handleSubmit = async (data: UserRegistration) => {
     try {
       await UserService.create(data)
+      router.push('/login')
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.response?.status === 500) {
@@ -59,9 +59,6 @@ export default function Register() {
       }
     }
   }
-
-  if (session.status === 'loading') return null
-  if (session?.data?.user) redirect('/account')
 
   return (
     <Page>

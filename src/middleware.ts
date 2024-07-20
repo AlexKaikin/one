@@ -7,14 +7,14 @@ const AdminAllowedPaths = ['/admin']
 
 export default withAuth(
   async function middleware(request: NextRequest) {
-    const isAdminAllowedPath = AdminAllowedPaths.some(path =>
-      request.nextUrl.pathname.startsWith(path)
-    )
-
     const user = await getToken({
       req: request,
       secret: process.env.NEXTAUTH_SECRET,
     })
+
+    const isAdminAllowedPath = AdminAllowedPaths.some(path =>
+      request.nextUrl.pathname.startsWith(path)
+    )
 
     if (isAdminAllowedPath && user?.role !== Roles.admin) {
       return NextResponse.rewrite(request.nextUrl.origin + '/forbidden')

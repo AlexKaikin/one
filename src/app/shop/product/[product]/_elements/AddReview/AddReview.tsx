@@ -17,9 +17,9 @@ import { ReviewForm } from '../ReviewForm/ReviewForm'
 export function AddReview({ product }: { product: Product }) {
   const { data } = useSession()
   const { t } = useTranslation()
-  const { id, category } = product
-  const loginLink = `/login?from=shop/${category?.toLowerCase()}/${id}`
-  const registrationLink = `/register?from=shop/${category?.toLowerCase()}/${id}`
+  const { id } = product
+  const loginLink = `/login?from=shop/product/${id}`
+  const registrationLink = `/register?from=shop/product/${id}`
 
   return (
     <Accordion shadow={false}>

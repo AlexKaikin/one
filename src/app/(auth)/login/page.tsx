@@ -2,10 +2,9 @@
 
 import { useState } from 'react'
 import { FieldError, useForm } from 'react-hook-form'
-import { isAxiosError } from 'axios'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { z } from 'zod'
 import { useTranslation } from '@/store'
 import { UserRegistration } from '@/types'
@@ -41,8 +40,10 @@ function getSchema(t: Function) {
 
 export default function Register() {
   const { t } = useTranslation()
-  const session = useSession()
+  const router = useRouter()
   const [error, setError] = useState<string | null>(null)
+  const searchParams = useSearchParams()
+  const from = searchParams.get('from') || 'account'
 
   const formMethods = useForm<UserRegistration>({
     defaultValues: { email: '', password: '' },
@@ -51,20 +52,12 @@ export default function Register() {
 
   const onSubmit = async (data: UserRegistration) => {
     try {
-      const res = await signIn('credentials', { ...data, redirect: false })
-
-      if (res?.error) setError(t('invalidCredentials'))
+      await signIn('credentials', { ...data, redirect: false })
+      router.replace(`/${from}`)
     } catch (error) {
-      if (isAxiosError(error)) {
-        if (error.response?.status === 500) {
-          setError(error.response?.data.message)
-        }
-      }
+      setError(t('invalidCredentials'))
     }
   }
-
-  if (session.status === 'loading') return null
-  if (session?.data?.user) redirect('/account')
 
   return (
     <Page>
