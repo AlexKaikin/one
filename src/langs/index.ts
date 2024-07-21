@@ -12,8 +12,67 @@ export type Translate = {
   ru: Translation
 }
 
+const auth = {
+  en: {
+    login: 'Login',
+    registration: 'Registration',
+  },
+  ru: {
+    login: 'Вход',
+    registration: 'Регистрация',
+  },
+}
+
+const sort = {
+  en: {
+    sorting: 'Sorting',
+    new: 'New',
+    pop: 'Pop',
+    priceAsc: 'Price asc',
+    priceDesc: 'Price desc',
+  },
+  ru: {
+    sorting: 'Сортировка',
+    new: 'Новые',
+    pop: 'Популярные',
+    priceAsc: 'Возрастание цены',
+    priceDesc: 'Убывание цены',
+  },
+}
+
+const measurement = {
+  en: {
+    pieces: 'Pieces',
+    grams: 'Grams',
+    kilograms: 'Kilograms',
+    volumeMeasurement: 'Volume measurement',
+    milliliters: 'Milliliters',
+    liters: 'Liters',
+  },
+  ru: {
+    pieces: 'Штуки',
+    grams: 'Граммы',
+    kilograms: 'Килограммы',
+    volumeMeasurement: 'Измерение объёма',
+    milliliters: 'Миллилитры',
+    liters: 'Литры',
+  },
+}
+
 export const translate = {
   en: {
+    ...auth.en,
+    ...sort.en,
+    ...measurement.en,
+    manufacturer: 'Manufacturer',
+    characteristics: 'Characteristics',
+    numberReviews: 'Number of reviews',
+    country: 'Country',
+    city: 'City',
+    year: 'Year',
+    hide: 'Hide',
+    show: 'Show',
+    exclude: 'Exclude',
     admin: 'Admin',
     add: 'Add',
     added: 'Added',
@@ -23,8 +82,6 @@ export const translate = {
     addedToCompare: 'Added to compare',
     excludedFromCompare: 'Excluded from compare',
     dashboard: 'Dashboard',
-    login: 'Login',
-    registration: 'Registration',
     home: 'Home',
     shop: 'Shop',
     products: 'Products',
@@ -41,11 +98,6 @@ export const translate = {
     logout: 'Logout',
     darkTheme: 'Dark theme',
     lightTheme: 'Light theme',
-    sorting: 'Sorting',
-    new: 'New',
-    pop: 'Pop',
-    priceAsc: 'Price asc',
-    priceDesc: 'Price desc',
     required: 'Required',
     title: 'Title',
     description: 'Description',
@@ -102,12 +154,6 @@ export const translate = {
     yes: 'Yes',
     no: 'No',
     category: 'Category',
-    pieces: 'Pieces',
-    grams: 'Grams',
-    kilograms: 'Kilograms',
-    volumeMeasurement: 'Volume measurement',
-    milliliters: 'Milliliters',
-    liters: 'Liters',
     noReviews: 'There are no reviews, write first!',
     policyTitle: 'Privacy Policy',
     policyContent: `
@@ -132,8 +178,8 @@ export const translate = {
 <p>There are two main types of cookies: session cookies and persistent cookies.</p>
 
 <ul>
-  <li>- Session cookies are deleted from your computer as soon as you close your browser.</li>
-  <li>- Persistent cookies are stored on your computer until they are deleted or expire.</li>
+  <li>Session cookies are deleted from your computer as soon as you close your browser.</li>
+  <li>Persistent cookies are stored on your computer until they are deleted or expire.</li>
 </ul>
 
 <p>Cookie</p>
@@ -141,13 +187,25 @@ export const translate = {
 <p>The use of cookies on this website is for the following purposes:</p>
 
 <ul>
-  <li>- collecting data about the user through the means of analitics;</li>
-  <li>- enabling the publication of content on social networks;</li>
-  <li>- displaying recommendations for the user if he or she has already visited this website;</li>
+  <li>collecting data about the user through the means of analitics;</li>
+  <li>enabling the publication of content on social networks;</li>
+  <li>displaying recommendations for the user if he or she has already visited this website;</li>
 </ul>
 `,
   },
   ru: {
+    ...auth.ru,
+    ...sort.ru,
+    ...measurement.ru,
+    manufacturer: 'Производитель',
+    characteristics: 'Характеристики',
+    numberReviews: 'Количество отзывов',
+    country: 'Страна',
+    city: 'Город',
+    year: 'Год',
+    hide: 'Скрыть',
+    show: 'Показать',
+    exclude: 'Исключить',
     admin: 'Админ',
     add: 'Добавить',
     added: 'Добавлено',
@@ -157,8 +215,6 @@ export const translate = {
     addedToCompare: 'Добавлено в сравнение',
     excludedFromCompare: 'Исключено из сравнения',
     dashboard: 'Главная панель',
-    login: 'Вход',
-    registration: 'Регистрация',
     home: 'Главная',
     shop: 'Магазин',
     products: 'Товары',
@@ -175,11 +231,6 @@ export const translate = {
     logout: 'Выход',
     darkTheme: 'Тёмная тема',
     lightTheme: 'Светлая тема',
-    sorting: 'Сортировка',
-    new: 'Новые',
-    pop: 'Популярные',
-    priceAsc: 'Возрастание цены',
-    priceDesc: 'Убывание цены',
     required: 'Обязательно',
     title: 'Заголовок',
     description: 'Описание',
@@ -236,12 +287,6 @@ export const translate = {
     yes: 'Да',
     no: 'Нет',
     category: 'Категория',
-    pieces: 'Штуки',
-    grams: 'Граммы',
-    kilograms: 'Килограммы',
-    volumeMeasurement: 'Измерение объёма',
-    milliliters: 'Миллилитры',
-    liters: 'Литры',
     noReviews: 'Отзывов нет, напишите первый!',
     policyTitle: 'Политика конфиденциальности',
     policyContent: `
@@ -253,7 +298,7 @@ export const translate = {
 <p>Гражданин, принимая настоящее Соглашение, выражает свою заинтересованность и полное согласие на то, что обработка его персональных данных может включать в себя следующие действия: сбор, систематизацию, накопление, хранение, уточнение (обновление, изменение), использование, уничтожение.</p>
 
 <p>Гражданин гарантирует: предоставленная им информация является полной, точной и достоверной; при предоставлении информации не нарушается законные права и интересы третьих лиц; вся предоставленная информация заполняется Гражданином лично в отношении себя.</p>`,
-    cookieTitle: 'Использование cookies',
+    cookieTitle: 'Использование cookie',
     cookieContent: `
 <p>О cookie</p>
 
@@ -266,9 +311,9 @@ export const translate = {
 <p>Существует два основных типа файлов cookie: сеансовые файлы cookie и постоянные файлы cookie.</p>
 
 <ul>
-  <li>- Сеансовые файлы cookie удаляются с вашего компьютера, как только вы закрываете браузер.</li>
-  <li>- Постоянные файлы cookie хранятся на вашем компьютере до тех пор, пока они не будут удалены или не истечет срок их действия.</li>
-  <li>- отображение рекомендаций для пользователя, если он уже посещал данный сайт;</li>
+  <li>Сеансовые файлы cookie удаляются с вашего компьютера, как только вы закрываете браузер.</li>
+  <li>Постоянные файлы cookie хранятся на вашем компьютере до тех пор, пока они не будут удалены или не истечет срок их действия.</li>
+  <li>отображение рекомендаций для пользователя, если он уже посещал данный сайт;</li>
 </ul>
 
 <p>Cookie</p>
@@ -276,9 +321,9 @@ export const translate = {
 <p>Использование файлов cookie на этом веб-сайте предназначено для следующих целей:</p>
 
 <ul>
-  <li>- сбор данных о пользователе средствами аналитики;</li>
-  <li>- возможность публикации контента в социальных сетях;</li>
-  <li>- отображение рекомендаций для пользователя, если он уже посещал данный сайт;</li>
+  <li>сбор данных о пользователе средствами аналитики;</li>
+  <li>возможность публикации контента в социальных сетях;</li>
+  <li>отображение рекомендаций для пользователя, если он уже посещал данный сайт;</li>
 </ul>
 `,
   },

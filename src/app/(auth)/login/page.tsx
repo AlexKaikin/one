@@ -50,8 +50,6 @@ export default function Login() {
     resolver: zodResolver(getSchema(t)),
   })
 
-  console.log(error)
-
   const onSubmit = async (data: UserRegistration) => {
     try {
       const res = await signIn('credentials', { ...data, redirect: false })

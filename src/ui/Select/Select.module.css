@@ -12,7 +12,8 @@
   flex-direction: column;
   gap: calc(var(--spacing) * 2);
   background-color: var(--bg);
-  box-shadow: var(--shadow);
+  box-shadow: 0 0 100px 1px color-mix(in srgb, var(--text), transparent 50%);
   padding: calc(var(--spacing) * 2);
   cursor: pointer;
+  border-radius: var(--radius);
 }

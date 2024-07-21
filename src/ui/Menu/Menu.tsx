@@ -34,21 +34,19 @@ export function Menu(props: MenuProps) {
 }
 
 export function MenuWithContext({ trigger, href, children }: MenuProps) {
-  const { open, setOpen } = useContext(MenuContext) as MenuContextType
+  const { open, style, setStyle, handleCloseMenu, handleToggleMenu } =
+    useContext(MenuContext) as MenuContextType
   const { height, width } = useWindowDimensions()
-  const [style, setStyle] = useState({})
-
   const ref = useRef<any | null>(null)
   const portalRef = useRef<any | null>(null)
-
-  useOnClickOutside(ref, () => setOpen(false))
-
   const searchParams = useSearchParams()
   const search = searchParams.get('search')
 
+  useOnClickOutside(ref, handleCloseMenu)
+
   useEffect(() => {
-    setOpen(false)
-  }, [search, setOpen])
+    handleCloseMenu()
+  }, [handleCloseMenu, search])
 
   useLayoutEffect(() => {
     if (open && portalRef.current && height && width) {
@@ -70,23 +68,23 @@ export function MenuWithContext({ trigger, href, children }: MenuProps) {
         setStyle(prev => ({ ...prev, top: `10px` }))
       }
     }
-  }, [height, width, open])
+  }, [height, width, open, setStyle])
 
   return (
     <div ref={ref} className={styles.menu}>
       <div className={styles.trigger}>
         {href ? (
-          <Link href={href || '#'} onClick={() => setOpen(false)}>
+          <Link href={href || '#'} onClick={handleCloseMenu}>
             {trigger}
           </Link>
         ) : (
-          <div className={styles.triggerButton} onClick={() => setOpen(!open)}>
+          <div className={styles.triggerButton} onClick={handleToggleMenu}>
             {trigger}
           </div>
         )}
 
         {!!href && (
-          <IconButton variant="text" onClick={() => setOpen(!open)}>
+          <IconButton variant="text" onClick={handleToggleMenu}>
             <Icon name="arrowDropDown" />
           </IconButton>
         )}
@@ -112,7 +110,7 @@ type MenuItemProps = {
 }
 
 export function MenuItem({ children, active = false, variant }: MenuItemProps) {
-  const { setOpen } = useContext(MenuContext) as MenuContextType
+  const { handleCloseMenu } = useContext(MenuContext) as MenuContextType
 
   return (
     <div
@@ -120,7 +118,7 @@ export function MenuItem({ children, active = false, variant }: MenuItemProps) {
         [styles['active']]: active,
         [styles[variant || '']]: !!variant,
       })}
-      onClick={() => setOpen(false)}
+      onClick={handleCloseMenu}
     >
       {children}
     </div>
@@ -128,7 +126,7 @@ export function MenuItem({ children, active = false, variant }: MenuItemProps) {
 }
 
 export function SubMenu({ trigger, href, children }: Props) {
-  const { setOpen } = useContext(MenuContext) as MenuContextType
+  const { handleCloseMenu } = useContext(MenuContext) as MenuContextType
   const [openSub, setOpenSub] = useState(false)
 
   function onClick() {
@@ -138,7 +136,7 @@ export function SubMenu({ trigger, href, children }: Props) {
   return (
     <div>
       <div onClick={onClick} className={styles.subTrigger}>
-        <Link href={href || '#'} onClick={() => setOpen(false)}>
+        <Link href={href || '#'} onClick={handleCloseMenu}>
           {trigger}
         </Link>
 

@@ -1,12 +1,11 @@
 'use client'
 
 import { useFavoriteProducts, useTranslation } from '@/store'
-import { UrlParams } from '@/types'
 import { Page, PageContent } from '@/ui'
 import { ProductPreview } from '../_elements'
 import styles from '../page.module.css'
 
-export default function FavoritesPage(urlParams: UrlParams) {
+export default function FavoritesPage() {
   const { favoritesItems } = useFavoriteProducts()
   const { t } = useTranslation()
 

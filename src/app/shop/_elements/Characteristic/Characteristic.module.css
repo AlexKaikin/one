@@ -1,0 +1,10 @@
+.characteristic {
+  display: flex;
+  justify-content: space-between;
+  gap: calc(var(--spacing));
+}
+
+.divider {
+  flex-grow: 1;
+  border-bottom: 3px dotted color-mix(in srgb, var(--text), transparent 70%);
+}

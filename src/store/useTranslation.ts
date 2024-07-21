@@ -33,10 +33,22 @@ export const useTranslation = create<Lang>()((set, get) => ({
   },
   tAPI: (value, product) => {
     const lang = get().lang
+    const text = value.split('.')
 
     if (lang === Langs.EN) {
+      if (text[0] === 'characteristics') {
+        return product.characteristics[text[1]]
+      }
+
       return product[value]
     } else {
+      if (text[0] === 'characteristics') {
+        return (
+          product.translations[lang][text[1]] ||
+          product.characteristics[text[1]]
+        )
+      }
+
       return product.translations[lang][value] || product[value]
     }
   },

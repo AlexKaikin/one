@@ -1,35 +1,19 @@
-'use client'
+'use client';
 
-import { useCallback, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { z } from 'zod'
-import { Product } from '@/app/api/products/model'
-import { Measurements } from '@/entities'
-import { TranslationKeys } from '@/langs'
-import { ProductService } from '@/services'
-import { useTranslation } from '@/store'
-import {
-  Button,
-  Form,
-  FormCheckbox,
-  FormFile,
-  FormInput,
-  FormTextarea,
-  Icon,
-  IconButton,
-  Menu,
-  MenuItem,
-  Select,
-  SelectOption,
-  Stack,
-  Tab,
-  Tabs,
-  useNotify,
-} from '@/ui'
-import { zodResolver } from '@hookform/resolvers/zod'
-import styles from './ProductForm.module.css'
+import { useCallback, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+import { Product } from '@/app/api/products/model';
+import { Measurements } from '@/entities';
+import { TranslationKeys } from '@/langs';
+import { ProductService } from '@/services';
+import { useTranslation } from '@/store';
+import { Button, Form, FormCheckbox, FormFile, FormInput, FormTextarea, Icon, IconButton, Menu, MenuItem, Select, SelectOption, Stack, Tab, Tabs, Typography, useNotify } from '@/ui';
+import { zodResolver } from '@hookform/resolvers/zod';
+import styles from './ProductForm.module.css';
+
 
 const MAX_SIZE_FILE = 1
 const MAX_FILES = 10
@@ -58,6 +42,12 @@ function getSchema(t: Function) {
     volumeMeasurement: z
       .string({ required_error, invalid_type_error })
       .min(1, { message: required_error }),
+    characteristics: z.object({
+      manufacturer: z.string(),
+      country: z.string(),
+      city: z.string(),
+      year: z.coerce.number(),
+    }),
     imageUrls: z.string().array(),
     destroyImageUrls: z.string().array().optional(),
     published: z.boolean(),
@@ -68,6 +58,10 @@ function getSchema(t: Function) {
       ru: z.object({
         title: z.string().optional(),
         description: z.string().optional(),
+        manufacturer: z.string().optional(),
+        country: z.string().optional(),
+        city: z.string().optional(),
+        year: z.coerce.number().optional(),
       }),
     }),
   })
@@ -241,6 +235,24 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
                     />
                   </Stack>
 
+                  <Stack flexDirection="column" spacing={2}>
+                    <Typography variant="h5">{t('characteristics')}</Typography>
+                    <FormInput
+                      name="characteristics.manufacturer"
+                      label={t('manufacturer')}
+                    />
+                    <FormInput
+                      name="characteristics.country"
+                      label={t('country')}
+                    />
+                    <FormInput name="characteristics.city" label={t('city')} />
+                    <FormInput
+                      name="characteristics.year"
+                      type="number"
+                      label={t('year')}
+                    />
+                  </Stack>
+
                   <FormCheckbox
                     name="published"
                     defaultChecked={getValues('published')}
@@ -253,11 +265,30 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
               <div className={styles.container}>
                 <Stack flexDirection="column" spacing={2}>
                   <FormInput name="translations.ru.title" label={t('title')} />
+
                   <FormTextarea
                     name="translations.ru.description"
                     label={t('description')}
                     rows={7}
                   />
+
+                  <Stack flexDirection="column" spacing={2}>
+                    <Typography variant="h5">{t('characteristics')}</Typography>
+                    <FormInput
+                      name="translations.ru.manufacturer"
+                      label={t('manufacturer')}
+                    />
+                    <FormInput
+                      name="translations.ru.country"
+                      label={t('country')}
+                    />
+                    <FormInput name="translations.ru.city" label={t('city')} />
+                    <FormInput
+                      name="translations.ru.year"
+                      type="number"
+                      label={t('year')}
+                    />
+                  </Stack>
                 </Stack>
               </div>
             </Tab>

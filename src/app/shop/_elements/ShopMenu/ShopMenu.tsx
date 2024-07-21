@@ -18,12 +18,6 @@ export function ShopMenu() {
   const { t } = useTranslation()
   const router = useRouter()
 
-  const onCart = () => (!!cartItems.length ? router.push('/shop/cart') : null)
-  const onFavorites = () =>
-    !!favoritesItems.length ? router.push('/shop/favorites') : null
-  const onCompare = () =>
-    !!compareItems.length ? router.push('/shop/compare') : null
-
   return (
     <div className={styles.shopMenu}>
       <Menu
@@ -54,7 +48,7 @@ export function ShopMenu() {
           </Badge>
         }
         className={styles.button}
-        onClick={onFavorites}
+        onClick={() => router.push('/shop/favorites')}
       >
         {t('favorites')}
       </Button>
@@ -67,7 +61,7 @@ export function ShopMenu() {
             <Icon name="barChart" width={25} height={25} />
           </Badge>
         }
-        onClick={onCompare}
+        onClick={() => router.push('/shop/compare')}
       >
         {t('compare')}
       </Button>
@@ -80,7 +74,7 @@ export function ShopMenu() {
             <Icon name="cart" width={25} height={25} />
           </Badge>
         }
-        onClick={onCart}
+        onClick={() => router.push('/shop/cart')}
       >
         {t('cart')}
       </Button>

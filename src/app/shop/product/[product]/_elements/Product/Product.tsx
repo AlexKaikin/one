@@ -5,6 +5,7 @@ import { Product as ProductType } from '@/app/api/products/model'
 import { Review as ReviewType } from '@/app/api/reviews/model'
 import { useTranslation } from '@/store'
 import { Rating, Stack, Typography } from '@/ui'
+import { Characteristic } from '../../../../_elements/Characteristic/Characteristic'
 import { Actions } from '../Actions/Actions'
 import { AddReview } from '../AddReview/AddReview'
 import { NotAvailable } from '../NotAvailable/NotAvailable'
@@ -24,36 +25,58 @@ export function Product({ product, reviews }: Props) {
     <div className={styles.product}>
       <Slider imageUrls={product.imageUrls} />
 
-      <Stack isWide flexDirection="column" spacing={2}>
-        <Stack flexDirection="column">
-          <Stack alignItems="center" justifyContent="space-between" spacing={2}>
-            {product.inStock > 0 ? (
-              <div className={styles.inStock}>{t('inStock')}</div>
-            ) : (
-              <div className={styles.ended}>{t('ended')}</div>
-            )}
+      <Stack isWide flexDirection="column" spacing={4}>
+        <Stack flexDirection="column" spacing={2}>
+          <Stack flexDirection="column">
+            <Stack
+              alignItems="center"
+              justifyContent="space-between"
+              spacing={2}
+            >
+              {product.inStock > 0 ? (
+                <div className={styles.inStock}>{t('inStock')}</div>
+              ) : (
+                <div className={styles.ended}>{t('ended')}</div>
+              )}
 
-            <div className={styles.labels}>
-              {newProduct && <span className={styles.new}>new</span>}
-              {popProduct && <span className={styles.pop}>pop</span>}
-            </div>
+              <div className={styles.labels}>
+                {newProduct && <span className={styles.new}>new</span>}
+                {popProduct && <span className={styles.pop}>pop</span>}
+              </div>
+            </Stack>
+
+            <Typography variant="h1">{tAPI('title', product)}</Typography>
           </Stack>
 
-          <Typography variant="h1">{tAPI('title', product)}</Typography>
+          {!!product.rating && (
+            <Stack spacing={1}>
+              <Rating value={product.rating} />({product.ratingCount})
+            </Stack>
+          )}
+
+          <Typography variant="p">
+            {t(product.volumeMeasurement)}: {product.volume}
+          </Typography>
+
+          <Actions product={product} />
+
+          <NotAvailable product={product} />
         </Stack>
-
-        <Rating value={4} />
-
-        <Typography variant="p">
-          {t(product.volumeMeasurement)}: {product.volume}
-        </Typography>
-
-        <Actions product={product} />
-        <NotAvailable product={product} />
 
         <Stack flexDirection="column" spacing={1}>
           <Typography variant="h3">{t('description')}</Typography>
           <Typography variant="p">{tAPI('description', product)}</Typography>
+        </Stack>
+
+        <Stack flexDirection="column" spacing={1}>
+          <Typography variant="h3">{t('characteristics')}</Typography>
+
+          <div className={styles.characteristics}>
+            <Characteristic value="manufacturer" product={product} />
+            <Characteristic value="country" product={product} />
+            <Characteristic value="city" product={product} />
+            <Characteristic value="year" product={product} />
+          </div>
         </Stack>
 
         <Stack flexDirection="column" spacing={1}>

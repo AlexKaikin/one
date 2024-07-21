@@ -25,10 +25,20 @@ export async function POST(request: Request) {
       volume: data.get('volume'),
       volumeMeasurement: data.get('volumeMeasurement'),
       published: data.get('published'),
+      characteristics: {
+        manufacturer: data.get('characteristics[manufacturer]'),
+        country: data.get('characteristics[country]'),
+        city: data.get('characteristics[city]'),
+        year: data.get('characteristics[year]'),
+      },
       translations: {
         ru: {
           title: data.get('translations[ru][title]'),
           description: data.get('translations[ru][description]'),
+          manufacturer: data.get('translations[ru][manufacturer]'),
+          country: data.get('translations[ru][country]'),
+          city: data.get('translations[ru][city]'),
+          year: data.get('translations[ru][year]'),
         },
       },
       imageUrls,

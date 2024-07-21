@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connectDB } from '@/config/db';
-import { deleteFiles, toObject, uploadFiles } from '@/helpers';
+import { deleteFiles, uploadFiles } from '@/helpers';
 import { Product, ProductModel } from '../model';
 
 
@@ -12,7 +12,11 @@ export async function GET(request: Request, context: { params: Params }) {
   try {
     await connectDB()
     const id = context.params.product
-    const product = (await ProductModel.findById(id)) as Product
+    const product = (await ProductModel.findByIdAndUpdate(
+      id,
+      { $inc: { viewsCount: 1 } },
+      { returnDocument: 'after' }
+    )) as Product
 
     if (!product) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 })
@@ -58,10 +62,20 @@ export async function PATCH(request: Request, context: { params: Params }) {
       volumeMeasurement: data.get('volumeMeasurement'),
       price: data.get('price'),
       published: data.get('published'),
+      characteristics: {
+        manufacturer: data.get('characteristics[manufacturer]'),
+        country: data.get('characteristics[country]'),
+        city: data.get('characteristics[city]'),
+        year: data.get('characteristics[year]'),
+      },
       translations: {
         ru: {
           title: data.get('translations[ru][title]'),
           description: data.get('translations[ru][description]'),
+          manufacturer: data.get('translations[ru][manufacturer]'),
+          country: data.get('translations[ru][country]'),
+          city: data.get('translations[ru][city]'),
+          year: data.get('translations[ru][year]'),
         },
       },
       imageUrls,

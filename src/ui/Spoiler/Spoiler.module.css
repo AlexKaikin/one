@@ -1,0 +1,38 @@
+.spoiler {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content {
+  position: relative;
+  transition-property: max-height, height;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.hide {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    box-shadow: 0px -93px 51px -58px var(--bg) inset;
+  }
+}
+
+.hideShadow {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    box-shadow: none;
+  }
+}

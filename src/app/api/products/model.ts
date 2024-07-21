@@ -17,7 +17,12 @@ export type Product = {
   viewsCount: number
   rating: number
   imageUrls: string[]
-  property: { key: string; value: string }[]
+  characteristics: {
+    manufacturer: string
+    country: string
+    city: string
+    year: number
+  }
   category: string
   tags: string[]
   published: boolean
@@ -26,16 +31,19 @@ export type Product = {
   updatedAt: string
 }
 
+const characteristicsSchema = {
+  manufacturer: { type: String, default: '' },
+  country: { type: String, default: '' },
+  city: { type: String, default: '' },
+  year: { type: Number, default: 0 },
+}
+
 const translationSchema = {
   ru: {
     title: { type: String, default: '' },
     description: { type: String, default: '' },
+    ...characteristicsSchema,
   },
-}
-
-const propertySchema = {
-  key: { type: String, require: true },
-  value: { type: String, require: true },
 }
 
 const schema = new Schema(
@@ -52,7 +60,7 @@ const schema = new Schema(
     viewsCount: { type: Number, default: 0 },
     imageUrls: [{ type: String }],
     tags: [{ type: String }],
-    property: [propertySchema],
+    characteristics: characteristicsSchema,
     published: { type: Boolean, default: false },
     translations: translationSchema,
   },

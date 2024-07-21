@@ -57,7 +57,7 @@ export function Sorting() {
     }
     const path = window.location.pathname + '?' + queryParams?.toString()
     router.push(path)
-  }, [])
+  }, [router])
 
   return (
     <Select

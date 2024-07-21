@@ -56,11 +56,11 @@ export function ReviewForm({ review }: { review: Review }) {
 
   const handleChangeRaiting = useCallback((number: number) => {
     setValue('rating', number, { shouldValidate: true, shouldDirty: true })
-  }, [])
+  }, [setValue])
 
   const handleChangeStatus = useCallback((value: ReviewStatuses) => {
     setValue('status', value, { shouldValidate: true, shouldDirty: true })
-  }, [])
+  }, [setValue])
 
   const handleSubmit = async (data: Review) => {
     try {
