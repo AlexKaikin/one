@@ -1,8 +1,7 @@
-'use client';
+'use client'
 
-import React, { Dispatch, ReactNode, SetStateAction, useState } from 'react';
-import { useTranslation } from '@/store';
-
+import React, { Dispatch, ReactNode, SetStateAction, useState } from 'react'
+import { useTranslation } from '@/store'
 
 export type SelectContextType = {
   open: boolean
@@ -13,6 +12,16 @@ export type SelectContextType = {
 
   optionValue: any
   setOptionValue: Dispatch<SetStateAction<any>>
+
+  style: Style
+  setStyle: Dispatch<SetStateAction<Style>>
+}
+
+type Style = {
+  top?: string
+  right?: string
+  bottom?: string
+  left?: string
 }
 
 export const SelectContext = React.createContext<SelectContextType | null>(null)
@@ -20,8 +29,9 @@ export const SelectContext = React.createContext<SelectContextType | null>(null)
 export function SelectProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false)
   const { t } = useTranslation()
-  const [active, setActive] = useState(t('choose'))
+  const [active, setActive] = useState(null)
   const [optionValue, setOptionValue] = useState<any>()
+  const [style, setStyle] = useState({})
 
   const value = {
     open,
@@ -30,6 +40,8 @@ export function SelectProvider({ children }: { children: ReactNode }) {
     setActive,
     optionValue,
     setOptionValue,
+    style,
+    setStyle,
   }
 
   return (

@@ -1,10 +1,8 @@
 .select {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: var(--spacing);
-}
-
-.option {
 }
 
 .options {

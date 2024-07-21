@@ -10,9 +10,6 @@ export const ReviewService = {
   getAll(params: UrlParams) {
     return api.get<Review[]>(`reviews/?${getSearchParams(params)}`)
   },
-  getAllbyProduct(product_Id: string) {
-    return api.get<Review[]>(`reviews/product/${product_Id}`)
-  },
   getOne(id: string, params: UrlParams) {
     return api.get<Review>(`reviews/${id}?${getSearchParams(params)}`)
   },

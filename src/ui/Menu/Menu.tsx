@@ -1,6 +1,13 @@
 'use client'
 
-import { ReactNode, useContext, useEffect, useRef, useState } from 'react'
+import {
+  ReactNode,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
 import { createPortal } from 'react-dom'
 import cn from 'classnames'
 import Link from 'next/link'
@@ -43,7 +50,7 @@ export function MenuWithContext({ trigger, href, children }: MenuProps) {
     setOpen(false)
   }, [search, setOpen])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (open && portalRef.current && height && width) {
       const portalRect = portalRef.current.getBoundingClientRect()
 
@@ -52,7 +59,7 @@ export function MenuWithContext({ trigger, href, children }: MenuProps) {
       }
 
       if (portalRect.bottom > height) {
-        setStyle(prev => ({ ...prev, bottom: `10px` }))
+        setStyle(prev => ({ ...prev, bottom: `50px` }))
       }
 
       if (portalRect.left < 0) {
@@ -63,7 +70,7 @@ export function MenuWithContext({ trigger, href, children }: MenuProps) {
         setStyle(prev => ({ ...prev, top: `10px` }))
       }
     }
-  }, [height, width, style, open])
+  }, [height, width, open])
 
   return (
     <div ref={ref} className={styles.menu}>

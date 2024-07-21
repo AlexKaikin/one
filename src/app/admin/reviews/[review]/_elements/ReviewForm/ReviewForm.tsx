@@ -1,10 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import dayjs from 'dayjs'
 import Link from 'next/link'
-import { title } from 'process'
 import { z } from 'zod'
 import { Review } from '@/app/api/reviews/model'
 import { ReviewStatuses } from '@/entities'
@@ -13,7 +11,6 @@ import { useTranslation } from '@/store'
 import {
   Button,
   Form,
-  FormInput,
   FormTextarea,
   Rating,
   Select,
@@ -30,8 +27,12 @@ function getSchema(t: Function) {
   const schema = z.object({
     body: z.string({ required_error }).min(1, { message: required_error }),
     rating: z.number({ required_error }).min(0, { message: required_error }),
-    product: z.object({ title: z.string() }),
-    user: z.string(),
+    product: z
+      .object({ id: z.string(), title: z.string() })
+      .transform(({ id }) => id),
+    user: z
+      .object({ id: z.string(), lastName: z.string(), firstName: z.string() })
+      .transform(({ id }) => id),
     status: z.string(),
   })
 
@@ -88,7 +89,7 @@ export function ReviewForm({ review }: { review: Review }) {
           {review.product.title}
         </Link>
       </p>
-       <p>
+      <p>
         User:{' '}
         <Link href={`/admin/users/${review.user.id}`}>
           {review.user.lastName} {review.user.firstName}

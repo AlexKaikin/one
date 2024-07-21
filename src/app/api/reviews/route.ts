@@ -2,6 +2,7 @@
 
 import { NextResponse } from 'next/server'
 import { connectDB } from '@/config/db'
+import { ReviewStatuses } from '@/entities'
 import { type Review, ReviewModel } from '../../../app/api/reviews/model'
 
 export async function POST(request: Request) {
@@ -23,10 +24,8 @@ export async function GET(request: Request) {
 
     const { query, fields, pagination } = getFindParams(request)
 
-    const reviews = (await ReviewModel.find(
-      query,
-      fields,
-      pagination
+    const reviews = (await ReviewModel.find(query, fields, pagination).populate(
+      getPopulate(request)
     )) as Review[]
     const total = await ReviewModel.countDocuments(query)
     const response = NextResponse.json(reviews)
@@ -46,10 +45,30 @@ function getFindParams(request: Request) {
   const search = searchParams.get('search') || ''
   const limit = Number(searchParams.get('limit') || 10)
   const skip = (Number(searchParams.get('page') || 1) - 1) * limit
+  const product = searchParams.get('product')
+  const status = searchParams.get('status')
 
-  const query = { body: { $regex: new RegExp(search, 'i') } }
+  const sort = searchParams.get('_sort') || 'createdAt'
+  const order = searchParams.get('_order') || 'desc'
+  const sortParams = { [sort]: order }
+
+  const query: any = { body: { $regex: new RegExp(search, 'i') } }
+
+  if (product) {
+    query.product = product
+  }
+
+  if (!status) {
+    query.status = ReviewStatuses.approved
+  }
+
   const fields = ''
-  const pagination = { skip, limit }
+  const pagination = { skip, limit, sort: sortParams }
 
   return { query, fields, pagination }
+}
+
+function getPopulate(request: Request) {
+  const { searchParams } = new URL(request.url)
+  return searchParams.get('populate') || ''
 }

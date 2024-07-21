@@ -18,6 +18,7 @@ async function getReviews(urlParams: UrlParams) {
 }
 
 export default async function ReviewsPage(urlParams: UrlParams) {
+  urlParams.searchParams.status = 'all'
   const data = await getReviews(urlParams)
 
   if (!data) {

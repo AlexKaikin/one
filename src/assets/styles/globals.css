@@ -27,3 +27,8 @@ body {
   width: 100%;
   z-index: 1;
 }
+
+p,
+ul {
+  margin-bottom: calc(var(--spacing) * 2);
+}

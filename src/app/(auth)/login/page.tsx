@@ -50,11 +50,18 @@ export default function Login() {
     resolver: zodResolver(getSchema(t)),
   })
 
+  console.log(error)
+
   const onSubmit = async (data: UserRegistration) => {
     try {
-      await signIn('credentials', { ...data, redirect: false })
-      router.replace(`/${from}`)
-      router.refresh()
+      const res = await signIn('credentials', { ...data, redirect: false })
+      
+      if (res?.error) {
+        setError(t('invalidCredentials'))
+      } else {
+        router.replace(`/${from}`)
+        router.refresh()
+      }
     } catch (error) {
       setError(t('invalidCredentials'))
     }

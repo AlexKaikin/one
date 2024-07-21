@@ -5,8 +5,8 @@ import {
   ReactNode,
   useContext,
   useEffect,
+  useLayoutEffect,
   useRef,
-  useState,
 } from 'react'
 import { createPortal } from 'react-dom'
 import { FieldError } from 'react-hook-form'
@@ -18,7 +18,7 @@ import styles from './Select.module.css'
 import { SelectContext, SelectContextType, SelectProvider } from './context'
 
 type SelectProps = ComponentProps<'div'> & {
-  label: string
+  label: ReactNode
   children: ReactNode
   onSelectChange: Function
   defaultSelectValue: any
@@ -41,17 +41,25 @@ export function SelectWithContext({
   errorState,
   ...rest
 }: SelectProps) {
-  const { open, setOpen, active, optionValue, setActive } = useContext(
-    SelectContext
-  ) as SelectContextType
+  const { open, setOpen, active, optionValue, setActive, style, setStyle } =
+    useContext(SelectContext) as SelectContextType
   const ref = useRef<any | null>(null)
   const portalRef = useRef<any | null>(null)
   const { height, width } = useWindowDimensions()
-  const [style, setStyle] = useState({})
 
-  useOnClickOutside(ref, () => setOpen(false))
+  useOnClickOutside(ref, handleClickOutside)
 
-  useEffect(() => {
+  function handleClickOutside() {
+    setOpen(false)
+    setStyle({})
+  }
+
+  function handleClick() {
+    setOpen(!open)
+    setStyle({})
+  }
+
+  useLayoutEffect(() => {
     if (open && portalRef.current && height && width) {
       const portalRect = portalRef.current.getBoundingClientRect()
 
@@ -60,7 +68,7 @@ export function SelectWithContext({
       }
 
       if (portalRect.bottom > height) {
-        setStyle(prev => ({ ...prev, bottom: `10px` }))
+        setStyle(prev => ({ ...prev, top: `-30px` }))
       }
 
       if (portalRect.left < 0) {
@@ -71,17 +79,19 @@ export function SelectWithContext({
         setStyle(prev => ({ ...prev, top: `10px` }))
       }
     }
-  }, [height, width, style, open])
+  }, [height, width, open, setStyle])
 
   useEffect(() => {
     if (optionValue !== undefined) {
       onSelectChange && onSelectChange(optionValue)
     }
-  }, [optionValue])
+  }, [onSelectChange, optionValue])
 
   useEffect(() => {
-    setActive(defaultSelectValue)
-  }, [])
+    if (!active) {
+      setActive(defaultSelectValue)
+    }
+  }, [active, defaultSelectValue, setActive])
 
   return (
     <div ref={ref} {...rest}>
@@ -90,7 +100,7 @@ export function SelectWithContext({
         <Button
           variant="clean"
           endIcon={<Icon name="arrowDropDown" height={22} width={22} />}
-          onClick={() => setOpen(!open)}
+          onClick={handleClick}
         >
           {active}
         </Button>
@@ -115,7 +125,7 @@ type SelectOptionProps = ComponentProps<'div'> & {
 }
 
 export function SelectOption({ value, children, ...rest }: SelectOptionProps) {
-  const { setOpen, setActive, setOptionValue } = useContext(
+  const { setOpen, setActive, setOptionValue, setStyle } = useContext(
     SelectContext
   ) as SelectContextType
 
@@ -123,6 +133,7 @@ export function SelectOption({ value, children, ...rest }: SelectOptionProps) {
     setOpen(false)
     setActive(children)
     setOptionValue(value)
+    setStyle({})
   }
 
   return (

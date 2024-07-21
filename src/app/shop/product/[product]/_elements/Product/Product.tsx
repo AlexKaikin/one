@@ -44,7 +44,9 @@ export function Product({ product, reviews }: Props) {
 
         <Rating value={4} />
 
-        <Typography variant="p">{product.volume} gramm</Typography>
+        <Typography variant="p">
+          {t(product.volumeMeasurement)}: {product.volume}
+        </Typography>
 
         <Actions product={product} />
         <NotAvailable product={product} />
@@ -61,6 +63,8 @@ export function Product({ product, reviews }: Props) {
             {reviews.map(review => (
               <Review key={review.id} review={review} />
             ))}
+
+            {!reviews.length && <>{t('noReviews')}</>}
           </Stack>
         </Stack>
       </Stack>

@@ -101,6 +101,51 @@ export const translate = {
     updated: 'Updated',
     yes: 'Yes',
     no: 'No',
+    category: 'Category',
+    pieces: 'Pieces',
+    grams: 'Grams',
+    kilograms: 'Kilograms',
+    volumeMeasurement: 'Volume measurement',
+    milliliters: 'Milliliters',
+    liters: 'Liters',
+    noReviews: 'There are no reviews, write first!',
+    policyTitle: 'Privacy Policy',
+    policyContent: `
+<p>All persons who have filled in the information constituting personal data on this site, as well as placed other information by the specified actions confirm their consent to the processing of personal data and their transfer to the operator of personal data processing.</p>
+
+<p>Under the personal data of the Citizen is understood the following information: general information (name and e-mail address, telephone number).</p>
+
+<p>Citizen, by accepting this Agreement, express their interest and full consent that the processing of their personal data may include the following actions: collection, systematization, accumulation, storage, clarification (update, modification), use, destruction.</p>
+
+<p>The Citizen guarantees: the information provided by him is complete, accurate and reliable; when providing information does not violate the legal rights and interests of third parties; all the information provided is filled out by the Citizen in respect of himself personally.</p>`,
+
+    cookieTitle: 'Use of cookies',
+    cookieContent: `
+<p>About cookie</p>
+
+<p>All web pages on this website use cookies. By using this website and agreeing to this policy, you authorize the use of cookies in accordance with the terms of this policy.</p>
+
+<p>Cookies are transmitted by web servers to web browsers and stored by the latter.</p>
+
+<p>The information is then sent back to the server each time the browser requests a page from the server. This allows the web server to identify and track web browsers.</p>
+
+<p>There are two main types of cookies: session cookies and persistent cookies.</p>
+
+<ul>
+  <li>- Session cookies are deleted from your computer as soon as you close your browser.</li>
+  <li>- Persistent cookies are stored on your computer until they are deleted or expire.</li>
+</ul>
+
+<p>Cookie</p>
+
+<p>The use of cookies on this website is for the following purposes:</p>
+
+<ul>
+  <li>- collecting data about the user through the means of analitics;</li>
+  <li>- enabling the publication of content on social networks;</li>
+  <li>- displaying recommendations for the user if he or she has already visited this website;</li>
+</ul>
+`,
   },
   ru: {
     admin: 'Админ',
@@ -190,6 +235,52 @@ export const translate = {
     updated: 'Обновлено',
     yes: 'Да',
     no: 'Нет',
+    category: 'Категория',
+    pieces: 'Штуки',
+    grams: 'Граммы',
+    kilograms: 'Килограммы',
+    volumeMeasurement: 'Измерение объёма',
+    milliliters: 'Миллилитры',
+    liters: 'Литры',
+    noReviews: 'Отзывов нет, напишите первый!',
+    policyTitle: 'Политика конфиденциальности',
+    policyContent: `
+    
+<p>Все лица, заполнившие на данном сайте сведения, составляющие персональные данные, а также разместившие иную информацию указанными действиями, подтверждают свое согласие на обработку персональных данных и их передачу оператору обработки персональных данных.</p>
+
+<p>Под персональными данными Гражданина понимаются следующие сведения: общие сведения (имя и адрес электронной почты, номер телефона).</p>
+
+<p>Гражданин, принимая настоящее Соглашение, выражает свою заинтересованность и полное согласие на то, что обработка его персональных данных может включать в себя следующие действия: сбор, систематизацию, накопление, хранение, уточнение (обновление, изменение), использование, уничтожение.</p>
+
+<p>Гражданин гарантирует: предоставленная им информация является полной, точной и достоверной; при предоставлении информации не нарушается законные права и интересы третьих лиц; вся предоставленная информация заполняется Гражданином лично в отношении себя.</p>`,
+    cookieTitle: 'Использование cookies',
+    cookieContent: `
+<p>О cookie</p>
+
+<p>Все веб-страницы на этом сайте используют файлы cookie. Используя этот веб-сайт и соглашаясь с этой политикой, вы разрешаете использование файлов cookie в соответствии с условиями этой политики.</p>
+
+<p>Файлы cookie передаются веб-серверами веб-браузерам и сохраняются последними.</p>
+
+<p>Затем информация отправляется обратно на сервер каждый раз, когда браузер запрашивает страницу с сервера. Это позволяет веб-серверу идентифицировать и отслеживать веб-браузеры.</p>
+
+<p>Существует два основных типа файлов cookie: сеансовые файлы cookie и постоянные файлы cookie.</p>
+
+<ul>
+  <li>- Сеансовые файлы cookie удаляются с вашего компьютера, как только вы закрываете браузер.</li>
+  <li>- Постоянные файлы cookie хранятся на вашем компьютере до тех пор, пока они не будут удалены или не истечет срок их действия.</li>
+  <li>- отображение рекомендаций для пользователя, если он уже посещал данный сайт;</li>
+</ul>
+
+<p>Cookie</p>
+
+<p>Использование файлов cookie на этом веб-сайте предназначено для следующих целей:</p>
+
+<ul>
+  <li>- сбор данных о пользователе средствами аналитики;</li>
+  <li>- возможность публикации контента в социальных сетях;</li>
+  <li>- отображение рекомендаций для пользователя, если он уже посещал данный сайт;</li>
+</ul>
+`,
   },
 }
 

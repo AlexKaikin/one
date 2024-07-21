@@ -1,9 +1,8 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { Icon } from '@/ui'
+import { Icon, Stack } from '@/ui'
 import { Sorting } from '../Sorting/Sorting'
-import styles from './SortAndFilter.module.css'
 
 export function SortAndFilter() {
   const pathname = usePathname()
@@ -14,12 +13,12 @@ export function SortAndFilter() {
   if (!isCatalog) return null
 
   return (
-    <div className={styles.group}>
+    <Stack flexDirection="row" alignItems="center" spacing={2}>
       <Sorting />
 
-      <div className={styles.groupItem}>
+      <Stack>
         <Icon name="filter" width={25} height={25} /> Filter
-      </div>
-    </div>
+      </Stack>
+    </Stack>
   )
 }

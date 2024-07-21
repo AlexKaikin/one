@@ -27,6 +27,7 @@ export function ShopMenu() {
   return (
     <div className={styles.shopMenu}>
       <Menu
+        href="/shop"
         trigger={
           <Button
             startIcon={<Icon name="apps" width={20} height={20} />}
@@ -38,11 +39,11 @@ export function ShopMenu() {
         }
       >
         <MenuItem>
-          <Link href={'/shop'}>{t('tea')}</Link>
+          <Link href={'/shop/category/tea'}>{t('tea')}</Link>
         </MenuItem>
 
         <MenuItem>
-          <Link href={'/shop'}>{t('coffee')}</Link>
+          <Link href={'/shop/category/coffee'}>{t('coffee')}</Link>
         </MenuItem>
       </Menu>
 

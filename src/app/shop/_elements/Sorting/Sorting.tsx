@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslation } from '@/store'
-import { Button, Icon, Menu, MenuItem } from '@/ui'
+import { Icon, Select, SelectOption, Stack } from '@/ui'
 
 export function Sorting() {
   const { t } = useTranslation()
@@ -20,7 +20,7 @@ export function Sorting() {
     else return t('new')
   }
 
-  function changeSortActive(item: string) {
+  function handleChangeSelect(item: string) {
     let queryParams
     let _sort = ''
     let _order = ''
@@ -35,7 +35,7 @@ export function Sorting() {
       _sort = 'rating'
       _order = 'desc'
     } else {
-      _sort = 'id'
+      _sort = 'createdAt'
       _order = 'desc'
     }
 
@@ -59,36 +59,20 @@ export function Sorting() {
   }
 
   return (
-    <Menu
-      trigger={
-        <Button variant="clean" startIcon={<Icon name="sort" />}>
-          {t('sorting')}: {getSortActive()}
-        </Button>
+    <Select
+      label={
+        <Stack alignItems="center">
+          <Icon name="sort" />
+          {t('sorting')}:
+        </Stack>
       }
+      defaultSelectValue={getSortActive()}
+      onSelectChange={handleChangeSelect}
     >
-      <MenuItem>
-        <Button variant="clean" onClick={() => changeSortActive('new')}>
-          {t('new')}
-        </Button>
-      </MenuItem>
-
-      <MenuItem>
-        <Button variant="clean" onClick={() => changeSortActive('pop')}>
-          {t('pop')}
-        </Button>
-      </MenuItem>
-
-      <MenuItem>
-        <Button variant="clean" onClick={() => changeSortActive('priceAsc')}>
-          {t('priceAsc')}
-        </Button>
-      </MenuItem>
-
-      <MenuItem>
-        <Button variant="clean" onClick={() => changeSortActive('priceDesc')}>
-          {t('priceDesc')}
-        </Button>
-      </MenuItem>
-    </Menu>
+      <SelectOption value={'new'}>{t('new')}</SelectOption>
+      <SelectOption value={'pop'}>{t('pop')}</SelectOption>
+      <SelectOption value={'priceAsc'}>{t('priceAsc')}</SelectOption>
+      <SelectOption value={'priceDesc'}>{t('priceDesc')}</SelectOption>
+    </Select>
   )
 }

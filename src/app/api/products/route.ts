@@ -1,9 +1,10 @@
-'use server'
+'use server';
 
-import { NextResponse } from 'next/server'
-import { connectDB } from '@/config/db'
-import { uploadFiles } from '@/helpers'
-import { Product, ProductModel } from '../../../app/api/products/model'
+import { NextResponse } from 'next/server';
+import { connectDB } from '@/config/db';
+import { uploadFiles } from '@/helpers';
+import { Product, ProductModel } from '../../../app/api/products/model';
+
 
 export async function POST(request: Request) {
   try {
@@ -17,10 +18,12 @@ export async function POST(request: Request) {
     )
     const newProduct = {
       title: data.get('title'),
+      category: data.get('category'),
       description: data.get('description'),
+      price: data.get('price'),
       inStock: data.get('inStock'),
       volume: data.get('volume'),
-      price: data.get('price'),
+      volumeMeasurement: data.get('volumeMeasurement'),
       published: data.get('published'),
       translations: {
         ru: {
@@ -43,7 +46,7 @@ export async function GET(request: Request) {
   try {
     await connectDB()
 
-    const { query, fields, pagination } = getFindParams(request)
+    const { query, fields, pagination } = await getFindParams(request)
 
     const products = (await ProductModel.find(
       query,
@@ -63,15 +66,31 @@ export async function GET(request: Request) {
   }
 }
 
-function getFindParams(request: Request) {
+async function getFindParams(request: Request) {
   const { searchParams } = new URL(request.url)
   const search = searchParams.get('search') || ''
   const limit = Number(searchParams.get('limit') || 10)
   const skip = (Number(searchParams.get('page') || 1) - 1) * limit
+  const sort = searchParams.get('_sort') || 'createdAt'
+  const order = searchParams.get('_order') || 'desc'
+  const sortParams = { [sort]: order }
+  const category = searchParams.get('category')
+  const published = searchParams.get('published')
 
-  const query = { title: { $regex: new RegExp(search, 'i') } }
+  const query: any = {
+    title: { $regex: new RegExp(search, 'i') },
+  }
+
+  if (category) {
+    query.category = category
+  }
+
+  if (!published) {
+    query.published = true
+  }
+
   const fields = ''
-  const pagination = { skip, limit }
+  const pagination = { skip, limit, sort: sortParams }
 
   return { query, fields, pagination }
 }

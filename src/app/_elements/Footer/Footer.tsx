@@ -10,8 +10,8 @@ export function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <Link href="#">{t('policy')}</Link>
-        <Link href="#">{t('cookies')}</Link>
+        <Link href="/policy">{t('policy')}</Link>
+        <Link href="/cookie">{t('cookies')}</Link>
       </div>
     </footer>
   )

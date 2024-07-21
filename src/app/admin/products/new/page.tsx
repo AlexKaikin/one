@@ -11,6 +11,7 @@ const defaultValues = {
   description: '',
   price: 0,
   volume: '',
+  volumeMeasurement: undefined,
   inStock: 0,
   imageUrls: [],
   published: false,

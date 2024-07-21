@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
@@ -49,12 +49,15 @@ export function ReviewForm({ productId, userId }: Props) {
   const { setValue, reset, formState } = formMethods
   const { isDirty, errors } = formState
 
-  function handleChangeRaiting(number: number) {
-    setValue('rating', number, { shouldValidate: true, shouldDirty: true })
-    setDefaultRating(
-      number > 0 ? <Rating value={number} /> : <>{t('unrated')}</>
-    )
-  }
+  const handleChangeRaiting = useCallback(
+    (number: number) => {
+      setValue('rating', number, { shouldValidate: true, shouldDirty: true })
+      setDefaultRating(
+        number > 0 ? <Rating value={number} /> : <>{t('unrated')}</>
+      )
+    },
+    [setValue, t]
+  )
 
   const handleSubmit = async (data: CreateReview) => {
     try {

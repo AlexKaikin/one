@@ -70,19 +70,6 @@ export async function DELETE(_: Request, context: { params: Params }) {
   }
 }
 
-// function getFindParams(request: Request) {
-//   const { searchParams } = new URL(request.url)
-//   const search = searchParams.get('search') || ''
-//   const limit = Number(searchParams.get('limit') || 10)
-//   const skip = (Number(searchParams.get('page') || 1) - 1) * limit
-
-//   const query = { body: { $regex: new RegExp(search, 'i') } }
-//   const fields = ''
-//   const pagination = { skip, limit }
-
-//   return { query, fields, pagination }
-// }
-
 function getPopulate(request: Request) {
   const { searchParams } = new URL(request.url)
   return searchParams.get('populate') || ''

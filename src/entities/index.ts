@@ -8,3 +8,11 @@ export enum ReviewStatuses {
   approved = 'approved',
   notApproved = 'notApproved',
 }
+
+export enum Measurements {
+  pieces = 'pieces',
+  grams = 'grams',
+  kilograms = 'kilograms',
+  milliliters = 'milliliters',
+  liters = 'liters',
+}

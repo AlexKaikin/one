@@ -21,24 +21,24 @@ export function DesktopMenu() {
       <Menu trigger={t('shop')} href={'/shop'}>
         <SubMenu trigger={t('products')} href={'/shop'}>
           <MenuItem>
-            <Link href={'/shop'}>{t('tea')}</Link>
+            <Link href={'/shop/category/tea'}>{t('tea')}</Link>
           </MenuItem>
 
           <MenuItem>
-            <Link href={'/shop'}>{t('coffee')}</Link>
+            <Link href={'/shop/category/coffee'}>{t('coffee')}</Link>
           </MenuItem>
         </SubMenu>
 
         <MenuItem>
-          <Link href={'/shop'}>{t('favorites')}</Link>
+          <Link href={'/shop/favorites'}>{t('favorites')}</Link>
         </MenuItem>
 
         <MenuItem>
-          <Link href={'/shop'}>{t('compare')}</Link>
+          <Link href={'/shop/compare'}>{t('compare')}</Link>
         </MenuItem>
 
         <MenuItem>
-          <Link href={'/shop'}>{t('cart')}</Link>
+          <Link href={'/shop/cart'}>{t('cart')}</Link>
         </MenuItem>
       </Menu>
 

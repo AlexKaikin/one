@@ -1,11 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 import { Product } from '@/app/api/products/model'
+import { Measurements } from '@/entities'
 import { ProductService } from '@/services'
 import { useTranslation } from '@/store'
 import {
@@ -17,6 +18,10 @@ import {
   FormTextarea,
   Icon,
   IconButton,
+  Menu,
+  MenuItem,
+  Select,
+  SelectOption,
   Stack,
   Tab,
   Tabs,
@@ -36,6 +41,7 @@ function getSchema(t: Function) {
   const schema = z.object({
     id: z.string(),
     title: z.string({ required_error }).min(1, { message: required_error }),
+    category: z.string({ required_error }).min(1, { message: required_error }),
     description: z
       .string({ required_error })
       .min(1, { message: required_error }),
@@ -46,6 +52,9 @@ function getSchema(t: Function) {
       .number({ required_error, invalid_type_error })
       .gte(0, { message: more0 }),
     volume: z
+      .string({ required_error, invalid_type_error })
+      .min(1, { message: required_error }),
+    volumeMeasurement: z
       .string({ required_error, invalid_type_error })
       .min(1, { message: required_error }),
     imageUrls: z.string().array(),
@@ -82,7 +91,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
     Product & { files: FileList | null; destroyImageUrls: string[] }
   >({ defaultValues, resolver: zodResolver(getSchema(t)) })
   const { formState, getValues, setValue, watch, reset } = formMethods
-  const { isDirty } = formState
+  const { isDirty, errors } = formState
 
   const isFilesLimit =
     getValues('imageUrls').length + filePreviews.length >= MAX_FILES
@@ -141,6 +150,20 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
     setValue('files', fileList || null, { shouldDirty: true })
   }
 
+  const handleChangeCategory = useCallback(
+    (value: string) => {
+      setValue('category', value, { shouldValidate: true, shouldDirty: true })
+    },
+    [setValue]
+  )
+
+  const handleChangeVolumeMeasurement = useCallback((value: Measurements) => {
+    setValue('volumeMeasurement', value, {
+      shouldValidate: true,
+      shouldDirty: true,
+    })
+  }, [])
+
   useEffect(() => {
     reset(defaultValues)
     setFilePreviews([])
@@ -155,13 +178,49 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
               <div className={styles.container}>
                 <Stack flexDirection="column" spacing={2}>
                   <FormInput name="title" label={t('title')} />
+
+                  <Select
+                    label={`${t('category')}: `}
+                    defaultSelectValue={<>{t('choose')}</>}
+                    onSelectChange={handleChangeCategory}
+                    errorState={errors.category}
+                  >
+                    <SelectOption value={'tea'}>{t('tea')}</SelectOption>
+                    <SelectOption value={'coffee'}>{t('coffee')}</SelectOption>
+                  </Select>
+
                   <FormTextarea
                     name="description"
                     label={t('description')}
                     rows={7}
                   />
 
-                  <Stack spacing={1}>
+                  <Stack alignItems="center" spacing={2}>
+                    <FormInput name="volume" label={t('volume')} />
+
+                    <Stack isWide alignItems="center" justifyContent="center">
+                      <Select
+                        label={`${t('volumeMeasurement')}: `}
+                        defaultSelectValue={
+                          <>{t(defaultValues.volumeMeasurement)}</>
+                        }
+                        onSelectChange={handleChangeVolumeMeasurement}
+                        errorState={errors.volumeMeasurement}
+                      >
+                        {(
+                          Object.keys(Measurements) as Array<
+                            keyof typeof Measurements
+                          >
+                        ).map(key => (
+                          <SelectOption key={key} value={key}>
+                            {t(key)}
+                          </SelectOption>
+                        ))}
+                      </Select>
+                    </Stack>
+                  </Stack>
+
+                  <Stack spacing={2}>
                     <FormInput
                       name="inStock"
                       type="number"
@@ -174,8 +233,6 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
                       label={t('price')}
                       startIcon={<div className={styles.inputIcon}>$</div>}
                     />
-
-                    <FormInput name="volume" label={t('volume')} />
                   </Stack>
 
                   <FormCheckbox

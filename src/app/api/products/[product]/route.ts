@@ -1,7 +1,8 @@
-import { NextResponse } from 'next/server'
-import { connectDB } from '@/config/db'
-import { deleteFiles, toObject, uploadFiles } from '@/helpers'
-import { Product, ProductModel } from '../model'
+import { NextResponse } from 'next/server';
+import { connectDB } from '@/config/db';
+import { deleteFiles, toObject, uploadFiles } from '@/helpers';
+import { Product, ProductModel } from '../model';
+
 
 type Params = {
   product: string
@@ -50,9 +51,11 @@ export async function PATCH(request: Request, context: { params: Params }) {
 
     const updatedProduct = {
       title: data.get('title'),
+      category: data.get('category'),
       description: data.get('description'),
       inStock: data.get('inStock'),
       volume: data.get('volume'),
+      volumeMeasurement: data.get('volumeMeasurement'),
       price: data.get('price'),
       published: data.get('published'),
       translations: {

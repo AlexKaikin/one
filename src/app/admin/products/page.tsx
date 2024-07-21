@@ -1,10 +1,9 @@
-import Link from 'next/link'
-import { ApiError } from '@/helpers'
-import { ProductService } from '@/services'
-import { useTranslation } from '@/store'
-import { UrlParams } from '@/types'
-import { Button, List, Page, PageContent, PageHeader, Pagination } from '@/ui'
-import { AddProductButton, Products } from './_elements'
+import { ApiError } from '@/helpers';
+import { ProductService } from '@/services';
+import { UrlParams } from '@/types';
+import { Page, PageContent, PageHeader, Pagination } from '@/ui';
+import { AddProductButton, Products } from './_elements';
+
 
 async function getProducts(urlParams: UrlParams) {
   try {
@@ -19,6 +18,7 @@ async function getProducts(urlParams: UrlParams) {
 }
 
 export default async function ProductsPage(urlParams: UrlParams) {
+  urlParams.searchParams.published = 'true'
   const data = await getProducts(urlParams)
 
   if (!data) {

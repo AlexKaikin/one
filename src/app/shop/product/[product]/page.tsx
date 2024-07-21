@@ -1,9 +1,8 @@
-import { ApiError } from '@/helpers';
-import { ProductService, ReviewService } from '@/services';
-import { UrlParams } from '@/types';
-import { Page, PageContent } from '@/ui';
-import { Product } from './_elements/Product/Product';
-
+import { ApiError } from '@/helpers'
+import { ProductService, ReviewService } from '@/services'
+import { UrlParams } from '@/types'
+import { Page, PageContent } from '@/ui'
+import { Product } from './_elements/Product/Product'
 
 async function getProduct(id: string) {
   try {
@@ -16,7 +15,9 @@ async function getProduct(id: string) {
 
 async function getReviews(productId: string) {
   try {
-    const { data } = await ReviewService.getAllbyProduct(productId)
+    const { data } = await ReviewService.getAll({
+      searchParams: { product: productId, populate: 'user' },
+    })
 
     return data
   } catch (error) {

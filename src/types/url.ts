@@ -13,5 +13,8 @@ export type UrlParams = {
     q?: string
     by?: string
     populate?: string
+    published?: string
+    product?: string
+    status?: string
   }
 }

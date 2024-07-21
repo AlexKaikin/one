@@ -3,6 +3,7 @@
 import 'mongoose'
 import mongoose, { Schema, model } from 'mongoose'
 import { schemaConfig } from '@/config'
+import { Measurements } from '@/entities'
 
 export type Product = {
   id: string
@@ -11,11 +12,14 @@ export type Product = {
   price: number
   inStock: number
   volume: string
+  volumeMeasurement: Measurements
   ratingCount: number
+  viewsCount: number
   rating: number
   imageUrls: string[]
   property: { key: string; value: string }[]
   category: string
+  tags: string[]
   published: boolean
   translations: { ru: { title: string } }
   createdAt: string
@@ -37,15 +41,18 @@ const propertySchema = {
 const schema = new Schema(
   {
     title: { type: String, require: true },
+    category: { type: String, require: true },
     description: { type: String, require: true },
     price: { type: Number, require: true },
     inStock: { type: Number, require: true },
     volume: { type: String, require: true },
+    volumeMeasurement: { type: String, require: true },
     rating: { type: Number, default: 0 },
     ratingCount: { type: Number, default: 0 },
+    viewsCount: { type: Number, default: 0 },
     imageUrls: [{ type: String }],
+    tags: [{ type: String }],
     property: [propertySchema],
-    category: { type: String, require: true },
     published: { type: Boolean, default: false },
     translations: translationSchema,
   },
