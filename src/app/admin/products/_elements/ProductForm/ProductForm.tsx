@@ -162,7 +162,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
       shouldValidate: true,
       shouldDirty: true,
     })
-  }, [])
+  }, [setValue])
 
   useEffect(() => {
     reset(defaultValues)
