@@ -1,5 +1,6 @@
 'use client'
 
+import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import dayjs from 'dayjs'
 import Link from 'next/link'
@@ -53,13 +54,13 @@ export function ReviewForm({ review }: { review: Review }) {
   const { setValue, reset, formState } = formMethods
   const { errors, isDirty } = formState
 
-  function handleChangeRaiting(number: number) {
+  const handleChangeRaiting = useCallback((number: number) => {
     setValue('rating', number, { shouldValidate: true, shouldDirty: true })
-  }
+  }, [])
 
-  function handleChangeStatus(value: ReviewStatuses) {
+  const handleChangeStatus = useCallback((value: ReviewStatuses) => {
     setValue('status', value, { shouldValidate: true, shouldDirty: true })
-  }
+  }, [])
 
   const handleSubmit = async (data: Review) => {
     try {

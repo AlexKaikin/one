@@ -27,7 +27,6 @@ export function ShopMenu() {
   return (
     <div className={styles.shopMenu}>
       <Menu
-        href="/shop"
         trigger={
           <Button
             startIcon={<Icon name="apps" width={20} height={20} />}

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 import { Product } from '@/app/api/products/model'
 import { Measurements } from '@/entities'
+import { TranslationKeys } from '@/langs'
 import { ProductService } from '@/services'
 import { useTranslation } from '@/store'
 import {
@@ -157,12 +158,15 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
     [setValue]
   )
 
-  const handleChangeVolumeMeasurement = useCallback((value: Measurements) => {
-    setValue('volumeMeasurement', value, {
-      shouldValidate: true,
-      shouldDirty: true,
-    })
-  }, [setValue])
+  const handleChangeVolumeMeasurement = useCallback(
+    (value: Measurements) => {
+      setValue('volumeMeasurement', value, {
+        shouldValidate: true,
+        shouldDirty: true,
+      })
+    },
+    [setValue]
+  )
 
   useEffect(() => {
     reset(defaultValues)
@@ -181,7 +185,9 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
 
                   <Select
                     label={`${t('category')}: `}
-                    defaultSelectValue={<>{t('choose')}</>}
+                    defaultSelectValue={
+                      <>{t(defaultValues.category as TranslationKeys)}</>
+                    }
                     onSelectChange={handleChangeCategory}
                     errorState={errors.category}
                   >

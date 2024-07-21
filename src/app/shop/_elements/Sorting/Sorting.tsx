@@ -1,5 +1,6 @@
 'use client'
 
+import { useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslation } from '@/store'
 import { Icon, Select, SelectOption, Stack } from '@/ui'
@@ -20,7 +21,7 @@ export function Sorting() {
     else return t('new')
   }
 
-  function handleChangeSelect(item: string) {
+  const handleChangeSelect = useCallback((item: string) => {
     let queryParams
     let _sort = ''
     let _order = ''
@@ -56,7 +57,7 @@ export function Sorting() {
     }
     const path = window.location.pathname + '?' + queryParams?.toString()
     router.push(path)
-  }
+  }, [])
 
   return (
     <Select
