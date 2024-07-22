@@ -25,6 +25,7 @@ export function Stack(props: Props) {
     spacing,
     style,
     isWide,
+    flexWrap,
     ...rest
   } = props
 
@@ -33,6 +34,7 @@ export function Stack(props: Props) {
       style={{
         display: display || 'flex',
         flexDirection,
+        flexWrap,
         justifyContent,
         alignItems,
         overflow,

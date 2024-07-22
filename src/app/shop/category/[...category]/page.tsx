@@ -1,9 +1,8 @@
 import { ApiError } from '@/helpers'
 import { ProductService } from '@/services'
 import { UrlParams } from '@/types'
-import { Page, PageContent, Pagination } from '@/ui'
-import { ProductPreview } from '../../_elements'
-import styles from './page.module.css'
+import { Page, PageContent } from '@/ui'
+import { Products } from '../../_elements'
 
 async function getProducts(urlParams: UrlParams) {
   try {
@@ -32,12 +31,7 @@ export default async function CategoryPage(urlParams: UrlParams) {
   return (
     <Page>
       <PageContent>
-        <div className={styles.products}>
-          {products.map(product => (
-            <ProductPreview key={product.id} product={product} />
-          ))}
-        </div>
-        <Pagination totalCount={totalCount} />
+        <Products products={products} totalCount={totalCount} />
       </PageContent>
     </Page>
   )

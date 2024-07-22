@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { Icon, Stack } from '@/ui'
+import { Filter } from '../Filter/Filter'
 import { Sorting } from '../Sorting/Sorting'
 
 export function SortAndFilter() {
@@ -15,10 +16,7 @@ export function SortAndFilter() {
   return (
     <Stack flexDirection="row" alignItems="center" spacing={2}>
       <Sorting />
-
-      <Stack>
-        <Icon name="filter" width={25} height={25} /> Filter
-      </Stack>
+      <Filter />
     </Stack>
   )
 }

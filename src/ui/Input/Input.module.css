@@ -46,3 +46,11 @@
 .right {
   text-align: right;
 }
+
+.startAdornment {
+  padding-left: calc(var(--spacing) / 2);
+}
+
+.endAdornment {
+  padding-right: calc(var(--spacing) / 2);
+}

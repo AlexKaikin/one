@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import imgUrl from '@/assets/images/home/friends-posing-party.jpg'
 import { useTranslation } from '@/store'
-import { Button, Page, PageContent, PageHeader, Stack, Typography } from '@/ui'
+import { Button, Page, PageContent, Stack, Typography } from '@/ui'
 import styles from './page.module.css'
 
 export default function Home() {

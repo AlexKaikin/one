@@ -1,29 +1,16 @@
 'use client'
 
-import { useFavoriteProducts, useTranslation } from '@/store'
+import { useFavoriteProducts } from '@/store'
 import { Page, PageContent } from '@/ui'
-import { ProductPreview } from '../_elements'
-import styles from '../page.module.css'
+import { Products } from '../_elements'
 
 export default function FavoritesPage() {
   const { favoritesItems } = useFavoriteProducts()
-  const { t } = useTranslation()
-
-  if (!favoritesItems.length)
-    return (
-      <Page>
-        <PageContent>{t('empty')}</PageContent>
-      </Page>
-    )
 
   return (
     <Page>
       <PageContent>
-        <div className={styles.products}>
-          {favoritesItems?.map(product => (
-            <ProductPreview key={product.id} product={product} />
-          ))}
-        </div>
+        <Products products={favoritesItems} totalCount={'0'} />
       </PageContent>
     </Page>
   )

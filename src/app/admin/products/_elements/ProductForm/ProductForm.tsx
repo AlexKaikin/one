@@ -231,7 +231,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
                       name="price"
                       type="number"
                       label={t('price')}
-                      startIcon={<div className={styles.inputIcon}>$</div>}
+                      startAdornment={<div className={styles.inputIcon}>$</div>}
                     />
                   </Stack>
 

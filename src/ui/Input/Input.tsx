@@ -8,8 +8,8 @@ import styles from './Input.module.css'
 
 type Props = ComponentProps<'input'> & {
   label?: string
-  startIcon?: ReactNode
-  endIcon?: ReactNode
+  startAdornment?: ReactNode
+  endAdornment?: ReactNode
   errorState?: FieldError
   align?: 'left' | 'center' | 'right'
 }
@@ -18,9 +18,9 @@ function ForwardRef(props: Props, ref: Ref<HTMLInputElement>) {
   const {
     errorState,
     label,
-    startIcon,
+    startAdornment,
     align = 'left',
-    endIcon,
+    endAdornment,
     ...rest
   } = props
   const [focus, setFocus] = useState(false)
@@ -35,7 +35,9 @@ function ForwardRef(props: Props, ref: Ref<HTMLInputElement>) {
           [styles.focus]: focus,
         })}
       >
-        {startIcon && startIcon}
+        {startAdornment && (
+          <div className={styles.startAdornment}>{startAdornment}</div>
+        )}
 
         <input
           onFocus={() => setFocus(true)}
@@ -45,7 +47,9 @@ function ForwardRef(props: Props, ref: Ref<HTMLInputElement>) {
           onBlur={() => setFocus(false)}
         />
 
-        {endIcon && endIcon}
+        {endAdornment && (
+          <div className={styles.endAdornment}>{endAdornment}</div>
+        )}
       </div>
       {errorState?.message ? <FormFieldErrors error={errorState} /> : null}
     </div>

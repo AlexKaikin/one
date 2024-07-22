@@ -1,26 +1,18 @@
-'use client'
+'use client';
 
-import { useCallback } from 'react'
-import { useForm } from 'react-hook-form'
-import dayjs from 'dayjs'
-import Link from 'next/link'
-import { z } from 'zod'
-import { Review } from '@/app/api/reviews/model'
-import { ReviewStatuses } from '@/entities'
-import { ReviewService } from '@/services'
-import { useTranslation } from '@/store'
-import {
-  Button,
-  Form,
-  FormTextarea,
-  Rating,
-  Select,
-  SelectOption,
-  Stack,
-  useNotify,
-} from '@/ui'
-import { zodResolver } from '@hookform/resolvers/zod'
-import styles from './ReviewForm.module.css'
+import { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
+import dayjs from 'dayjs';
+import Link from 'next/link';
+import { z } from 'zod';
+import { Review } from '@/app/api/reviews/model';
+import { ReviewStatuses } from '@/entities';
+import { ReviewService } from '@/services';
+import { useTranslation } from '@/store';
+import { Button, Form, FormTextarea, Rating, Select, SelectOption, Stack, useNotify } from '@/ui';
+import { zodResolver } from '@hookform/resolvers/zod';
+import styles from './ReviewForm.module.css';
+
 
 function getSchema(t: Function) {
   const required_error = t('required')

@@ -1,0 +1,27 @@
+.filter {
+  position: fixed;
+  z-index: 1;
+  top: 0px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  box-shadow: 0 0 200px 1px color-mix(in srgb, var(--dark), transparent 30%);
+  width: 300px;
+  height: 100%;
+}
+
+.filterHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing);
+  padding: calc(var(--spacing) * 2);
+  padding-bottom: 0;
+}
+
+.filterContent {
+  display: flex;
+  overflow: auto;
+}

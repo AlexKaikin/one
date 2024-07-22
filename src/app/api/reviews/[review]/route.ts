@@ -34,7 +34,9 @@ export async function PATCH(request: Request, context: { params: Params }) {
 
     const id = context.params.review
     const data = await request.json()
-    const review = await ReviewModel.findByIdAndUpdate(id, data, { new: true })
+    const review = await ReviewModel.findByIdAndUpdate(id, data, {
+      new: true,
+    }).populate('user product')
 
     if (!review) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 })

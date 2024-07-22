@@ -30,7 +30,7 @@ function MobileSearch() {
   )
 }
 
-const style = { padding: '10px', marginRight: '5px' }
+const style = { padding: '10px' }
 
 function DesktopSearch() {
   const { t } = useTranslation()
@@ -72,7 +72,7 @@ function DesktopSearch() {
     <Input
       value={value}
       onChange={e => setValue(e.target.value)}
-      endIcon={endIcon}
+      endAdornment={endIcon}
       placeholder={`${t('search')}...`}
     />
   )

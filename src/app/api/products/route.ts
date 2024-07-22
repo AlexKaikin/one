@@ -1,10 +1,9 @@
-'use server';
+'use server'
 
-import { NextResponse } from 'next/server';
-import { connectDB } from '@/config/db';
-import { uploadFiles } from '@/helpers';
-import { Product, ProductModel } from '../../../app/api/products/model';
-
+import { NextResponse } from 'next/server'
+import { connectDB } from '@/config/db'
+import { uploadFiles } from '@/helpers'
+import { Product, ProductModel } from '../../../app/api/products/model'
 
 export async function POST(request: Request) {
   try {
@@ -87,17 +86,28 @@ async function getFindParams(request: Request) {
   const category = searchParams.get('category')
   const published = searchParams.get('published')
 
+  const priceFrom = searchParams.get('price_gte')
+  const priceTo = searchParams.get('price_lte')
+  const ratings = searchParams.get('ratings')?.split(',')
+  const manufacturer = searchParams.get('manufacturer') || ''
+
   const query: any = {
     title: { $regex: new RegExp(search, 'i') },
   }
 
-  if (category) {
-    query.category = category
-  }
-
-  if (!published) {
-    query.published = true
-  }
+  if (!published) query.published = true
+  if (category) query.category = new RegExp(category, 'i')
+  if (ratings) query.rating = { $in: ratings }
+  if (manufacturer)
+    query['characteristics.manufacturer'] = new RegExp(manufacturer, 'i')
+  if (priceFrom)
+    query.price
+      ? (query.price.$gte = priceFrom)
+      : (query.price = { $gte: priceFrom })
+  if (priceTo)
+    query.price
+      ? (query.price.$lte = priceTo)
+      : (query.price = { $lte: priceTo })
 
   const fields = ''
   const pagination = { skip, limit, sort: sortParams }

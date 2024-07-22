@@ -17,6 +17,11 @@ type Props = { product: ProductType; reviews: ReviewType[] }
 
 export function Product({ product, reviews }: Props) {
   const { t, tAPI } = useTranslation()
+  const isCharacteristicsEmpty =
+    !product.characteristics.city &&
+    !product.characteristics.country &&
+    !product.characteristics.manufacturer &&
+    !product.characteristics.year
   const newProduct =
     dayjs(new Date()).diff(dayjs(product.createdAt), 'month') < 15
   const popProduct = product.ratingCount > 1
@@ -68,16 +73,26 @@ export function Product({ product, reviews }: Props) {
           <Typography variant="p">{tAPI('description', product)}</Typography>
         </Stack>
 
-        <Stack flexDirection="column" spacing={1}>
-          <Typography variant="h3">{t('characteristics')}</Typography>
+        {!isCharacteristicsEmpty && (
+          <Stack
+            flexDirection="column"
+            spacing={1}
+            className={styles.characteristicsWrap}
+          >
+            <Typography variant="h3">{t('characteristics')}</Typography>
 
-          <div className={styles.characteristics}>
-            <Characteristic value="manufacturer" product={product} />
-            <Characteristic value="country" product={product} />
-            <Characteristic value="city" product={product} />
-            <Characteristic value="year" product={product} />
-          </div>
-        </Stack>
+            <div className={styles.characteristics}>
+              <Characteristic
+                hideIfNot
+                value="manufacturer"
+                product={product}
+              />
+              <Characteristic hideIfNot value="country" product={product} />
+              <Characteristic hideIfNot value="city" product={product} />
+              <Characteristic hideIfNot value="year" product={product} />
+            </div>
+          </Stack>
+        )}
 
         <Stack flexDirection="column" spacing={1}>
           <AddReview product={product} />
