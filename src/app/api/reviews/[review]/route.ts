@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { connectDB } from '@/config/db'
+import { connectDB } from '@/configs'
 import { ReviewStatuses } from '@/entities'
 import { ProductModel } from '../../products/model'
 import { Review, ReviewModel } from '../model'

@@ -59,11 +59,53 @@ const measurement = {
   },
 }
 
+const user = {
+  en: {
+    recipientDetails: 'Recipient details',
+    lastName: 'Last name',
+    firstName: 'First name',
+    middleName: 'Middle name',
+  },
+  ru: {
+    recipientDetails: 'Подробнее о получателе',
+    lastName: 'Фамилия',
+    firstName: 'Имя',
+    middleName: 'Отчество',
+  },
+}
+
+const address = {
+  en: {
+    receivingAddress: 'Receiving address',
+    street: 'Street',
+    house: 'House',
+    apartment: 'Apartment',
+    postalCode: 'Postal code',
+  },
+  ru: {
+    receivingAddress: 'Адрес получателя',
+    street: 'Улица',
+    house: 'Дом',
+    apartment: 'Квартира',
+    postalCode: 'Почтовый индекс',
+  },
+}
+
 export const translate = {
   en: {
     ...auth.en,
     ...sort.en,
     ...measurement.en,
+    ...address.en,
+    ...user.en,
+    inShop: 'in shop',
+    inBlog: 'in blog',
+    summery: 'Summery',
+    total: 'Total',
+    discount: 'Discount',
+    amount: 'Amount',
+    coupon: 'Coupon',
+    checkout: 'Checkout',
     filter: 'Filter',
     from: 'From',
     to: 'To',
@@ -202,6 +244,16 @@ export const translate = {
     ...auth.ru,
     ...sort.ru,
     ...measurement.ru,
+    ...address.ru,
+    ...user.ru,
+    inShop: 'в магазине',
+    inBlog: 'в блоге',
+    summery: 'Сводка',
+    total: 'Итого',
+    discount: 'Скидка',
+    amount: 'Сумма',
+    coupon: 'Купон',
+    checkout: 'Оформить',
     filter: 'Фильтр',
     from: 'От',
     to: 'До',

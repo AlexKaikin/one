@@ -1,5 +1,5 @@
 import { Product } from '@/app/api/products/model'
-import { api, options } from '@/config/api'
+import { api, options } from '@/configs/api'
 import { getSearchParams } from '@/helpers'
 import { UrlParams } from '@/types'
 
@@ -8,7 +8,7 @@ export const ProductService = {
     return api.post<Product>(`products`, data, options.multipart)
   },
   getAll(params: UrlParams) {
-    return api.get<Product[]>(`products/?${getSearchParams(params)}`)
+    return api.get<Product[]>(`products/${getSearchParams(params)}`)
   },
   getOne(id: string) {
     return api.get<Product>(`products/${id}`)

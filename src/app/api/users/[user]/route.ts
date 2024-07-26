@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { connectDB } from '@/config/db'
+import { connectDB } from '@/configs'
 import { User, UserModel } from '../model'
 
 type Params = {

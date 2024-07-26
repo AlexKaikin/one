@@ -28,7 +28,6 @@ export const SelectContext = React.createContext<SelectContextType | null>(null)
 
 export function SelectProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false)
-  const { t } = useTranslation()
   const [active, setActive] = useState(null)
   const [optionValue, setOptionValue] = useState<any>()
   const [style, setStyle] = useState({})

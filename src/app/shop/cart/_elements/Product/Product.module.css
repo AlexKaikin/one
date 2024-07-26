@@ -1,0 +1,76 @@
+.product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  /* padding: calc(var(--spacing) * 2); */
+  box-shadow: 0 0px 20px var(--shadow);
+  border-radius: calc(var(--radius));
+  background-color: var(--bg);
+  position: relative;
+  z-index: 0;
+
+  @media only screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: var(--spacing);
+
+    margin-bottom: 20px;
+  }
+}
+
+.imgContainer {
+  flex: 0 0 80px;
+  position: relative;
+
+  @media only screen and (max-width: 600px) {
+    flex: 0 0 80px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    flex: auto;
+
+    text-align: center;
+    width: 50%;
+  }
+}
+
+.img {
+  border-radius: calc(var(--radius));
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+}
+
+.title {
+  flex: 1 1 130px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @media only screen and (max-width: 768px) {
+    flex: 1 1 auto;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.quantityContainer {
+  flex: 0 0 150px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cost {
+  flex: 0 0 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.delete {
+  flex: 0 0 40px;
+  display: flex;
+  justify-content: flex-end;
+}

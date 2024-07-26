@@ -20,6 +20,7 @@ import {
 } from '@/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import styles from './Filter.module.css'
+import { uuid } from '@/helpers'
 
 const schema = z.object({
   search: z.string(),
@@ -152,7 +153,7 @@ export function Filter() {
       <Stack>
         <Button
           variant="clean"
-          startIcon={<Icon name="filter" width={25} height={25} />}
+          startIcon={<Icon name="filter" width={20} height={20} />}
           onClick={() => setOpen(!open)}
         >
           {t('filter')}
@@ -222,8 +223,8 @@ export function Filter() {
                           <FormCheckbox
                             checked={ratings.includes(item)}
                             onChange={() => handleRating(item)}
+                            label={<Rating value={item} />}
                           />
-                          <Rating value={item} />
                         </Stack>
                       ))}
                     </Stack>

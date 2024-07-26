@@ -19,6 +19,7 @@ import { SelectContext, SelectContextType, SelectProvider } from './context'
 
 type SelectProps = ComponentProps<'div'> & {
   label: ReactNode
+  color?: string
   children: ReactNode
   onSelectChange: Function
   defaultSelectValue: any
@@ -36,6 +37,7 @@ export function Select(props: SelectProps) {
 export function SelectWithContext({
   children,
   label,
+  color,
   onSelectChange,
   defaultSelectValue,
   errorState,
@@ -88,10 +90,8 @@ export function SelectWithContext({
   }, [onSelectChange, optionValue])
 
   useEffect(() => {
-    if (!active) {
-      setActive(defaultSelectValue)
-    }
-  }, [active, defaultSelectValue, setActive])
+    setActive(defaultSelectValue)
+  }, [defaultSelectValue, setActive])
 
   return (
     <div ref={ref} {...rest}>
@@ -102,7 +102,7 @@ export function SelectWithContext({
           endIcon={<Icon name="arrowDropDown" height={22} width={22} />}
           onClick={handleClick}
         >
-          {active}
+          <span style={{ color: color || 'var(--primary)' }}>{active}</span>
         </Button>
       </div>
 

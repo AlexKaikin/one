@@ -15,7 +15,9 @@
 .group {
   display: flex;
   flex-direction: row;
+  align-items: center;
   min-width: 100px;
   justify-content: flex-end;
+  gap: var(--spacing);
   margin: 4px 0;
 }

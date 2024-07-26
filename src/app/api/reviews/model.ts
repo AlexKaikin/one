@@ -2,7 +2,7 @@
 
 import 'mongoose'
 import mongoose, { Schema, model } from 'mongoose'
-import { schemaConfig } from '@/config'
+import { schemaConfig } from '@/configs'
 import { ReviewStatuses } from '@/entities'
 import { Product } from '../products/model'
 import { User } from '../users/model'

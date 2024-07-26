@@ -10,6 +10,7 @@ import IconCart from '@/assets/svg/cart.svg'
 import IconChevronLeft from '@/assets/svg/chevronLeft.svg'
 import IconChevronRight from '@/assets/svg/chevronRight.svg'
 import IconClose from '@/assets/svg/close.svg'
+import IconExclamation from '@/assets/svg/exclamation.svg'
 import IconFilter from '@/assets/svg/filter.svg'
 import IconGalaxy from '@/assets/svg/galaxy.svg'
 import IconHeart from '@/assets/svg/heart.svg'
@@ -54,6 +55,7 @@ type IconType =
   | 'minus'
   | 'starOutline'
   | 'star'
+  | 'exclamation'
 
 export function Icon({ name, ...rest }: Props) {
   const icons = {
@@ -82,6 +84,7 @@ export function Icon({ name, ...rest }: Props) {
     minus: <IconMinus {...rest} />,
     starOutline: <IconStarOutline {...rest} />,
     star: <IconStar {...rest} />,
+    exclamation: <IconExclamation {...rest} />,
   }
   const icon = icons[name]
   return icon

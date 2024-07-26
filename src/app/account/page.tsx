@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/config/authOptions'
+import { authOptions } from '@/configs'
 import { UserService } from '@/services'
 import { Page, PageContent } from '@/ui'
 import { UserForm } from './_elements'

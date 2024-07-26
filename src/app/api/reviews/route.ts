@@ -1,7 +1,7 @@
 'use server'
 
 import { NextResponse } from 'next/server'
-import { connectDB } from '@/config/db'
+import { connectDB } from '@/configs'
 import { ReviewStatuses } from '@/entities'
 import { type Review, ReviewModel } from '../../../app/api/reviews/model'
 

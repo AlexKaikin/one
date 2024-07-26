@@ -2,7 +2,7 @@
 
 import 'mongoose'
 import mongoose, { Schema, model } from 'mongoose'
-import { schemaConfig } from '@/config'
+import { schemaConfig } from '@/configs'
 import { Measurements } from '@/entities'
 
 export type Product = {

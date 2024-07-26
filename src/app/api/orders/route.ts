@@ -2,13 +2,13 @@
 
 import { NextResponse } from 'next/server'
 import { connectDB } from '@/configs'
-import { ProductService } from './services'
+import { OrderService } from './services'
 
 export async function POST(request: Request) {
   try {
     await connectDB()
 
-    const product = await ProductService.create(request)
+    const product = await OrderService.create(request)
 
     return NextResponse.json(product, { status: 201 })
   } catch (error) {
@@ -20,8 +20,8 @@ export async function GET(request: Request) {
   try {
     await connectDB()
 
-    const { products, total } = await ProductService.getAll(request)
-    const response = NextResponse.json(products)
+    const { orders, total } = await OrderService.getAll(request)
+    const response = NextResponse.json(orders)
     response.headers.append('X-Total-Count', String(total))
 
     return response

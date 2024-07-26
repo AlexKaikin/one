@@ -1,16 +1,18 @@
-import React, { forwardRef, ComponentProps, Ref } from 'react'
+import React, { forwardRef, ComponentProps, Ref, ReactNode } from 'react'
 import { FieldError } from 'react-hook-form'
 import cn from 'classnames'
+import { uuid } from '@/helpers'
 import { FormFieldErrors } from '@/ui'
 import styles from './Checkbox.module.css'
 
 export type CheckboxProps = ComponentProps<'input'> & {
-  label?: string
+  label?: ReactNode
   errorState?: FieldError
 }
 
 function ForwardRef(props: CheckboxProps, ref: Ref<HTMLInputElement>) {
-  const { label, errorState, ...rest } = props
+  const { id, label, errorState, ...rest } = props
+  const checkboxId = uuid()
 
   return (
     <label className={styles.root}>
@@ -20,10 +22,15 @@ function ForwardRef(props: CheckboxProps, ref: Ref<HTMLInputElement>) {
           ref={ref}
           type="checkbox"
           className={cn(styles.checkbox)}
+          id={id || checkboxId}
         />
-        {label ? <span>{label}</span> : null}
+        {!!label && (
+          <label htmlFor={id || checkboxId} className={styles.label}>
+            {label}
+          </label>
+        )}
       </div>
-      {errorState?.message ? <FormFieldErrors error={errorState} /> : null}
+      {!!errorState?.message && <FormFieldErrors error={errorState} />}
     </label>
   )
 }

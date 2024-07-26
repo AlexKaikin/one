@@ -1,5 +1,5 @@
 import { Review, CreateReview } from '@/app/api/reviews/model'
-import { api, options } from '@/config/api'
+import { api, options } from '@/configs/api'
 import { getSearchParams } from '@/helpers'
 import { UrlParams } from '@/types'
 

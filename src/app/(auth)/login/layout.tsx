@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
-import { authOptions } from '@/config'
+import { authOptions } from '@/configs'
 
 export const metadata: Metadata = {
   title: 'Login',
