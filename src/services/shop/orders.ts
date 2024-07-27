@@ -10,8 +10,8 @@ export const OrderService = {
   getAll(params: UrlParams) {
     return api.get<Order[]>(`orders/${getSearchParams(params)}`)
   },
-  getOne(id: string, params: UrlParams) {
-    return api.get<Order>(`orders/${id}${getSearchParams(params)}`)
+  getOne(id: string) {
+    return api.get<Order>(`orders/${id}`)
   },
   update(id: string, data: Order) {
     return api.patch<Order>(`orders/${id}`, data, options.json)

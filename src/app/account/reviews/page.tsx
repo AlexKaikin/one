@@ -1,4 +1,6 @@
+import { getServerSession } from 'next-auth'
 import { Reviews } from '@/app/_elements'
+import { authOptions } from '@/configs'
 import { ApiError } from '@/helpers'
 import { ReviewService } from '@/services'
 import { UrlParams } from '@/types'
@@ -17,6 +19,8 @@ async function getReviews(urlParams: UrlParams) {
 }
 
 export default async function ReviewsPage(urlParams: UrlParams) {
+  const session = await getServerSession(authOptions)
+  urlParams.searchParams.user = session?.user.id
   const data = await getReviews(urlParams)
 
   if (!data) return null

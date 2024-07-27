@@ -1,14 +1,18 @@
 'use client'
 
 import dayjs from 'dayjs'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Review } from '@/app/api/reviews/model'
 import { useTranslation } from '@/store'
 import { Table, TableCell, TableRow } from '@/ui'
 
 export function Reviews({ reviews }: { reviews: Review[] }) {
+  const pathname = usePathname()
   const { t } = useTranslation()
   const router = useRouter()
+  const path = pathname.split('/')[1]
+
+  if (!reviews.length) return t('empty')
 
   return (
     <Table>
@@ -21,7 +25,7 @@ export function Reviews({ reviews }: { reviews: Review[] }) {
       {reviews.map(review => (
         <TableRow
           key={review.id}
-          onClick={() => router.push(`/admin/reviews/${review.id}`)}
+          onClick={() => router.push(`/${path}/reviews/${review.id}`)}
         >
           <TableCell>{review.body}</TableCell>
           <TableCell>

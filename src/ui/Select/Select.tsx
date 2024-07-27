@@ -24,6 +24,7 @@ type SelectProps = ComponentProps<'div'> & {
   onSelectChange: Function
   defaultSelectValue: any
   errorState?: FieldError
+  readOnly?: boolean
 }
 
 export function Select(props: SelectProps) {
@@ -41,6 +42,7 @@ export function SelectWithContext({
   onSelectChange,
   defaultSelectValue,
   errorState,
+  readOnly,
   ...rest
 }: SelectProps) {
   const { open, setOpen, active, optionValue, setActive, style, setStyle } =
@@ -99,8 +101,12 @@ export function SelectWithContext({
         <div>{label}</div>
         <Button
           variant="clean"
-          endIcon={<Icon name="arrowDropDown" height={22} width={22} />}
-          onClick={handleClick}
+          endIcon={
+            readOnly ? null : (
+              <Icon name="arrowDropDown" height={22} width={22} />
+            )
+          }
+          onClick={readOnly ? () => null : handleClick}
         >
           <span style={{ color: color || 'var(--primary)' }}>{active}</span>
         </Button>

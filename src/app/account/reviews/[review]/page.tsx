@@ -18,5 +18,5 @@ export default async function ReviewPage(urlParams: UrlParams) {
 
   if (!review) return null
 
-  return <Review review={review} editMode />
+  return <Review review={review} />
 }

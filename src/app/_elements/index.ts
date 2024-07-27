@@ -1,2 +1,6 @@
 export { Header } from './Header/Header'
 export { Footer } from './Footer/Footer'
+export { Orders } from './Orders/Orders'
+export { Order } from './Order/Order'
+export { Review } from './Review/Review'
+export { Reviews } from './Reviews/Reviews'

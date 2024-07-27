@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: calc(var(--spacing) * 2);
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 2);
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  box-shadow: 0 0px 20px var(--shadow);
+  border-radius: calc(var(--radius));
+  background-color: var(--bg);
+  position: relative;
+  z-index: 0;
+  border: var(--border);
+  padding: var(--spacing);
+}
+
+.imgContainer {
+  flex: 0 0 80px;
+  position: relative;
+}
+
+.img {
+  border-radius: calc(var(--radius));
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+}

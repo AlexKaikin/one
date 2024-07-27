@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 import { CreateOrder } from '@/app/api/orders/model'
+import { OrderStatuses } from '@/entities'
 import { getLocalStorage } from '@/helpers'
 import { OrderService } from '@/services'
 import { useCart, useTranslation } from '@/store'
@@ -39,6 +40,7 @@ function getSchema(t: Function) {
     name: z.string({ required_error }).min(1, { message }),
     surname: z.string({ required_error }).min(1, { message }),
     middleName: z.string({ required_error }).min(1, { message }),
+    user: z.string().optional(),
   })
 
   return schema
@@ -46,7 +48,7 @@ function getSchema(t: Function) {
 
 export default function CartPage() {
   const { notify } = useNotify()
-  const { data } = useSession()
+  const { data: session } = useSession()
   const { t } = useTranslation()
   const { cartItems, totalCost } = useCart()
   const router = useRouter()
@@ -57,10 +59,13 @@ export default function CartPage() {
 
   const handleSubmit = async (data: CreateOrder) => {
     try {
-       data.cartItems = getLocalStorage('cart') || []
-       data.totalCost = totalCost
-       await OrderService.create(data)
-       router.push('/account/orders')
+      data.cartItems = getLocalStorage('cart') || []
+      data.totalCost = totalCost
+      data.status = 'awaitingPayment'
+      data.user = session?.user.id || ''
+      await OrderService.create(data)
+      router.push('/account/orders')
+      router.refresh()
     } catch (error) {
       notify({ type: 'error', message: t('globalError') })
     }
@@ -84,7 +89,7 @@ export default function CartPage() {
               className={styles.form}
             >
               <Stack flexDirection="column">
-                {!data?.user && (
+                {!session?.user && (
                   <div className={styles.notification}>
                     <Icon name="exclamation" />
                     <Stack flexWrap="wrap" spacing={1}>
@@ -99,7 +104,7 @@ export default function CartPage() {
                 <Stack flexDirection="row" flexWrap="wrap" spacing={1}>
                   <WidgetGroup
                     className={cn(styles.widget, {
-                      [styles['disable']]: !data?.user,
+                      [styles['disable']]: !session?.user,
                     })}
                   >
                     <Widget title={t('receivingAddress')}>
@@ -107,32 +112,32 @@ export default function CartPage() {
                         <FormInput
                           name="region"
                           label={t('country')}
-                          disabled={!data?.user}
+                          disabled={!session?.user}
                         />
                         <FormInput
                           name="city"
                           label={t('city')}
-                          disabled={!data?.user}
+                          disabled={!session?.user}
                         />
                         <FormInput
                           name="street"
                           label={t('street')}
-                          disabled={!data?.user}
+                          disabled={!session?.user}
                         />
                         <FormInput
                           name="home"
                           label={t('house')}
-                          disabled={!data?.user}
+                          disabled={!session?.user}
                         />
                         <FormInput
                           label={t('apartment')}
-                          disabled={!data?.user}
+                          disabled={!session?.user}
                         />
                         <FormInput
                           name="index"
                           type="number"
                           label={t('postalCode')}
-                          disabled={!data?.user}
+                          disabled={!session?.user}
                         />
                       </Stack>
                     </Widget>
@@ -140,7 +145,7 @@ export default function CartPage() {
 
                   <div
                     className={cn(styles.widget, {
-                      [styles['disable']]: !data?.user,
+                      [styles['disable']]: !session?.user,
                     })}
                   >
                     <WidgetGroup>
@@ -149,17 +154,17 @@ export default function CartPage() {
                           <FormInput
                             name="surname"
                             label={t('lastName')}
-                            disabled={!data?.user}
+                            disabled={!session?.user}
                           />
                           <FormInput
                             name="name"
                             label={t('firstName')}
-                            disabled={!data?.user}
+                            disabled={!session?.user}
                           />
                           <FormInput
                             name="middleName"
                             label={t('middleName')}
-                            disabled={!data?.user}
+                            disabled={!session?.user}
                           />
                         </Stack>
                       </Widget>

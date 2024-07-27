@@ -7,15 +7,19 @@ import { Menu, MenuItem } from '@/ui'
 
 export function AccountMenu() {
   const { t } = useTranslation()
-  const category = usePathname()
+  const category = usePathname().split('/')[2]
 
-  const menu = [{ title: t('profile'), path: '/account' }]
+  const menu = [
+    { title: t('profile'), path: undefined },
+    { title: t('orders'), path: 'orders' },
+    { title: t('reviews'), path: 'reviews' },
+  ]
 
   return (
     <Menu>
       {menu.map(({ title, path }) => (
         <MenuItem key={title} variant="sidebar" active={category === path}>
-          <Link href={path}>{title}</Link>
+          <Link href={`/account/${path || ''}`}>{title}</Link>
         </MenuItem>
       ))}
     </Menu>

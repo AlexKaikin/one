@@ -4,17 +4,3 @@
   gap: var(--spacing);
   padding: var(--spacing);
 }
-
-.links {
-  display: flex;
-  gap: var(--spacing);
-  padding: var(--spacing);
-}
-
-.mobileBtn {
-  display: none;
-
-  @media (max-width: 768px) {
-    display: flex;
-  }
-}

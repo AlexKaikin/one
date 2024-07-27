@@ -22,8 +22,10 @@ async function getFindParams(request: Request) {
   const sort = searchParams.get('_sort') || 'createdAt'
   const order = searchParams.get('_order') || 'desc'
   const sortParams = { [sort]: order }
-
+  const user = searchParams.get('user')
   const query: any = {}
+
+  if (user) query.user = user
 
   const fields = ''
   const pagination = { skip, limit, sort: sortParams }

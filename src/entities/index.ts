@@ -16,3 +16,11 @@ export enum Measurements {
   milliliters = 'milliliters',
   liters = 'liters',
 }
+
+export enum OrderStatuses {
+  awaitingPayment = 'awaiting payment',
+  cancel = 'cancel',
+  paid = 'paid',
+  delivery = 'delivery',
+  delivered = 'delivered',
+}
