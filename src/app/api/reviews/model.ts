@@ -4,24 +4,7 @@ import 'mongoose'
 import mongoose, { Schema, model } from 'mongoose'
 import { schemaConfig } from '@/configs'
 import { ReviewStatuses } from '@/entities'
-import { Product } from '../products/model'
-import { User } from '../users/model'
-
-export type Review = {
-  id: string
-  body: string
-  rating: number
-  status: ReviewStatuses
-  user: User
-  product: Product
-  createdAt: string
-  updatedAt: string
-}
-
-export type CreateReview = Omit<
-  Review,
-  'id' | 'status' | 'createdAt' | 'updatedAt' | 'product' | 'user'
-> & { product: string; user: string }
+import { Review } from '@/types'
 
 const schema = new Schema(
   {

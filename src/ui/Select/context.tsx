@@ -1,7 +1,6 @@
 'use client'
 
 import React, { Dispatch, ReactNode, SetStateAction, useState } from 'react'
-import { useTranslation } from '@/store'
 
 export type SelectContextType = {
   open: boolean

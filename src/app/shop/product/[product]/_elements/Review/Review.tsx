@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import Image from 'next/image'
-import { Review as ReviewType } from '@/app/api/reviews/model'
 import defautAvatar from '@/assets/images/user/defaultAvatar.png'
+import { Review as ReviewType } from '@/types'
 import { Rating, Stack } from '@/ui'
 import styles from './Review.module.css'
 
@@ -20,7 +20,7 @@ export function Review({ review }: { review: ReviewType }) {
 
       <Stack flexDirection="column" spacing={1}>
         <Stack spacing={1}>
-          {user.firstName}{' '}
+          {!!user.firstName.length ? user.firstName : user.email}{' '}
           <div className={styles.date}>
             {dayjs(new Date(user.createdAt)).format('H:mm, DD.MM.YYYY')}
           </div>

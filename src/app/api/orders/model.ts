@@ -3,28 +3,7 @@
 import 'mongoose'
 import mongoose, { Schema, model } from 'mongoose'
 import { schemaConfig } from '@/configs'
-import { CartItem } from '@/types'
-
-export type Order = {
-  id: string
-  name: string
-  surname: string
-  middleName: string
-  region: string
-  city: string
-  street: string
-  home: string
-  apartment: string
-  index: number
-  cartItems: CartItem[]
-  totalCost: number
-  status: string
-  createdAt: string
-  updatedAt: string
-  user: string
-}
-
-export type CreateOrder = Omit<Order, 'id' | 'createdAt' | 'updatedAt'>
+import { Order } from '@/types'
 
 const cartItemsSchema = {
   id: { type: String, require: true },

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { connectDB } from '@/configs'
-import { Order, OrderModel } from '../model'
+import { Order } from '@/types'
+import { OrderModel } from '../model'
 
 type Params = {
   order: string

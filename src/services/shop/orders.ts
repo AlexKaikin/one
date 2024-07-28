@@ -1,6 +1,6 @@
-import { CreateOrder, Order } from '@/app/api/orders/model'
 import { api, options } from '@/configs/api'
 import { getSearchParams } from '@/helpers'
+import { CreateOrder, Order } from '@/types'
 import { UrlParams } from '@/types'
 
 export const OrderService = {

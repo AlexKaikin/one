@@ -2,7 +2,7 @@
 
 import dayjs from 'dayjs'
 import { usePathname, useRouter } from 'next/navigation'
-import { Review } from '@/app/api/reviews/model'
+import { Review } from '@/types'
 import { useTranslation } from '@/store'
 import { Table, TableCell, TableRow } from '@/ui'
 

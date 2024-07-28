@@ -3,12 +3,12 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { User } from '@/app/api/users/model'
 import { ApiError } from '@/helpers'
 import { UserService } from '@/services'
 import { Button, Form, FormInput } from '@/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import styles from './UserForm.module.css'
+import { User } from '@/types'
 
 const required_error = 'Required'
 

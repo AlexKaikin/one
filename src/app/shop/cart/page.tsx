@@ -6,11 +6,10 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
-import { CreateOrder } from '@/app/api/orders/model'
-import { OrderStatuses } from '@/entities'
 import { getLocalStorage } from '@/helpers'
 import { OrderService } from '@/services'
 import { useCart, useTranslation } from '@/store'
+import { CreateOrder } from '@/types'
 import {
   Button,
   Form,

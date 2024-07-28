@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Product } from '@/app/api/products/model'
+import { Product } from '@/types'
 import { useTranslation } from '@/store'
 import { Table, TableCell, TableRow } from '@/ui'
 import dayjs from 'dayjs'

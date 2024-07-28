@@ -1,6 +1,6 @@
 'use client'
 
-import { Product as ProductType } from '@/app/api/products/model'
+import { Product as ProductType } from '@/types'
 import { useTranslation } from '@/store'
 import { Page, PageContent, PageHeader } from '@/ui'
 import { Product } from './_elements'

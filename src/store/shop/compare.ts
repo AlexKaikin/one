@@ -1,8 +1,8 @@
 'use client'
 
 import { create } from 'zustand'
-import { Product } from '@/app/api/products/model'
 import { getLocalStorage } from '@/helpers'
+import { Product } from '@/types'
 
 export type Compare = {
   compareItems: Product[]

@@ -4,9 +4,9 @@ import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
-import { CreateReview } from '@/app/api/reviews/model'
 import { ReviewService } from '@/services'
 import { useTranslation } from '@/store'
+import { CreateReview } from '@/types'
 import {
   Button,
   Form,

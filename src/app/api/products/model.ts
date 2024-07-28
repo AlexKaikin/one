@@ -3,33 +3,7 @@
 import 'mongoose'
 import mongoose, { Schema, model } from 'mongoose'
 import { schemaConfig } from '@/configs'
-import { Measurements } from '@/entities'
-
-export type Product = {
-  id: string
-  title: string
-  description: string
-  price: number
-  inStock: number
-  volume: string
-  volumeMeasurement: Measurements
-  ratingCount: number
-  viewsCount: number
-  rating: number
-  imageUrls: string[]
-  characteristics: {
-    manufacturer: string
-    country: string
-    city: string
-    year: number
-  }
-  category: string
-  tags: string[]
-  published: boolean
-  translations: { ru: { title: string } }
-  createdAt: string
-  updatedAt: string
-}
+import { Product } from '@/types'
 
 const characteristicsSchema = {
   manufacturer: { type: String, default: '' },

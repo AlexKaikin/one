@@ -1,4 +1,5 @@
-import { Order, OrderModel } from './model'
+import { Order } from '@/types'
+import { OrderModel } from './model'
 
 export const OrderService = {
   create: async (request: Request) => {

@@ -1,13 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { Product } from '@/app/api/products/model'
 import {
   useCart,
   useFavoriteProducts,
   useCompareProducts,
   useTranslation,
 } from '@/store'
+import { Product } from '@/types'
 import {
   Button,
   Icon,

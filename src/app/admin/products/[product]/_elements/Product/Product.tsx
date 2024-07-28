@@ -3,9 +3,9 @@
 import { useState } from 'react'
 import { toFormData } from 'axios'
 import { useRouter } from 'next/navigation'
-import { Product as ProductType } from '@/app/api/products/model'
 import { ProductService } from '@/services'
-import { ImageLoader, PageHeader, useNotify } from '@/ui'
+import { Product as ProductType } from '@/types'
+import { ImageLoader, useNotify } from '@/ui'
 import { ProductForm } from '../../../_elements'
 
 export function Product({ defaultValues }: { defaultValues: ProductType }) {

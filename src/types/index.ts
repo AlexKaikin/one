@@ -1,3 +1,10 @@
-export type { UserRegistration, UserResponse } from './user'
+export type { User, UserRegistration, UserResponse } from './account'
 export type { UrlParams } from './url'
-export type { CartItem } from './shop'
+export type {
+  Product,
+  CartItem,
+  Order,
+  CreateOrder,
+  Review,
+  CreateReview,
+} from './shop'

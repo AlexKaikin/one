@@ -1,7 +1,7 @@
 'use client'
 
-import { Product } from '@/app/api/products/model'
 import { useTranslation } from '@/store'
+import { Product } from '@/types'
 import { Pagination } from '@/ui'
 import { ProductPreview } from '../ProductPreview/ProductPreview'
 import styles from './Products.module.css'

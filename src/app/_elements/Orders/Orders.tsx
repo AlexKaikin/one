@@ -2,7 +2,7 @@
 
 import dayjs from 'dayjs'
 import { usePathname, useRouter } from 'next/navigation'
-import { Order } from '@/app/api/orders/model'
+import { Order } from '@/types'
 import { TranslationKeys } from '@/langs'
 import { useTranslation } from '@/store'
 import { Table, TableCell, TableRow } from '@/ui'

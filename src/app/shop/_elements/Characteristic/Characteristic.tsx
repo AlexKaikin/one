@@ -1,4 +1,4 @@
-import { Product } from '@/app/api/products/model';
+import { Product } from '@/types';
 import { TranslationKeys } from '@/langs';
 import { useTranslation } from '@/store';
 import styles from './Characteristic.module.css';

@@ -1,5 +1,6 @@
 import { uploadFiles } from '@/helpers'
-import { Product, ProductModel } from './model'
+import { Product } from '@/types'
+import { ProductModel } from './model'
 
 export const ProductService = {
   create: async (request: Request) => {

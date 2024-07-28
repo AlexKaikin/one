@@ -1,4 +1,4 @@
-import { Product } from '@/app/api/products/model'
+import { Product } from '@/types'
 import { Button, Stack, Typography } from '@/ui'
 
 export function NotAvailable({ product }: { product: Product }) {

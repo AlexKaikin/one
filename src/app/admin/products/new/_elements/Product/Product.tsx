@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Product as ProductType } from '@/app/api/products/model'
+import { Product as ProductType } from '@/types'
 import { toFormData } from '@/helpers'
 import { ProductService } from '@/services'
 import { ImageLoader, useNotify } from '@/ui'

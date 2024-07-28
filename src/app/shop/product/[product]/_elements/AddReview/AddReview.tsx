@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { Product } from '@/app/api/products/model'
+import { Product } from '@/types'
 import { useTranslation } from '@/store'
 import {
   Accordion,

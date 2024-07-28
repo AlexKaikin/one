@@ -1,7 +1,6 @@
-import { Product } from '@/app/api/products/model'
 import { api, options } from '@/configs/api'
 import { getSearchParams } from '@/helpers'
-import { UrlParams } from '@/types'
+import { Product, UrlParams } from '@/types'
 
 export const ProductService = {
   create(data: Product) {

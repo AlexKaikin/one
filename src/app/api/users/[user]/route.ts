@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { connectDB } from '@/configs'
-import { User, UserModel } from '../model'
+import { User } from '@/types'
+import { UserModel } from '../model'
 
 type Params = {
   user: string

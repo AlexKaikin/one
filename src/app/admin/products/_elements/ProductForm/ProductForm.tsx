@@ -1,19 +1,34 @@
-'use client';
+'use client'
 
-import { useCallback, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { z } from 'zod';
-import { Product } from '@/app/api/products/model';
-import { Measurements } from '@/entities';
-import { TranslationKeys } from '@/langs';
-import { ProductService } from '@/services';
-import { useTranslation } from '@/store';
-import { Button, Form, FormCheckbox, FormFile, FormInput, FormTextarea, Icon, IconButton, Menu, MenuItem, Select, SelectOption, Stack, Tab, Tabs, Typography, useNotify } from '@/ui';
-import { zodResolver } from '@hookform/resolvers/zod';
-import styles from './ProductForm.module.css';
-
+import { useCallback, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { z } from 'zod'
+import { Measurements } from '@/entities'
+import { TranslationKeys } from '@/langs'
+import { ProductService } from '@/services'
+import { useTranslation } from '@/store'
+import { Product } from '@/types'
+import {
+  Button,
+  Form,
+  FormCheckbox,
+  FormFile,
+  FormInput,
+  FormTextarea,
+  Icon,
+  IconButton,
+  Select,
+  SelectOption,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+  useNotify,
+} from '@/ui'
+import { zodResolver } from '@hookform/resolvers/zod'
+import styles from './ProductForm.module.css'
 
 const MAX_SIZE_FILE = 1
 const MAX_FILES = 10

@@ -1,17 +1,17 @@
-'use client'
+'use client';
 
-import dayjs from 'dayjs'
-import { Product as ProductType } from '@/app/api/products/model'
-import { Review as ReviewType } from '@/app/api/reviews/model'
+import dayjs from 'dayjs';
 import { useTranslation } from '@/store'
-import { Rating, Stack, Typography } from '@/ui'
-import { Characteristic } from '../../../../_elements/Characteristic/Characteristic'
-import { Actions } from '../Actions/Actions'
-import { AddReview } from '../AddReview/AddReview'
-import { NotAvailable } from '../NotAvailable/NotAvailable'
-import { Review } from '../Review/Review'
-import { Slider } from '../Slider/Slider'
-import styles from './Product.module.css'
+import { Product as ProductType, Review as ReviewType } from '@/types'
+import { Rating, Stack, Typography } from '@/ui';
+import { Characteristic } from '../../../../_elements/Characteristic/Characteristic';
+import { Actions } from '../Actions/Actions';
+import { AddReview } from '../AddReview/AddReview';
+import { NotAvailable } from '../NotAvailable/NotAvailable';
+import { Review } from '../Review/Review';
+import { Slider } from '../Slider/Slider';
+import styles from './Product.module.css';
+
 
 type Props = { product: ProductType; reviews: ReviewType[] }
 

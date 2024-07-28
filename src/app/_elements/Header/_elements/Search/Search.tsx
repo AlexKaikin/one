@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { SCREEN_LG } from '@/constants'
-import { useWindowDimensions } from '@/hooks'
+import { useOnClickOutside, useWindowDimensions } from '@/hooks'
 import { useTranslation } from '@/store'
-import { Icon, IconButton, Input, Menu, Select, SelectOption } from '@/ui'
+import { Icon, IconButton, Input, Popper, Select, SelectOption } from '@/ui'
 import styles from './Search.module.css'
 
 export function Search() {
@@ -21,12 +21,26 @@ export function Search() {
 }
 
 function MobileSearch() {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<any | null>(null)
+
+  useOnClickOutside(ref, () => setOpen(false))
+
   return (
-    <Menu trigger={<Icon name="search" width={25} height={25} />}>
-      <div className={styles.container}>
-        <DesktopSearch />
-      </div>
-    </Menu>
+    <div ref={ref} style={{ position: 'relative' }}>
+      <Icon
+        name="search"
+        width={25}
+        height={25}
+        onClick={() => setOpen(!open)}
+      />
+
+      <Popper open={open} anchorEl={ref}>
+        <div className={styles.container}>
+          <DesktopSearch />
+        </div>
+      </Popper>
+    </div>
   )
 }
 
@@ -40,11 +54,11 @@ function DesktopSearch() {
 
   const endIcon = (
     <div className={styles.group}>
-      {value !== '' && (
+      {/* {value !== '' && (
         <IconButton variant="text" onClick={onClean}>
           <Icon name="close" height={20} width={20} />
         </IconButton>
-      )}
+      )} */}
 
       <Select
         label=""
@@ -70,12 +84,12 @@ function DesktopSearch() {
     router.replace(`/${path}?${params}`)
   }
 
-  function onClean() {
-    setValue('')
+  // function onClean() {
+  //   setValue('')
 
-    params.delete('search')
-    router.replace(`/${path}?${params}`)
-  }
+  //   params.delete('search')
+  //   router.replace(`/${path}?${params}`)
+  // }
 
   return (
     <Input

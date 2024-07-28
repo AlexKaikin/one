@@ -1,7 +1,7 @@
-import { ReviewStatuses } from '@/entities';
-import { ProductModel } from '../products/model';
-import { CreateReview, Review, ReviewModel } from './model';
-
+import { ReviewStatuses } from '@/entities'
+import { CreateReview, Review } from '@/types'
+import { ProductModel } from '../products/model'
+import { ReviewModel } from './model'
 
 export const ReviewService = { create, getAll, getOne, update, remove }
 
@@ -83,7 +83,7 @@ function getFindParams(request: Request) {
 
 function getPopulate(request: Request) {
   const { searchParams } = new URL(request.url)
-  
+
   return searchParams.get('populate') || ''
 }
 

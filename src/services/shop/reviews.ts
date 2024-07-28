@@ -1,7 +1,6 @@
-import { Review, CreateReview } from '@/app/api/reviews/model'
 import { api, options } from '@/configs/api'
 import { getSearchParams } from '@/helpers'
-import { UrlParams } from '@/types'
+import { Review, CreateReview, UrlParams } from '@/types'
 
 export const ReviewService = {
   create(data: CreateReview) {

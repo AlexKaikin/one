@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
-import { connectDB } from '@/configs';
-import { deleteFiles, uploadFiles } from '@/helpers';
-import { Product, ProductModel } from '../model';
-
+import { NextResponse } from 'next/server'
+import { connectDB } from '@/configs'
+import { deleteFiles, uploadFiles } from '@/helpers'
+import { Product } from '@/types'
+import { ProductModel } from '../model'
 
 type Params = {
   product: string

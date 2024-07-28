@@ -4,18 +4,9 @@ import 'mongoose'
 import mongoose, { Schema, model } from 'mongoose'
 import { schemaConfig } from '@/configs'
 import { Roles } from '@/entities'
+import { User } from '@/types'
 
-export type User = {
-  id: string
-  lastName: string
-  firstName: string
-  avatarUrl: string
-  email: string
-  password: string
-  role: string
-  createdAt: string
-  updatedAt: string
-}
+
 
 const schema = new Schema(
   {

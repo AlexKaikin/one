@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Product } from '@/app/api/products/model'
+import { Product } from '@/types'
 import { useTranslation } from '@/store'
 import styles from './ProductPreview.module.css'
 
