@@ -195,7 +195,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
                   <Select
                     label={`${t('category')}: `}
                     defaultSelectValue={
-                      <>{t(defaultValues.category as TranslationKeys)}</>
+                      <>{t(watch('category') as TranslationKeys)}</>
                     }
                     onSelectChange={handleChangeCategory}
                     errorState={errors.category}
@@ -217,7 +217,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
                       <Select
                         label={`${t('volumeMeasurement')}: `}
                         defaultSelectValue={
-                          <>{t(defaultValues.volumeMeasurement)}</>
+                          <>{t(watch('volumeMeasurement'))}</>
                         }
                         onSelectChange={handleChangeVolumeMeasurement}
                         errorState={errors.volumeMeasurement}

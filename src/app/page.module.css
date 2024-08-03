@@ -17,7 +17,7 @@
 }
 
 .img {
-  border-radius: calc(var(--spacing));
+  border-radius: calc(var(--radius));
   object-fit: contain;
   width: 100% !important;
   position: relative !important;

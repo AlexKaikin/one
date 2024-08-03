@@ -12,7 +12,7 @@ html[data-theme='light'] {
   --info: #566fdc;
 
   --spacing: 10px;
-  --radius: 5px;
+  --radius: 10px;
 
   --bg: rgb(255, 255, 255);
   --text: var(--dark);

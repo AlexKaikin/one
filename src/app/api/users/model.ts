@@ -3,10 +3,8 @@
 import 'mongoose'
 import mongoose, { Schema, model } from 'mongoose'
 import { schemaConfig } from '@/configs'
-import { Roles } from '@/entities'
+import { Roles, UserStatuses } from '@/entities'
 import { User } from '@/types'
-
-
 
 const schema = new Schema(
   {
@@ -19,6 +17,12 @@ const schema = new Schema(
       type: String,
       enum: Object.values(Roles),
       default: Roles.user,
+      require: true,
+    },
+    status: {
+      type: String,
+      enum: Object.values(UserStatuses),
+      default: UserStatuses.active,
       require: true,
     },
   },

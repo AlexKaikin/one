@@ -3,6 +3,12 @@ export enum Roles {
   user = 'user',
 }
 
+export enum UserStatuses {
+  active = 'active',
+  inactive = 'inactive',
+  blocked = 'blocked',
+}
+
 export enum ReviewStatuses {
   moderation = 'moderation',
   approved = 'approved',

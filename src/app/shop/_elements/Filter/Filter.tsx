@@ -233,7 +233,7 @@ export function Filter() {
                   <Widget>
                     <FormInput
                       name="search"
-                      placeholder="Shen"
+                      placeholder="shen"
                       label={t('title')}
                     />
                   </Widget>
@@ -241,7 +241,7 @@ export function Filter() {
                   <Widget>
                     <FormInput
                       name="manufacturer"
-                      placeholder="TIALEND"
+                      placeholder="tialend"
                       label={t('manufacturer')}
                     />
                   </Widget>

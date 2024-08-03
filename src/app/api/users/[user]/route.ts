@@ -1,7 +1,8 @@
-import { NextResponse } from 'next/server'
-import { connectDB } from '@/configs'
-import { User } from '@/types'
-import { UserModel } from '../model'
+import { NextResponse } from 'next/server';
+import { connectDB } from '@/configs';
+import { User } from '@/types';
+import { UserModel } from '../model';
+
 
 type Params = {
   user: string
@@ -32,12 +33,20 @@ export async function PATCH(request: Request, context: { params: Params }) {
     const data = await request.formData()
     const id = context.params.user
 
-    const updatedUser = {
-      email: data.get('email'),
-      lastName: data.get('lastName'),
-      firstName: data.get('firstName'),
-    }
+    const email = data.get('email')
+    const lastName = data.get('lastName')
+    const firstName = data.get('firstName')
+    const status = data.get('status')
+    const role = data.get('role')
 
+    const updatedUser: any = {}
+
+    if (email) updatedUser.email = email
+    if (lastName) updatedUser.lastName = lastName
+    if (firstName) updatedUser.firstName = firstName
+    if (status) updatedUser.status = status
+    if (role) updatedUser.role = role
+    console.log(updatedUser)
     const user = await UserModel.findByIdAndUpdate(id, updatedUser, {
       new: true,
     })
