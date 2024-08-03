@@ -8,3 +8,4 @@ export type {
   Review,
   CreateReview,
 } from './shop'
+export type { Post, Comment, CreateComment } from './blog'

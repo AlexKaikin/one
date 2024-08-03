@@ -16,6 +16,7 @@ export function AdminMenu() {
     { title: t('products'), path: 'products' },
     { title: t('reviews'), path: 'reviews' },
     { title: t('orders'), path: 'orders' },
+    { title: t('posts'), path: 'posts' },
   ]
 
   return (

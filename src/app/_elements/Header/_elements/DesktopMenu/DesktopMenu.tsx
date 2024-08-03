@@ -42,7 +42,25 @@ export function DesktopMenu() {
         </MenuItem>
       </Menu>
 
-      <Link href={'/blog'}>{t('blog')}</Link>
+      <Menu trigger={t('blog')} href={'/blog'}>
+        <SubMenu trigger={t('posts')} href={'/blog'}>
+          <MenuItem>
+            <Link href={'/blog/category/instructions'}>{t('instructions')}</Link>
+          </MenuItem>
+
+          <MenuItem>
+            <Link href={'/blog/category/traditions'}>{t('traditions')}</Link>
+          </MenuItem>
+
+           <MenuItem>
+            <Link href={'/blog/category/reviews'}>{t('reviews')}</Link>
+          </MenuItem>
+        </SubMenu>
+
+        <MenuItem>
+          <Link href={'/blog/favorites'}>{t('favorites')}</Link>
+        </MenuItem>
+      </Menu>
 
       <Link href={'/club'}>{t('club')}</Link>
 

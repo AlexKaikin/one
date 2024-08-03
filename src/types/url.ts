@@ -17,6 +17,7 @@ export type UrlParams = {
     populate?: string
     published?: string
     product?: string
+    post?: string
     status?: string
     user?: string
   }

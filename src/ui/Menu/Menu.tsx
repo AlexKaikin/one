@@ -84,8 +84,8 @@ export function MenuWithContext({ trigger, href, children }: MenuProps) {
         )}
 
         {!!href && (
-          <IconButton variant="text" onClick={handleToggleMenu}>
-            <Icon name="arrowDropDown" />
+          <IconButton variant="clean" onClick={handleToggleMenu}>
+            <Icon name="arrowDropDown" width={16} height={16} />
           </IconButton>
         )}
       </div>
@@ -140,8 +140,8 @@ export function SubMenu({ trigger, href, children }: Props) {
           {trigger}
         </Link>
 
-        <IconButton variant="text">
-          <Icon name="arrowDropDown" />
+        <IconButton variant="clean">
+          <Icon name="arrowDropDown" width={16} height={16} />
         </IconButton>
       </div>
 

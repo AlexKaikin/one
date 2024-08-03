@@ -103,7 +103,7 @@ export function SelectWithContext({
           variant="clean"
           endIcon={
             readOnly ? null : (
-              <Icon name="arrowDropDown" height={22} width={22} />
+              <Icon name="arrowDropDown" width={16} height={16} />
             )
           }
           onClick={readOnly ? () => null : handleClick}

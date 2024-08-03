@@ -1,0 +1,18 @@
+.blogMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--spacing) * 2);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.button {
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0;
+    font-size: 0.7rem;
+  }
+}

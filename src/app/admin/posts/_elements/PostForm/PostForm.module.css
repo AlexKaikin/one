@@ -1,0 +1,54 @@
+.col {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing);
+}
+
+.container {
+  width: 100%;
+}
+
+.imagescontainer {
+  width: 100%;
+  max-width: 500px;
+  border: var(--border);
+  padding: var(--spacing);
+  border-radius: var(--radius);
+}
+
+.groupButtons {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing);
+}
+
+.gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing);
+}
+
+.imgContainer {
+  position: relative;
+  width: 130px;
+}
+
+.img {
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.removeImg {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.inputIcon {
+  padding-left: var(--spacing);
+}

@@ -1,9 +1,35 @@
-import { Page, PageContent, PageHeader } from '@/ui'
+import { ApiError } from '@/helpers'
+import { PostService } from '@/services'
+import { UrlParams } from '@/types'
+import { Page, PageContent } from '@/ui'
+import { Posts } from './_elements'
 
-export default function Blog() {
+async function getPosts(urlParams: UrlParams) {
+  try {
+    const response = await PostService.getAll(urlParams)
+    const posts = response.data
+    const totalCount = response.headers['x-total-count']
+
+    return { posts, totalCount }
+  } catch (error) {
+    ApiError(error)
+  }
+}
+
+export default async function BlogPage(urlParams: UrlParams) {
+  const data = await getPosts(urlParams)
+
+  if (!data) {
+    return null
+  }
+
+  const { posts, totalCount } = data
+
   return (
     <Page>
-      <PageContent>Coming soon</PageContent>
+      <PageContent>
+        <Posts posts={posts} totalCount={totalCount} />
+      </PageContent>
     </Page>
   )
 }
