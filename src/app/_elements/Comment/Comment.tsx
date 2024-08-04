@@ -4,37 +4,34 @@ import { useState } from 'react'
 import dayjs from 'dayjs'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Review as ReviewType } from '@/types'
 import { ModerationStatuses } from '@/entities'
-import { ReviewService } from '@/services'
+import { CommentService } from '@/services'
 import { useTranslation } from '@/store'
+import { Comment as CommentType } from '@/types'
 import {
   Button,
-  Rating,
   Select,
   SelectOption,
   Stack,
   Textarea,
   useNotify,
 } from '@/ui'
-import styles from './Review.module.css'
+import styles from './Comment.module.css'
 
 type Props = {
-  review: ReviewType
+  comment: CommentType
   editMode?: boolean
 }
 
-export function Review({ review, editMode }: Props) {
-  const [status, setStatus] = useState(review.status)
+export function Comment({ comment, editMode }: Props) {
+  const [status, setStatus] = useState(comment.status)
   const router = useRouter()
   const { t } = useTranslation()
   const { notify } = useNotify()
-  const defaultRating =
-    review.rating > 0 ? <Rating value={review.rating} /> : <>{t('unrated')}</>
 
   const handleSubmit = async () => {
     try {
-      await ReviewService.update(review.id, { status } as ReviewType)
+      await CommentService.update(comment.id, { status } as CommentType)
       router.refresh()
       notify({ type: 'info', message: t('updated') })
     } catch (error) {
@@ -44,35 +41,29 @@ export function Review({ review, editMode }: Props) {
 
   return (
     <div className={styles.form}>
-      <Textarea value={review.body} rows={5} label={t('review')} readOnly />
+      <Textarea value={comment.text} rows={5} label={t('comment')} readOnly />
 
       <p>
         {t('date')}:{' '}
-        {dayjs(new Date(review.createdAt)).format('H:mm, DD.MM.YYYY')}
+        {dayjs(new Date(comment.createdAt)).format('H:mm, DD.MM.YYYY')}
       </p>
       <p>
-        {t('product')}:{' '}
-        <Link href={`/shop/product/${review.product.id}`}>
-          {review.product.title}
-        </Link>
+        {t('post')}:{' '}
+        <Link href={`/blog/post/${comment.post.id}`}>{comment.post.title}</Link>
       </p>
       {editMode && (
         <p>
           {t('user')}:{' '}
-          <Link href={`/admin/users/${review.user.id}`}>
-            {review.user.lastName} {review.user.firstName}
+          <Link href={`/admin/users/${comment.user.id}`}>
+            {comment.user.lastName} {comment.user.firstName}
           </Link>
         </p>
       )}
 
-      <Stack spacing={1}>
-        {t('rating')}: {defaultRating}
-      </Stack>
-
       <Stack flexDirection="column" spacing={2}>
         <Select
           label={`${t('status')}: `}
-          defaultSelectValue={t(review.status)}
+          defaultSelectValue={t(comment.status)}
           onSelectChange={setStatus}
           readOnly={!editMode}
         >

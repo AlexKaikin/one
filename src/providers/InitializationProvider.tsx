@@ -22,7 +22,7 @@ export function InitializationProvider({ children }: { children: ReactNode }) {
     getCompare()
     getLang()
     getCart()
-  }, [getCart, getCompare, getFavoriteProducts, getLang])
+  }, [getCart, getCompare, getFavoriteProducts, getFavoritePosts, getLang])
 
   return <>{children}</>
 }

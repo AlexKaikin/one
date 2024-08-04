@@ -98,6 +98,8 @@ export const translate = {
     ...measurement.en,
     ...address.en,
     ...user.en,
+    comment: 'Comment',
+    comments: 'Comments',
     posts: 'Posts',
     post: 'Post',
     newPost: 'New post',
@@ -223,6 +225,7 @@ export const translate = {
     no: 'No',
     category: 'Category',
     noReviews: 'There are no reviews, write first!',
+    noComments: 'There are no comments, write first!',
     policyTitle: 'Privacy Policy',
     policyContent: `
 <p>All persons who have filled in the information constituting personal data on this site, as well as placed other information by the specified actions confirm their consent to the processing of personal data and their transfer to the operator of personal data processing.</p>
@@ -267,6 +270,8 @@ export const translate = {
     ...measurement.ru,
     ...address.ru,
     ...user.ru,
+    comment: 'Комментарий',
+    comments: 'Комментарии',
     posts: 'Статьи',
     post: 'Статья',
     newPost: 'Новая статья',
@@ -392,6 +397,7 @@ export const translate = {
     no: 'Нет',
     category: 'Категория',
     noReviews: 'Отзывов нет, напишите первый!',
+    noComments: 'Комментарий нет, напишите первый!',
     policyTitle: 'Политика конфиденциальности',
     policyContent: `
     

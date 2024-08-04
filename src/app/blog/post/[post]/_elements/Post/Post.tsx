@@ -1,16 +1,18 @@
-'use client'
+'use client';
 
-import dayjs from 'dayjs'
-import Image from 'next/image'
-import { useFavoritePosts, useTranslation } from '@/store'
-import { Comment, Post as PostType } from '@/types'
-import { Icon, IconButton, Stack, Typography } from '@/ui'
-import styles from './Post.module.css'
-import { TranslationKeys } from '@/langs'
+import dayjs from 'dayjs';
+import Image from 'next/image';
+import { TranslationKeys } from '@/langs';
+import { useFavoritePosts, useTranslation } from '@/store';
+import { Comment as CommentType, Post as PostType } from '@/types';
+import { Icon, IconButton, Stack, Typography } from '@/ui';
+import { Comment } from '../Comment/Comment';
+import styles from './Post.module.css';
+import { AddComment } from '../AddComment/AddComment';
 
-type Props = { post: PostType }
+type Props = { post: PostType; comments: CommentType[] }
 
-export function Post({ post }: Props) {
+export function Post({ post, comments }: Props) {
   const { toggleFavorite, favoritesItems } = useFavoritePosts()
   const { t, tAPI } = useTranslation()
   const findFavorite = favoritesItems.find(item => item.id === post.id)
@@ -60,13 +62,26 @@ export function Post({ post }: Props) {
         </div>
 
         <div>
-          {tAPI('text', post).split('\n').map((p, i) => (
-            <Typography key={i} variant="p">
-              {p}
-            </Typography>
-          ))}
+          {tAPI('text', post)
+            .split('\n')
+            .map((p, i) => (
+              <Typography key={i} variant="p">
+                {p}
+              </Typography>
+            ))}
         </div>
-        {/* <Comments postId={_id} comments={comments} /> */}
+       
+       <Stack flexDirection="column" spacing={1}>
+          <AddComment post={post} />
+
+          <Stack flexDirection="column" spacing={2}>
+            {comments.map(comment => (
+              <Comment key={comment.id} comment={comment} />
+            ))}
+
+            {!comments.length && <>{t('noComments')}</>}
+          </Stack>
+        </Stack>
       </div>
     </div>
   )

@@ -1,3 +1,4 @@
+import { ModerationStatuses } from '@/entities'
 import { User } from '../account'
 
 export type Post = {
@@ -16,11 +17,17 @@ export type Post = {
 export type Comment = {
   id: string
   text: string
-  published: string
+  status: ModerationStatuses
   post: Post
   user: User
   createdAt: string
   updatedAt: string
 }
 
-export type CreateComment = Omit<Comment, 'id' | 'createdAt' | 'updatedAt'>
+export type CreateComment = Omit<
+  Comment,
+  'id' | 'post' | 'user' | 'createdAt' | 'updatedAt'
+> & {
+  post: string
+  user: string
+}

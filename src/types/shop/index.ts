@@ -1,4 +1,4 @@
-import { Measurements, ReviewStatuses } from '@/entities'
+import { Measurements, ModerationStatuses } from '@/entities'
 import { User } from '../account'
 
 export type Product = {
@@ -63,7 +63,7 @@ export type Review = {
   id: string
   body: string
   rating: number
-  status: ReviewStatuses
+  status: ModerationStatuses
   user: User
   product: Product
   createdAt: string

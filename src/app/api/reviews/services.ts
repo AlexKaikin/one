@@ -1,4 +1,4 @@
-import { ReviewStatuses } from '@/entities'
+import { ModerationStatuses } from '@/entities'
 import { CreateReview, Review } from '@/types'
 import { ProductModel } from '../products/model'
 import { ReviewModel } from './model'
@@ -35,7 +35,10 @@ async function update(id: string, request: Request) {
   if (!review) return null
 
   const reviewsByProduct = await ReviewModel.find({
-    $and: [{ product: review.product }, { status: ReviewStatuses.approved }],
+    $and: [
+      { product: review.product },
+      { status: ModerationStatuses.approved },
+    ],
   })
 
   await ProductModel.findByIdAndUpdate(
@@ -72,7 +75,7 @@ function getFindParams(request: Request) {
   if (user) query.user = user
   if (product) {
     query.product = product
-    query.status = ReviewStatuses.approved
+    query.status = ModerationStatuses.approved
   }
 
   const fields = ''

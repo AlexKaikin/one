@@ -13,6 +13,7 @@ export function AccountMenu() {
     { title: t('profile'), path: undefined },
     { title: t('orders'), path: 'orders' },
     { title: t('reviews'), path: 'reviews' },
+    { title: t('comments'), path: 'comments' },
   ]
 
   return (

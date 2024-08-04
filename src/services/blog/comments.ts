@@ -1,6 +1,6 @@
 import { api, options } from '@/configs/api'
 import { getSearchParams } from '@/helpers'
-import { CreateComment, UrlParams } from '@/types'
+import { Comment, CreateComment, UrlParams } from '@/types'
 
 export const CommentService = {
   create(data: CreateComment) {

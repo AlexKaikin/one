@@ -9,7 +9,7 @@ export enum UserStatuses {
   blocked = 'blocked',
 }
 
-export enum ReviewStatuses {
+export enum ModerationStatuses {
   moderation = 'moderation',
   approved = 'approved',
   notApproved = 'notApproved',

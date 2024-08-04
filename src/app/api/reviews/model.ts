@@ -3,7 +3,7 @@
 import 'mongoose'
 import mongoose, { Schema, model } from 'mongoose'
 import { schemaConfig } from '@/configs'
-import { ReviewStatuses } from '@/entities'
+import { ModerationStatuses } from '@/entities'
 import { Review } from '@/types'
 
 const schema = new Schema(
@@ -12,8 +12,8 @@ const schema = new Schema(
     rating: { type: Number, default: 0 },
     status: {
       type: String,
-      enum: Object.values(ReviewStatuses),
-      default: ReviewStatuses.moderation,
+      enum: Object.values(ModerationStatuses),
+      default: ModerationStatuses.moderation,
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     product: {

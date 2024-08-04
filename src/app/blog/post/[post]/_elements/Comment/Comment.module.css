@@ -1,0 +1,17 @@
+.comment {
+  background-color: color-mix(in srgb, var(--text), transparent 97%);
+  border-radius: var(--radius);
+  padding: calc(var(--spacing) * 2);
+}
+
+.imgContainer {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 70px;
+  height: 70px;
+}
+
+.date {
+  opacity: 0.5;
+}

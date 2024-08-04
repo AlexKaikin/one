@@ -7,6 +7,7 @@ export type UrlParams = {
     category?: string
     review?: string
     order?: string
+    comment?: string
   }
   searchParams: {
     _page?: string
