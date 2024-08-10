@@ -1,9 +1,8 @@
 'use server'
 
-import 'mongoose'
-import mongoose, { Schema, model } from 'mongoose'
+import { Schema, SchemaTypes, model, models } from 'mongoose'
 import { schemaConfig } from '@/configs'
-import { Roles, UserStatuses } from '@/entities'
+import { ROLES, USER_STATUSES } from '@/constants'
 import { User } from '@/types'
 
 const schema = new Schema(
@@ -13,20 +12,25 @@ const schema = new Schema(
     email: { type: String, require: true },
     avatarUrl: { type: String },
     password: { type: String, require: true },
+    location: { type: String },
+    about: { type: String },
+    interests: [{ type: String }],
+    followers: [{ type: SchemaTypes.ObjectId, ref: 'User' }],
+    following: [{ type: SchemaTypes.ObjectId, ref: 'User' }],
     role: {
       type: String,
-      enum: Object.values(Roles),
-      default: Roles.user,
+      enum: Object.values(ROLES),
+      default: ROLES.USER,
       require: true,
     },
     status: {
       type: String,
-      enum: Object.values(UserStatuses),
-      default: UserStatuses.active,
+      enum: Object.values(USER_STATUSES),
+      default: USER_STATUSES.ACTIVE,
       require: true,
     },
   },
   schemaConfig
 )
 
-export const UserModel = mongoose.models.User || model<User>('User', schema)
+export const UserModel = models.User || model<User>('User', schema)

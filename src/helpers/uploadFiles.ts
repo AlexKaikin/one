@@ -39,7 +39,7 @@ export async function deleteFile(url: string) {
 
     try {
       const result = await cloudinary.uploader.destroy(`upload/${match[1]}`)
-
+      
       return resolve(result)
     } catch (error: any) {
       reject(new Error(error.message))

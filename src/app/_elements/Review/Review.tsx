@@ -4,10 +4,10 @@ import { useState } from 'react'
 import dayjs from 'dayjs'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Review as ReviewType } from '@/types'
-import { ModerationStatuses } from '@/entities'
+import { MODERATION_STATUSES } from '@/constants'
 import { ReviewService } from '@/services'
 import { useTranslation } from '@/store'
+import { Review as ReviewType } from '@/types'
 import {
   Button,
   Rating,
@@ -76,14 +76,14 @@ export function Review({ review, editMode }: Props) {
           onSelectChange={setStatus}
           readOnly={!editMode}
         >
-          <SelectOption value={ModerationStatuses.moderation}>
-            {t(ModerationStatuses.moderation)}
+          <SelectOption value={MODERATION_STATUSES.MODERATION}>
+            {t(MODERATION_STATUSES.MODERATION)}
           </SelectOption>
-          <SelectOption value={ModerationStatuses.approved}>
-            {t(ModerationStatuses.approved)}
+          <SelectOption value={MODERATION_STATUSES.APPROVED}>
+            {t(MODERATION_STATUSES.APPROVED)}
           </SelectOption>
-          <SelectOption value={ModerationStatuses.notApproved}>
-            {t(ModerationStatuses.notApproved)}
+          <SelectOption value={MODERATION_STATUSES.NOT_APPROVED}>
+            {t(MODERATION_STATUSES.NOT_APPROVED)}
           </SelectOption>
         </Select>
       </Stack>

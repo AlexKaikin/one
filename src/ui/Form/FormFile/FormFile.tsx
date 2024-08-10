@@ -1,5 +1,6 @@
 'use client'
 
+import { ReactNode } from 'react'
 import { useTranslation } from '@/store'
 import { Button, Icon } from '@/ui'
 
@@ -10,6 +11,7 @@ type Props = {
   maxSizeMb?: number
   maxFiles?: number
   disabled?: boolean
+  trigger?: ReactNode
 }
 
 export function FormFile({
@@ -19,6 +21,7 @@ export function FormFile({
   maxSizeMb = 1,
   maxFiles = 10,
   disabled = false,
+  trigger,
 }: Props) {
   const { t } = useTranslation()
 
@@ -57,12 +60,19 @@ export function FormFile({
     })
   }
 
+  if (trigger) {
+    return (
+      <div onClick={() => selectFile({ contentType: accept, multiple })}>
+        {trigger}
+      </div>
+    )
+  }
+
   return (
-    <div>
+    <div onClick={() => selectFile({ contentType: accept, multiple })}>
       <Button
         type="button"
         startIcon={<Icon name="plus" height={20} width={20} />}
-        onClick={() => selectFile({ contentType: accept, multiple })}
         disabled={disabled}
       >
         {t('image')}

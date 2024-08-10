@@ -1,9 +1,10 @@
+import { NextRequest } from 'next/server'
 import { uploadFiles } from '@/helpers'
 import { Product } from '@/types'
 import { ProductModel } from './model'
 
 export const ProductService = {
-  create: async (request: Request) => {
+  create: async (request: NextRequest) => {
     const data = await request.formData()
     const files = data.getAll('files[]') as File[]
     const response = await uploadFiles(files)
@@ -40,7 +41,7 @@ export const ProductService = {
 
     return await ProductModel.create(newProduct)
   },
-  getAll: async (request: Request) => {
+  getAll: async (request: NextRequest) => {
     const { query, fields, pagination } = await getFindParams(request)
 
     const products = (await ProductModel.find(
@@ -53,7 +54,7 @@ export const ProductService = {
   },
 }
 
-async function getFindParams(request: Request) {
+async function getFindParams(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const search = searchParams.get('search') || ''
   const limit = Number(searchParams.get('limit') || 10)

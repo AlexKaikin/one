@@ -1,4 +1,4 @@
-import { ModerationStatuses } from '@/entities'
+import { MODERATION_STATUSES } from '@/constants'
 import { User } from '../account'
 
 export type Post = {
@@ -17,7 +17,7 @@ export type Post = {
 export type Comment = {
   id: string
   text: string
-  status: ModerationStatuses
+  status: MODERATION_STATUSES
   post: Post
   user: User
   createdAt: string

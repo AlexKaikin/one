@@ -1,26 +1,19 @@
-import bcrypt from 'bcrypt'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/configs'
-import { UserModel } from '../users/model'
-import { User } from '@/types'
+import { UserService } from './service'
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const data = await request.json()
-
     await connectDB()
 
-    const exists = await UserModel.findOne({ email: data.email })
+    const user = await UserService.create(request)
 
-    if (exists) {
+    if (user) {
       return NextResponse.json(
         { message: 'Email already exists' },
         { status: 500 }
       )
     }
-
-    const hashPassword = await bcrypt.hash(data.password, 3)
-    await UserModel.create({ ...data, password: hashPassword })
 
     return NextResponse.json({ message: 'User registrated' }, { status: 201 })
   } catch (error) {
@@ -31,13 +24,16 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     await connectDB()
 
-    const users = (await UserModel.find()) as User[]
+    const { users, total } = await UserService.getAll(request)
+    const response = NextResponse.json(users)
+    
+    response.headers.append('X-Total-Count', String(total))
 
-    return NextResponse.json(users)
+    return response
   } catch (error) {
     return NextResponse.json(
       { message: 'Something went wrong' },

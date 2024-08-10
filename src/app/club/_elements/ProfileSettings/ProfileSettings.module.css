@@ -1,0 +1,42 @@
+.form {
+  display: flex;
+  gap: calc(var(--spacing) * 2);
+
+  @media only screen and (max-width: 576px) {
+    flex-direction: column;
+  }
+}
+
+.avatar {
+  flex: 0 0 200px;
+}
+
+.avatarChange {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.imgContainer {
+  position: relative;
+  width: 100%;
+}
+
+.img {
+  border-radius: calc(var(--spacing));
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+}
+
+.btn {
+  background-color: var(--bg);
+  color: var(--text);
+  padding: var(--spacing);
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px 10px color-mix(in srgb, var(--dark), transparent 90%);
+}

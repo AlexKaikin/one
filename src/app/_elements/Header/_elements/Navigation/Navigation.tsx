@@ -1,6 +1,6 @@
 'use client'
 
-import { SCREEN_LG } from '@/constants'
+import { SCREEN_SIZES } from '@/constants'
 import { useWindowDimensions } from '@/hooks'
 import { DesktopMenu } from '../DesktopMenu/DesktopMenu'
 import { MobileMenu } from '../MobileMenu/MobileMenu'
@@ -13,7 +13,7 @@ export function Navigation() {
 
   return (
     <div className={styles.navigation}>
-      {width < SCREEN_LG ? <MobileMenu /> : <DesktopMenu />}
+      {width < SCREEN_SIZES.LG ? <MobileMenu /> : <DesktopMenu />}
     </div>
   )
 }

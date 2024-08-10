@@ -22,7 +22,7 @@ export {
 } from './Form'
 export { Widget, WidgetGroup } from './Widget/Widget'
 export { List, ListItem } from './List/List'
-export { Icon } from './Icon/Icon'
+export { Icon, type IconType } from './Icon/Icon'
 export { Menu, MenuItem, SubMenu } from './Menu/Menu'
 export { Divider } from './Divider/Divider'
 export { IconButton } from './IconButton/IconButton'

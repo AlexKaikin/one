@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Roles, UserStatuses } from '@/entities'
+import { ROLES, USER_STATUSES } from '@/constants'
 import { UserService } from '@/services'
 import { useTranslation } from '@/store'
 import { User as UserType } from '@/types'
@@ -48,8 +48,8 @@ export function User({ user }: { user: UserType }) {
             defaultSelectValue={t(user.role)}
             onSelectChange={setRole}
           >
-            <SelectOption value={Roles.admin}>{t(Roles.admin)}</SelectOption>
-            <SelectOption value={Roles.user}>{t(Roles.user)}</SelectOption>
+            <SelectOption value={ROLES.ADMIN}>{t(ROLES.ADMIN)}</SelectOption>
+            <SelectOption value={ROLES.USER}>{t(ROLES.USER)}</SelectOption>
           </Select>
 
           <Select
@@ -57,14 +57,14 @@ export function User({ user }: { user: UserType }) {
             defaultSelectValue={t(user.status)}
             onSelectChange={setStatus}
           >
-            <SelectOption value={UserStatuses.inactive}>
-              {t(UserStatuses.inactive)}
+            <SelectOption value={USER_STATUSES.INACTIVE}>
+              {t(USER_STATUSES.INACTIVE)}
             </SelectOption>
-            <SelectOption value={UserStatuses.active}>
-              {t(UserStatuses.active)}
+            <SelectOption value={USER_STATUSES.ACTIVE}>
+              {t(USER_STATUSES.ACTIVE)}
             </SelectOption>
-            <SelectOption value={UserStatuses.blocked}>
-              {t(UserStatuses.blocked)}
+            <SelectOption value={USER_STATUSES.BLOCKED}>
+              {t(USER_STATUSES.BLOCKED)}
             </SelectOption>
           </Select>
 

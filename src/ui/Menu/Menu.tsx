@@ -22,6 +22,7 @@ type MenuProps = {
   trigger?: ReactNode
   children: ReactNode
   href?: string
+  active?: boolean
 }
 type Props = { trigger: ReactNode; href?: string; children: ReactNode }
 
@@ -33,7 +34,12 @@ export function Menu(props: MenuProps) {
   )
 }
 
-export function MenuWithContext({ trigger, href, children }: MenuProps) {
+export function MenuWithContext({
+  trigger,
+  href,
+  active,
+  children,
+}: MenuProps) {
   const { open, style, setStyle, handleCloseMenu, handleToggleMenu } =
     useContext(MenuContext) as MenuContextType
   const { height, width } = useWindowDimensions()
@@ -74,7 +80,11 @@ export function MenuWithContext({ trigger, href, children }: MenuProps) {
     <div ref={ref} className={styles.menu}>
       <div className={styles.trigger}>
         {href ? (
-          <Link href={href || '#'} onClick={handleCloseMenu}>
+          <Link
+            href={href || '#'}
+            onClick={handleCloseMenu}
+            className={cn({ [styles.activeLink]: active })}
+          >
             {trigger}
           </Link>
         ) : (
@@ -85,7 +95,12 @@ export function MenuWithContext({ trigger, href, children }: MenuProps) {
 
         {!!href && (
           <IconButton variant="clean" onClick={handleToggleMenu}>
-            <Icon name="arrowDropDown" width={16} height={16} />
+            <Icon
+              name="arrowDropDown"
+              width={16}
+              height={16}
+              className={styles.icon}
+            />
           </IconButton>
         )}
       </div>
@@ -141,7 +156,12 @@ export function SubMenu({ trigger, href, children }: Props) {
         </Link>
 
         <IconButton variant="clean">
-          <Icon name="arrowDropDown" width={16} height={16} />
+          <Icon
+            name="arrowDropDown"
+            width={16}
+            height={16}
+            className={cn(styles.icon, { [styles['open']]: openSub })}
+          />
         </IconButton>
       </div>
 

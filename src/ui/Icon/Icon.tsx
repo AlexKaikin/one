@@ -13,7 +13,9 @@ import IconChevronRight from '@/assets/svg/chevronRight.svg'
 import IconClose from '@/assets/svg/close.svg'
 import IconExclamation from '@/assets/svg/exclamation.svg'
 import IconEye from '@/assets/svg/eye.svg'
+import IconFilePen from '@/assets/svg/filePen.svg'
 import IconFilter from '@/assets/svg/filter.svg'
+import IconFlag from '@/assets/svg/flag.svg'
 import IconFolder from '@/assets/svg/folder.svg'
 import IconGalaxy from '@/assets/svg/galaxy.svg'
 import IconHeart from '@/assets/svg/heart.svg'
@@ -21,18 +23,25 @@ import IconList from '@/assets/svg/list.svg'
 import IconListCheck from '@/assets/svg/listCheck.svg'
 import IconLoading from '@/assets/svg/loading.svg'
 import IconLogo from '@/assets/svg/logo.svg'
+import IconMapPin from '@/assets/svg/mapPin.svg'
+import IconMegaphone from '@/assets/svg/megaphone.svg'
+import IconMessage from '@/assets/svg/message.svg'
 import IconMinus from '@/assets/svg/minus.svg'
 import IconMoon from '@/assets/svg/moon.svg'
 import IconPlus from '@/assets/svg/plus.svg'
 import IconSearch from '@/assets/svg/search.svg'
+import IconSend from '@/assets/svg/send.svg'
 import IconSort from '@/assets/svg/sort.svg'
 import IconStar from '@/assets/svg/star.svg'
 import IconStarOutline from '@/assets/svg/starOutline.svg'
 import IconSun from '@/assets/svg/sun.svg'
 import IconTrash from '@/assets/svg/trash.svg'
+import IconUpload from '@/assets/svg/upload.svg'
+import IconUser from '@/assets/svg/user.svg'
+import IconUsers from '@/assets/svg/users.svg'
 
 type Props = ComponentProps<'svg'> & { name: IconType }
-type IconType =
+export type IconType =
   | 'galaxy'
   | 'search'
   | 'plus'
@@ -62,6 +71,15 @@ type IconType =
   | 'eye'
   | 'folder'
   | 'calendar'
+  | 'user'
+  | 'users'
+  | 'flag'
+  | 'message'
+  | 'megaphone'
+  | 'mapPin'
+  | 'filePen'
+  | 'send'
+  | 'upload'
 
 export function Icon({ name, ...rest }: Props) {
   const icons = {
@@ -94,6 +112,15 @@ export function Icon({ name, ...rest }: Props) {
     eye: <IconEye {...rest} />,
     folder: <IconFolder {...rest} />,
     calendar: <IconCalendar {...rest} />,
+    user: <IconUser {...rest} />,
+    users: <IconUsers {...rest} />,
+    flag: <IconFlag {...rest} />,
+    message: <IconMessage {...rest} />,
+    megaphone: <IconMegaphone {...rest} />,
+    mapPin: <IconMapPin {...rest} />,
+    filePen: <IconFilePen {...rest} />,
+    send: <IconSend {...rest} />,
+    upload: <IconUpload {...rest} />,
   }
   const icon = icons[name]
   return icon

@@ -1,9 +1,27 @@
-import { Page, PageContent, PageHeader } from '@/ui'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/configs'
+import { ApiError } from '@/helpers'
+import { UserService } from '@/services'
+import { UrlParams } from '@/types'
+import { Profile } from './_elements'
 
-export default function Club() {
-  return (
-    <Page>
-      <PageContent>Coming soon</PageContent>
-    </Page>
-  )
+async function getUserById(id: string) {
+  try {
+    const { data } = await UserService.getOne(id, {} as UrlParams)
+
+    return data
+  } catch (error) {
+    ApiError(error)
+  }
+}
+
+export default async function MyProfilePage() {
+  const session = await getServerSession(authOptions)
+  const data = await getUserById(session?.user?.id)
+
+  if (!data) {
+    return null
+  }
+
+  return <Profile user={data} />
 }

@@ -23,7 +23,11 @@ export function ShopMenu() {
       <Menu
         trigger={
           <Button
-            startIcon={<Icon name="apps" width={20} height={20} />}
+            startIcon={
+              <Badge value={0} variant="dot">
+                <Icon name="apps" width={20} height={20} />
+              </Badge>
+            }
             className={styles.button}
             variant="clean"
           >

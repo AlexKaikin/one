@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { ApiError } from '@/helpers'
 import { UserService } from '@/services'
+import { User } from '@/types'
 import { Button, Form, FormInput } from '@/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import styles from './UserForm.module.css'
-import { User } from '@/types'
 
 const required_error = 'Required'
 
@@ -29,7 +29,7 @@ export function UserForm({ defaultValues }: { defaultValues: User }) {
 
   const onSubmit = async (data: User) => {
     try {
-      const response = await UserService.update(data.id, data)
+      const response = await UserService.update(defaultValues.id, data)
       reset(response.data)
     } catch (error) {
       ApiError(error)

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
-import { Measurements } from '@/entities'
+import { MEASUREMENTS } from '@/constants'
 import { TranslationKeys } from '@/langs'
 import { ProductService } from '@/services'
 import { useTranslation } from '@/store'
@@ -168,7 +168,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
   )
 
   const handleChangeVolumeMeasurement = useCallback(
-    (value: Measurements) => {
+    (value: MEASUREMENTS) => {
       setValue('volumeMeasurement', value, {
         shouldValidate: true,
         shouldDirty: true,
@@ -207,28 +207,26 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
                   <FormTextarea
                     name="description"
                     label={t('description')}
-                    rows={7}
+                    rows={10}
                   />
 
                   <Stack alignItems="center" spacing={2}>
                     <FormInput name="volume" label={t('volume')} />
 
-                    <Stack isWide alignItems="center" justifyContent="center">
+                    <Stack isWide alignItems="center">
                       <Select
                         label={`${t('volumeMeasurement')}: `}
-                        defaultSelectValue={
-                          <>{t(watch('volumeMeasurement'))}</>
-                        }
+                        defaultSelectValue={t(watch('volumeMeasurement'))}
                         onSelectChange={handleChangeVolumeMeasurement}
                         errorState={errors.volumeMeasurement}
                       >
                         {(
-                          Object.keys(Measurements) as Array<
-                            keyof typeof Measurements
+                          Object.keys(MEASUREMENTS) as Array<
+                            keyof typeof MEASUREMENTS
                           >
                         ).map(key => (
                           <SelectOption key={key} value={key}>
-                            {t(key)}
+                            {t(MEASUREMENTS[key])}
                           </SelectOption>
                         ))}
                       </Select>
@@ -284,7 +282,7 @@ export function ProductForm({ defaultValues, onSubmit }: Props) {
                   <FormTextarea
                     name="translations.ru.description"
                     label={t('description')}
-                    rows={7}
+                    rows={10}
                   />
 
                   <Stack flexDirection="column" spacing={2}>

@@ -1,0 +1,12 @@
+.following {
+  display: flex;
+  flex-direction: row;
+  gap: calc(var(--spacing) * 2);
+  box-shadow: 0 0 10px 10px color-mix(in srgb, var(--text), transparent 95%);
+  border-radius: var(--radius);
+  padding: var(--spacing);
+}
+
+.action {
+  cursor: pointer;
+}

@@ -1,7 +1,7 @@
 import { getToken } from 'next-auth/jwt'
 import { withAuth } from 'next-auth/middleware'
 import { NextRequest, NextResponse } from 'next/server'
-import { Roles } from './entities'
+import { ROLES } from './constants'
 
 const AdminAllowedPaths = ['/admin']
 
@@ -16,7 +16,7 @@ export default withAuth(
       request.nextUrl.pathname.startsWith(path)
     )
 
-    if (isAdminAllowedPath && user?.role !== Roles.admin) {
+    if (isAdminAllowedPath && user?.role !== ROLES.ADMIN) {
       return NextResponse.rewrite(request.nextUrl.origin + '/forbidden')
     }
   },

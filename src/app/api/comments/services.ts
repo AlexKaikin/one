@@ -1,7 +1,6 @@
-import { ModerationStatuses } from '@/entities';
-import { CreateComment, Review } from '@/types';
-import { CommentModel } from './model';
-
+import { MODERATION_STATUSES } from '@/constants'
+import { CreateComment, Review } from '@/types'
+import { CommentModel } from './model'
 
 export const CommentService = { create, getAll, getOne, update, remove }
 
@@ -57,7 +56,7 @@ function getFindParams(request: Request) {
   if (user) query.user = user
   if (post) {
     query.post = post
-    query.status = ModerationStatuses.approved
+    query.status = MODERATION_STATUSES.APPROVED
   }
 
   const fields = ''

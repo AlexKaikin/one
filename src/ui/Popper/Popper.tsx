@@ -14,10 +14,7 @@ type Style = {}
 
 const defaultStyle = {
   position: 'absolute',
-  //   top: '0',
-  //   left: '0',
   zIndex: '1',
-  //  transform: 'auto',
 }
 
 export function Popper({ open, children, anchorEl }: Props) {

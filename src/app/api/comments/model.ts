@@ -2,7 +2,7 @@
 
 import { Schema, SchemaTypes, model, models } from 'mongoose'
 import { schemaConfig } from '@/configs'
-import { ModerationStatuses } from '@/entities'
+import { MODERATION_STATUSES } from '@/constants'
 import { Comment } from '@/types'
 
 const schema = new Schema(
@@ -10,8 +10,8 @@ const schema = new Schema(
     text: { type: String, require: true },
     status: {
       type: String,
-      enum: Object.values(ModerationStatuses),
-      default: ModerationStatuses.moderation,
+      enum: Object.values(MODERATION_STATUSES),
+      default: MODERATION_STATUSES.MODERATION,
     },
     user: { type: SchemaTypes.ObjectId, ref: 'User', required: true },
     post: { type: SchemaTypes.ObjectId, ref: 'Post', required: true },

@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
-import { connectDB } from '@/configs';
-import { User } from '@/types';
-import { UserModel } from '../model';
-
+import { NextRequest, NextResponse } from 'next/server'
+import { connectDB } from '@/configs'
+import { User } from '@/types'
+import { UserModel } from '../model'
+import { UserService } from '../service'
 
 type Params = {
   user: string
@@ -11,8 +11,9 @@ type Params = {
 export async function GET(_: Request, context: { params: Params }) {
   try {
     await connectDB()
+
     const id = context.params.user
-    const user = (await UserModel.findById(id)) as User
+    const user = await UserService.getOne(id)
 
     if (!user) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 })
@@ -27,29 +28,12 @@ export async function GET(_: Request, context: { params: Params }) {
   }
 }
 
-export async function PATCH(request: Request, context: { params: Params }) {
+export async function PATCH(request: NextRequest, context: { params: Params }) {
   try {
     await connectDB()
-    const data = await request.formData()
+
     const id = context.params.user
-
-    const email = data.get('email')
-    const lastName = data.get('lastName')
-    const firstName = data.get('firstName')
-    const status = data.get('status')
-    const role = data.get('role')
-
-    const updatedUser: any = {}
-
-    if (email) updatedUser.email = email
-    if (lastName) updatedUser.lastName = lastName
-    if (firstName) updatedUser.firstName = firstName
-    if (status) updatedUser.status = status
-    if (role) updatedUser.role = role
-    console.log(updatedUser)
-    const user = await UserModel.findByIdAndUpdate(id, updatedUser, {
-      new: true,
-    })
+    const user = await UserService.update(id, request)
 
     if (!user) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 })
@@ -68,7 +52,7 @@ export async function DELETE(_: Request, context: { params: Params }) {
   try {
     await connectDB()
     const id = context.params.user
-    const user = (await UserModel.findByIdAndDelete(id)) as User
+    const user = await UserService.getOne(id)
 
     if (!user) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 })

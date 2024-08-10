@@ -8,7 +8,7 @@ import '../assets/styles/globals.css'
 import { Footer, Header } from './_elements'
 
 const font = Noto_Sans({
-  weight: '600',
+  weight: '500',
   subsets: ['latin'],
   display: 'swap',
 })

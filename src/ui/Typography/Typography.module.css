@@ -29,7 +29,6 @@
 .h5,
 .h6 {
   font-size: var(--size);
-  font-weight: 600;
   margin-bottom: calc(var(--spacing) * 2);
 
   &:last-of-type {

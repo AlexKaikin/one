@@ -4,18 +4,11 @@ import { useState } from 'react'
 import dayjs from 'dayjs'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ModerationStatuses } from '@/entities'
+import { MODERATION_STATUSES } from '@/constants'
 import { CommentService } from '@/services'
 import { useTranslation } from '@/store'
 import { Comment as CommentType } from '@/types'
-import {
-  Button,
-  Select,
-  SelectOption,
-  Stack,
-  Textarea,
-  useNotify,
-} from '@/ui'
+import { Button, Select, SelectOption, Stack, Textarea, useNotify } from '@/ui'
 import styles from './Comment.module.css'
 
 type Props = {
@@ -67,14 +60,14 @@ export function Comment({ comment, editMode }: Props) {
           onSelectChange={setStatus}
           readOnly={!editMode}
         >
-          <SelectOption value={ModerationStatuses.moderation}>
-            {t(ModerationStatuses.moderation)}
+          <SelectOption value={MODERATION_STATUSES.MODERATION}>
+            {t(MODERATION_STATUSES.MODERATION)}
           </SelectOption>
-          <SelectOption value={ModerationStatuses.approved}>
-            {t(ModerationStatuses.approved)}
+          <SelectOption value={MODERATION_STATUSES.APPROVED}>
+            {t(MODERATION_STATUSES.APPROVED)}
           </SelectOption>
-          <SelectOption value={ModerationStatuses.notApproved}>
-            {t(ModerationStatuses.notApproved)}
+          <SelectOption value={MODERATION_STATUSES.NOT_APPROVED}>
+            {t(MODERATION_STATUSES.NOT_APPROVED)}
           </SelectOption>
         </Select>
       </Stack>

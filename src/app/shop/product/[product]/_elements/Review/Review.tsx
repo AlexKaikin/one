@@ -15,6 +15,7 @@ export function Review({ review }: { review: ReviewType }) {
           width={70}
           height={70}
           alt="avatar"
+          className={styles.img}
         />
       </div>
 

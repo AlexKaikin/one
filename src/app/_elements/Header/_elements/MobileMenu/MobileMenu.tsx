@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { Roles } from '@/entities'
+import { ROLES } from '@/constants'
 import { useTranslation } from '@/store'
 import { Icon, Menu, MenuItem, SubMenu } from '@/ui'
 import { Lang } from '../Lang/Lang'
@@ -44,17 +44,19 @@ export function MobileMenu() {
         </MenuItem>
       </SubMenu>
 
-       <SubMenu trigger={t('blog')} href={'/blog'}>
+      <SubMenu trigger={t('blog')} href={'/blog'}>
         <SubMenu trigger={t('posts')} href={'/blog'}>
           <MenuItem>
-            <Link href={'/blog/category/instructions'}>{t('instructions')}</Link>
+            <Link href={'/blog/category/instructions'}>
+              {t('instructions')}
+            </Link>
           </MenuItem>
 
           <MenuItem>
             <Link href={'/blog/category/traditions'}>{t('traditions')}</Link>
           </MenuItem>
 
-            <MenuItem>
+          <MenuItem>
             <Link href={'/blog/category/reviews'}>{t('reviews')}</Link>
           </MenuItem>
         </SubMenu>
@@ -64,9 +66,27 @@ export function MobileMenu() {
         </MenuItem>
       </SubMenu>
 
-      <MenuItem>
-        <Link href={'/club'}>{t('club')}</Link>
-      </MenuItem>
+      <SubMenu trigger={t('club')} href={'/club'}>
+        <MenuItem>
+          <Link href={'/club'}>{t('myPage')}</Link>
+        </MenuItem>
+
+        <MenuItem>
+          <Link href={'/club/messenger'}>{t('messenger')}</Link>
+        </MenuItem>
+
+        <MenuItem>
+          <Link href={'/club/groups'}>{t('groups')}</Link>
+        </MenuItem>
+
+        <MenuItem>
+          <Link href={'/club/users'}>{t('users')}</Link>
+        </MenuItem>
+
+        <MenuItem>
+          <Link href={'/club/events'}>{t('events')}</Link>
+        </MenuItem>
+      </SubMenu>
 
       <SubMenu trigger={t('account')}>
         {!data?.user && (
@@ -94,7 +114,7 @@ export function MobileMenu() {
           </>
         )}
 
-        {data?.user.role === Roles.admin && (
+        {data?.user.role === ROLES.ADMIN && (
           <MenuItem>
             <Link href={'/admin'}>{t('admin')}</Link>
           </MenuItem>

@@ -1,10 +1,10 @@
 'use server'
 
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { connectDB } from '@/configs'
 import { ProductService } from './services'
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     await connectDB()
 
@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     await connectDB()
 

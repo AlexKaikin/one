@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { SCREEN_LG } from '@/constants'
+import { SCREEN_SIZES } from '@/constants'
 import { useOnClickOutside, useWindowDimensions } from '@/hooks'
 import { useTranslation } from '@/store'
 import { Icon, IconButton, Input, Popper, Select, SelectOption } from '@/ui'
@@ -15,7 +15,7 @@ export function Search() {
 
   return (
     <div className={styles.search}>
-      {width < SCREEN_LG ? <MobileSearch /> : <DesktopSearch />}
+      {width < SCREEN_SIZES.LG ? <MobileSearch /> : <DesktopSearch />}
     </div>
   )
 }
@@ -35,7 +35,7 @@ function MobileSearch() {
         onClick={() => setOpen(!open)}
       />
 
-      <Popper open={open} anchorEl={ref}>
+      <Popper open={open} anchorEl={ref} >
         <div className={styles.container}>
           <DesktopSearch />
         </div>

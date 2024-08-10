@@ -15,6 +15,7 @@ export function Comment({ comment }: { comment: CommentType }) {
           width={70}
           height={70}
           alt="avatar"
+          className={styles.img}
         />
       </div>
 

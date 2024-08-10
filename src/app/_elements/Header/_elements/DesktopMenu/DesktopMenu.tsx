@@ -1,8 +1,10 @@
 'use client'
 
+import cn from 'classnames'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { Roles } from '@/entities'
+import { usePathname } from 'next/navigation'
+import { ROLES } from '@/constants'
 import { useTranslation } from '@/store'
 import { List, Menu, MenuItem, SubMenu } from '@/ui'
 import { Lang } from '../Lang/Lang'
@@ -10,61 +12,111 @@ import { SignOutLink } from '../SignOutLink/SignOutLink'
 import { Theme } from '../Theme/Theme'
 import styles from './DesktopMenu.module.css'
 
+type Link = {
+  url: string
+  title: string
+  subLinks: Link[] | null
+}
+
 export function DesktopMenu() {
   const { t } = useTranslation()
   const { data } = useSession()
+  const pathname = usePathname()
+
+  const shopLinks = [
+    {
+      url: '/shop',
+      title: t('products'),
+      subLinks: [
+        { url: '/shop/category/tea', title: t('tea'), subLinks: null },
+        { url: '/shop/category/coffee', title: t('coffee'), subLinks: null },
+      ],
+    },
+    { url: '/shop/favorites', title: t('favorites'), subLinks: null },
+    { url: '/shop/compare', title: t('compare'), subLinks: null },
+    { url: '/shop/cart', title: t('cart'), subLinks: null },
+  ]
+
+  const blogLinks = [
+    {
+      url: '/blog',
+      title: t('posts'),
+      subLinks: [
+        {
+          url: '/blog/category/instructions',
+          title: t('instructions'),
+          subLinks: null,
+        },
+        {
+          url: '/blog/category/traditions',
+          title: t('traditions'),
+          subLinks: null,
+        },
+        {
+          url: '/blog/category/reviews',
+          title: t('reviews'),
+          subLinks: null,
+        },
+      ],
+    },
+    { url: '/blog/favorites', title: t('favorites'), subLinks: null },
+  ]
+
+  const clubLinks = [
+    { url: '/club', title: t('myPage'), subLinks: null },
+    { url: '/club/messenger', title: t('messenger'), subLinks: null },
+    { url: '/club/groups', title: t('groups'), subLinks: null },
+    { url: '/club/users', title: t('users'), subLinks: null },
+    { url: '/club/events', title: t('events'), subLinks: null },
+  ]
 
   return (
     <List align="horizontal" spacing={2}>
-      <Link href={'/'}>{t('home')}</Link>
+      <Link
+        href={'/'}
+        className={cn({
+          [styles.active]:
+            (pathname.indexOf('/') >= 0 && '/' !== '/') || pathname === '/',
+        })}
+      >
+        {t('home')}
+      </Link>
 
-      <Menu trigger={t('shop')} href={'/shop'}>
-        <SubMenu trigger={t('products')} href={'/shop'}>
-          <MenuItem>
-            <Link href={'/shop/category/tea'}>{t('tea')}</Link>
-          </MenuItem>
-
-          <MenuItem>
-            <Link href={'/shop/category/coffee'}>{t('coffee')}</Link>
-          </MenuItem>
-        </SubMenu>
-
-        <MenuItem>
-          <Link href={'/shop/favorites'}>{t('favorites')}</Link>
-        </MenuItem>
-
-        <MenuItem>
-          <Link href={'/shop/compare'}>{t('compare')}</Link>
-        </MenuItem>
-
-        <MenuItem>
-          <Link href={'/shop/cart'}>{t('cart')}</Link>
-        </MenuItem>
+      <Menu
+        trigger={t('shop')}
+        href={'/shop'}
+        active={pathname.includes('shop')}
+      >
+        {shopLinks.map(link => (
+          <SubMenuItem key={link.title} link={link} />
+        ))}
       </Menu>
 
-      <Menu trigger={t('blog')} href={'/blog'}>
-        <SubMenu trigger={t('posts')} href={'/blog'}>
-          <MenuItem>
-            <Link href={'/blog/category/instructions'}>{t('instructions')}</Link>
-          </MenuItem>
-
-          <MenuItem>
-            <Link href={'/blog/category/traditions'}>{t('traditions')}</Link>
-          </MenuItem>
-
-           <MenuItem>
-            <Link href={'/blog/category/reviews'}>{t('reviews')}</Link>
-          </MenuItem>
-        </SubMenu>
-
-        <MenuItem>
-          <Link href={'/blog/favorites'}>{t('favorites')}</Link>
-        </MenuItem>
+      <Menu
+        trigger={t('blog')}
+        href={'/blog'}
+        active={pathname.includes('blog')}
+      >
+        {blogLinks.map(link => (
+          <SubMenuItem key={link.title} link={link} />
+        ))}
       </Menu>
 
-      <Link href={'/club'}>{t('club')}</Link>
+      <Menu
+        trigger={t('club')}
+        href={'/club'}
+        active={pathname.includes('club')}
+      >
+        {clubLinks.map(link => (
+          <SubMenuItem key={link.title} link={link} />
+        ))}
+      </Menu>
 
-      <Menu trigger={t('account')} href={'/account'}>
+      <Menu
+        trigger={t('account')}
+        href={'/account'}
+        active={pathname.includes('account')}
+      >
         {!data?.user && (
           <>
             <MenuItem>
@@ -90,7 +142,7 @@ export function DesktopMenu() {
           </>
         )}
 
-        {data?.user.role === Roles.admin && (
+        {data?.user.role === ROLES.ADMIN && (
           <MenuItem>
             <Link href={'/admin'}>{t('admin')}</Link>
           </MenuItem>
@@ -111,5 +163,30 @@ export function DesktopMenu() {
         </MenuItem>
       </Menu>
     </List>
+  )
+}
+
+function SubMenuItem({ link }: { link: Link }) {
+  const pathname = usePathname()
+
+  if (link.subLinks) {
+    return (
+      <SubMenu trigger={link.title} href={link.url}>
+        {link.subLinks.map(l => (
+          <SubMenuItem key={l.title} link={l} />
+        ))}
+      </SubMenu>
+    )
+  }
+
+  return (
+    <MenuItem>
+      <Link
+        href={link.url}
+        className={cn({ [styles.active]: pathname === link.url })}
+      >
+        {link.title}
+      </Link>
+    </MenuItem>
   )
 }

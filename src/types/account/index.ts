@@ -1,4 +1,5 @@
-import { Roles, UserStatuses } from '@/entities'
+import { ROLES, USER_STATUSES } from '@/constants';
+
 
 export type User = {
   id: string
@@ -7,8 +8,13 @@ export type User = {
   avatarUrl: string
   email: string
   password: string
-  role: Roles
-  status: UserStatuses
+  role: ROLES
+  status: USER_STATUSES
+  following: User[]
+  followers: User[]
+  about: string
+  interests: string[]
+  location: string
   createdAt: string
   updatedAt: string
 }

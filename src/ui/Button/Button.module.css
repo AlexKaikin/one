@@ -31,6 +31,7 @@
 
 .secondary {
   background-color: var(--secondary);
+  color: var(--text);
 }
 
 .success {
