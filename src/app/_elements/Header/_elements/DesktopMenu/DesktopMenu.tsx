@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ROLES } from '@/constants'
 import { useTranslation } from '@/store'
-import { List, Menu, MenuItem, SubMenu } from '@/ui'
+import { Divider, List, Menu, MenuItem, Stack, SubMenu } from '@/ui'
 import { Lang } from '../Lang/Lang'
 import { SignOutLink } from '../SignOutLink/SignOutLink'
 import { Theme } from '../Theme/Theme'
@@ -82,41 +82,25 @@ export function DesktopMenu() {
         {t('home')}
       </Link>
 
-      <Menu
-        trigger={t('shop')}
-        href={'/shop'}
-        active={pathname.includes('shop')}
-      >
+      <Menu trigger={t('shop')} active={pathname.includes('shop')}>
         {shopLinks.map(link => (
           <SubMenuItem key={link.title} link={link} />
         ))}
       </Menu>
 
-      <Menu
-        trigger={t('blog')}
-        href={'/blog'}
-        active={pathname.includes('blog')}
-      >
+      <Menu trigger={t('blog')} active={pathname.includes('blog')}>
         {blogLinks.map(link => (
           <SubMenuItem key={link.title} link={link} />
         ))}
       </Menu>
 
-      <Menu
-        trigger={t('club')}
-        href={'/club'}
-        active={pathname.includes('club')}
-      >
+      <Menu trigger={t('club')} active={pathname.includes('club')}>
         {clubLinks.map(link => (
           <SubMenuItem key={link.title} link={link} />
         ))}
       </Menu>
 
-      <Menu
-        trigger={t('account')}
-        href={'/account'}
-        active={pathname.includes('account')}
-      >
+      <Menu trigger={t('account')} active={pathname.includes('account')}>
         {!data?.user && (
           <>
             <MenuItem>
@@ -144,7 +128,7 @@ export function DesktopMenu() {
 
         {data?.user.role === ROLES.ADMIN && (
           <MenuItem>
-            <Link href={'/admin'}>{t('admin')}</Link>
+            <Link href={'/admin'}>{t('adminPanel')}</Link>
           </MenuItem>
         )}
 
@@ -154,13 +138,17 @@ export function DesktopMenu() {
           </MenuItem>
         )}
 
-        <MenuItem>
-          <Lang />
-        </MenuItem>
+        <Divider />
 
-        <MenuItem>
-          <Theme />
-        </MenuItem>
+        <Stack spacing={2}>
+          <MenuItem>
+            <Lang />
+          </MenuItem>
+
+          <MenuItem>
+            <Theme />
+          </MenuItem>
+        </Stack>
       </Menu>
     </List>
   )

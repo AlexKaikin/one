@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import defaultAvatar from '@/assets/images/user/defaultAvatar.png'
+import { useTranslation } from '@/store'
 import { User } from '@/types'
 import { Button, Icon, Page, PageContent, Spoiler, Stack } from '@/ui'
 import { CreatePost } from '../CreatePost/CreatePost'
@@ -11,13 +12,12 @@ import { Following } from '../Following/Following'
 import styles from './Profile.module.css'
 
 export function Profile({ user }: { user: User }) {
+  const { t } = useTranslation()
   const router = useRouter()
   const { data } = useSession()
   const isMyProfile = user.id === data?.user.id
   const isFollower = user?.followers?.find(({ id }) => id === data?.user.id)
   const isFollowing = user?.following?.find(({ id }) => id === data?.user.id)
-
-  //if (user && user.id === data?.user.id) router.push('/club')
 
   return (
     <Page>
@@ -88,7 +88,7 @@ export function Profile({ user }: { user: User }) {
                       }
                       onClick={() => router.push('/club/profile-settings')}
                     >
-                      Edit
+                      {t('edit')}
                     </Button>
                   )}
                 </div>
@@ -97,15 +97,15 @@ export function Profile({ user }: { user: User }) {
                 <Spoiler
                   hideShadow
                   maxHeight={50}
-                  hideLabel="Hide"
-                  showLabel="More"
+                  hideLabel={t('hide')}
+                  showLabel={t('more')}
                   labelSize="small"
                   color="secondary"
                 >
                   <div className={styles.more}>
                     {!!user?.about?.length && (
                       <Stack flexDirection="column" spacing={1}>
-                        <span className={styles.infoTitle}>About</span>
+                        <span className={styles.infoTitle}>{t('aboutMe')}</span>
 
                         <div>
                           {user.about.split('\n').map((item, index) => (
@@ -117,7 +117,9 @@ export function Profile({ user }: { user: User }) {
 
                     {!!user?.interests?.length && (
                       <Stack flexDirection="column" spacing={1}>
-                        <span className={styles.infoTitle}>Interests</span>
+                        <span className={styles.infoTitle}>
+                          {t('interests')}
+                        </span>
 
                         <div>{user.interests.join(', ')}</div>
                       </Stack>
@@ -125,7 +127,9 @@ export function Profile({ user }: { user: User }) {
 
                     {!!user?.location?.length && (
                       <Stack flexDirection="column" spacing={1}>
-                        <span className={styles.infoTitle}>Location</span>
+                        <span className={styles.infoTitle}>
+                          {t('location')}
+                        </span>
 
                         <Stack alignItems="center" spacing={1}>
                           <Icon name="mapPin" width={16} height={16} />{' '}

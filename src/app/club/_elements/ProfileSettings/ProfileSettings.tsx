@@ -51,8 +51,8 @@ export function ProfileSettings({ defaultValues }: { defaultValues: User }) {
     },
     resolver: zodResolver(schema),
   })
-  const { formState, getValues, setValue, watch, reset } = formMethods
-  const { isDirty, errors } = formState
+  const { formState, getValues, setValue, reset } = formMethods
+  const { isDirty } = formState
 
   const handleChangeFile = (files: FileList) => {
     if (files) {
@@ -156,18 +156,18 @@ export function ProfileSettings({ defaultValues }: { defaultValues: User }) {
 
           <Stack flexDirection="column" spacing={2} isWide>
             <Stack flexDirection="row" spacing={2}>
-              <FormInput name="firstName" label="First name" />
+              <FormInput name="firstName" label={t('firstName')} />
 
-              <FormInput name="lastName" label="Last name" />
+              <FormInput name="lastName" label={t('lastName')} />
             </Stack>
 
-            <FormTextarea name="about" label="About" />
+            <FormTextarea name="about" label={t('aboutMe')} />
 
             <FormInput
               name="interests"
-              label="Interests (separated by commas)"
+              label={`${t('interests')} (${t('separatedByCommas')})`}
             />
-            <FormInput name="location" label="Location" />
+            <FormInput name="location" label={t('location')} />
             {/* <FormCheckbox name="private" label="Hidden profile" /> */}
             <Stack
               flexDirection="row"

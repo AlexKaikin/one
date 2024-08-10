@@ -35,7 +35,7 @@ export function Theme() {
     <Link href="#" onClick={themeChange}>
       <Stack flexDirection="row" spacing={1}>
         <Icon name={name} width={20} height={20} />
-        {name === 'moon' ? t('darkTheme') : t('lightTheme')}
+        {name === 'moon' ? t('theme') : t('theme')}
       </Stack>
     </Link>
   )

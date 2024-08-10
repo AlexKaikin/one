@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { FieldError, useForm } from 'react-hook-form'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 import { useTranslation } from '@/store'
 import { UserRegistration } from '@/types'
@@ -42,8 +42,6 @@ export default function Login() {
   const { t } = useTranslation()
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
-  const searchParams = useSearchParams()
-  const from = searchParams.get('from') || 'account'
 
   const formMethods = useForm<UserRegistration>({
     defaultValues: { email: '', password: '' },
@@ -53,11 +51,10 @@ export default function Login() {
   const onSubmit = async (data: UserRegistration) => {
     try {
       const res = await signIn('credentials', { ...data, redirect: false })
-      
+
       if (res?.error) {
         setError(t('invalidCredentials'))
       } else {
-        router.replace(`/${from}`)
         router.refresh()
       }
     } catch (error) {

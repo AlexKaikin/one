@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getServerSession } from 'next-auth'
+import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { authOptions } from '@/configs'
 
@@ -14,9 +15,14 @@ export default async function LoginLayout({
   children: React.ReactNode
 }>) {
   const session = await getServerSession(authOptions)
+  const headersList = headers()
+  const fullUrl = headersList.get('referer') || ''
+  const searchParams = new URL(fullUrl).searchParams
+  const callbackUrl = searchParams.get('callbackUrl')
+  const from = searchParams.get('from') || '/account'
 
   if (session?.user) {
-    return redirect('/account')
+    return redirect(callbackUrl || from)
   }
 
   return children

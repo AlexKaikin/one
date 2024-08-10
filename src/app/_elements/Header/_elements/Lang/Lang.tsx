@@ -11,7 +11,7 @@ export function Lang() {
 
   return (
     <Link href="#" onClick={handleToggle}>
-      {lang === 'en' ? 'RU language' : 'EN language'}
+      {lang === 'en' ? 'RU lang' : 'EN lang'}
     </Link>
   )
 }

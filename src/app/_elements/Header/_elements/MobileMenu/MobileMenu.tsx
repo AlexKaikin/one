@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { ROLES } from '@/constants'
 import { useTranslation } from '@/store'
-import { Icon, Menu, MenuItem, SubMenu } from '@/ui'
+import { Divider, Icon, Menu, MenuItem, Stack, SubMenu } from '@/ui'
 import { Lang } from '../Lang/Lang'
 import { SignOutLink } from '../SignOutLink/SignOutLink'
 import { Theme } from '../Theme/Theme'
@@ -125,7 +125,11 @@ export function MobileMenu() {
             <SignOutLink />
           </MenuItem>
         )}
+      </SubMenu>
 
+      <Divider />
+
+      <Stack spacing={2}>
         <MenuItem>
           <Lang />
         </MenuItem>
@@ -133,7 +137,7 @@ export function MobileMenu() {
         <MenuItem>
           <Theme />
         </MenuItem>
-      </SubMenu>
+      </Stack>
     </Menu>
   )
 }
