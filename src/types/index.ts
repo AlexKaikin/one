@@ -1,4 +1,4 @@
-export type { User, UserRegistration, UserResponse } from './account'
+export type { User, UserRegistration, UserResponse, Profile } from './account'
 export type { UrlParams } from './url'
 export type {
   Product,

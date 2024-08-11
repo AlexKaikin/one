@@ -13,21 +13,21 @@ export function Following({ user }: { user: User }) {
     <div className={styles.following}>
       <Link href="/club">
         <Stack flexDirection="column" alignItems="center">
-          <span>{user.followers.length}</span>
+          <span>{user.profile.followers.length}</span>
           <span className={styles.label}>{t('followers')}</span>
         </Stack>
       </Link>
 
       <Link href="/club">
         <Stack flexDirection="column" alignItems="center">
-          <span>{user.following.length}</span>
+          <span>{user.profile.following.length}</span>
           <span className={styles.label}>{t('following')}</span>
         </Stack>
       </Link>
 
       <Link href="/club">
         <Stack flexDirection="column" alignItems="center">
-          <span>{user.following.length}</span>
+          <span>{user.profile.following.length}</span>
           <span className={styles.label}>{t('groups')}</span>
         </Stack>
       </Link>

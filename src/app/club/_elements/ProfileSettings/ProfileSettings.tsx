@@ -1,28 +1,41 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Image from 'next/image';
-import { z } from 'zod';
-import defaulAvatarUrl from '@/assets/images/user/defaultAvatar.png';
-import '@/services';
-import { UserService } from '@/services';
-import { useTranslation } from '@/store';
-import { User } from '@/types';
-import { IconButton, Form, FormInput, FormCheckbox, Button, FormTextarea, Stack, Icon, useNotify, Page, PageContent, FormFile, ImageLoader } from '@/ui';
-import { zodResolver } from '@hookform/resolvers/zod';
-import styles from './ProfileSettings.module.css';
-
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import Image from 'next/image'
+import { z } from 'zod'
+import defaulAvatarUrl from '@/assets/images/user/defaultAvatar.png'
+import '@/services'
+import { UserService } from '@/services'
+import { useTranslation } from '@/store'
+import { Profile, User } from '@/types'
+import {
+  IconButton,
+  Form,
+  FormInput,
+  FormCheckbox,
+  Button,
+  FormTextarea,
+  Stack,
+  Icon,
+  useNotify,
+  Page,
+  PageContent,
+  FormFile,
+} from '@/ui'
+import { zodResolver } from '@hookform/resolvers/zod'
+import styles from './ProfileSettings.module.css'
 
 const schema = z.object({
   firstName: z.string().optional(),
   lastName: z.string().optional(),
-  location: z.string().optional(),
+  profile: z.object({
+    id: z.string(),
+    location: z.string().optional(),
+    about: z.string().optional(),
+    interests: z.string().optional(),
+  }),
   avatarUrl: z.string().optional().nullable(),
-  about: z.string().optional(),
-  interests: z.coerce
-    .string()
-    .transform(value => value.split(',').map(item => item.trim())),
   files: z
     .instanceof(typeof window === 'undefined' ? File : FileList)
     .optional(),
@@ -40,14 +53,17 @@ export function ProfileSettings({ defaultValues }: { defaultValues: User }) {
 
   const formMethods = useForm<
     User & {
-      interests: string
       files: FileList | null
       destroyImageUrls: string[]
+      profile: Omit<Profile, 'interests'> & { interests: string }
     }
   >({
     defaultValues: {
       ...defaultValues,
-      interests: defaultValues.interests?.join(', '),
+      profile: {
+        ...defaultValues.profile,
+        interests: defaultValues.profile.interests.join(', '),
+      },
     },
     resolver: zodResolver(schema),
   })
@@ -101,8 +117,11 @@ export function ProfileSettings({ defaultValues }: { defaultValues: User }) {
     }
 
     try {
-      const response = await UserService.update(defaultValues.id, data)
-      reset(response.data)
+      const { files, destroyImageUrls, ...rest } = data
+
+      await UserService.update(defaultValues.id, data as unknown as User)
+
+      reset(rest)
       notify({ type: 'success', message: 'Completed successfully' })
     } catch (error) {
       notify({ type: 'error', message: 'Update error' })
@@ -114,7 +133,6 @@ export function ProfileSettings({ defaultValues }: { defaultValues: User }) {
   return (
     <Page>
       <PageContent>
-        <ImageLoader loading={loading} />
         <Form
           formMethods={formMethods}
           onSubmit={handleSubmit}
@@ -141,6 +159,7 @@ export function ProfileSettings({ defaultValues }: { defaultValues: User }) {
                       <Icon name="upload" width={16} height={16} />
                     </IconButton>
                   }
+                  loading={loading}
                 />
 
                 <IconButton
@@ -161,13 +180,13 @@ export function ProfileSettings({ defaultValues }: { defaultValues: User }) {
               <FormInput name="lastName" label={t('lastName')} />
             </Stack>
 
-            <FormTextarea name="about" label={t('aboutMe')} />
+            <FormTextarea name="profile.about" label={t('aboutMe')} />
 
             <FormInput
-              name="interests"
+              name="profile.interests"
               label={`${t('interests')} (${t('separatedByCommas')})`}
             />
-            <FormInput name="location" label={t('location')} />
+            <FormInput name="profile.location" label={t('location')} />
             {/* <FormCheckbox name="private" label="Hidden profile" /> */}
             <Stack
               flexDirection="row"

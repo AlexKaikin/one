@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react'
 import { useTranslation } from '@/store'
-import { Button, Icon } from '@/ui'
+import { Button, Icon, ImageLoader } from '@/ui'
 
 type Props = {
   accept: HTMLInputElement['accept']
@@ -12,6 +12,7 @@ type Props = {
   maxFiles?: number
   disabled?: boolean
   trigger?: ReactNode
+  loading?: boolean
 }
 
 export function FormFile({
@@ -22,6 +23,7 @@ export function FormFile({
   maxFiles = 10,
   disabled = false,
   trigger,
+  loading = false,
 }: Props) {
   const { t } = useTranslation()
 
@@ -62,21 +64,29 @@ export function FormFile({
 
   if (trigger) {
     return (
-      <div onClick={() => selectFile({ contentType: accept, multiple })}>
-        {trigger}
-      </div>
+      <>
+        <ImageLoader loading={loading} />
+
+        <div onClick={() => selectFile({ contentType: accept, multiple })}>
+          {trigger}
+        </div>
+      </>
     )
   }
 
   return (
-    <div onClick={() => selectFile({ contentType: accept, multiple })}>
-      <Button
-        type="button"
-        startIcon={<Icon name="plus" height={20} width={20} />}
-        disabled={disabled}
-      >
-        {t('image')}
-      </Button>
-    </div>
+    <>
+      <ImageLoader loading={loading} />
+
+      <div onClick={() => selectFile({ contentType: accept, multiple })}>
+        <Button
+          type="button"
+          startIcon={<Icon name="plus" height={20} width={20} />}
+          disabled={disabled}
+        >
+          {t('image')}
+        </Button>
+      </div>
+    </>
   )
 }

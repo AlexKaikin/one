@@ -16,8 +16,12 @@ export function Profile({ user }: { user: User }) {
   const router = useRouter()
   const { data } = useSession()
   const isMyProfile = user.id === data?.user.id
-  const isFollower = user?.followers?.find(({ id }) => id === data?.user.id)
-  const isFollowing = user?.following?.find(({ id }) => id === data?.user.id)
+  const isFollower = user?.profile.followers?.find(
+    ({ id }) => id === data?.user.id
+  )
+  const isFollowing = user?.profile.following?.find(
+    ({ id }) => id === data?.user.id
+  )
 
   return (
     <Page>
@@ -103,29 +107,29 @@ export function Profile({ user }: { user: User }) {
                   color="secondary"
                 >
                   <div className={styles.more}>
-                    {!!user?.about?.length && (
+                    {!!user?.profile.about?.length && (
                       <Stack flexDirection="column" spacing={1}>
                         <span className={styles.infoTitle}>{t('aboutMe')}</span>
 
                         <div>
-                          {user.about.split('\n').map((item, index) => (
+                          {user.profile.about.split('\n').map((item, index) => (
                             <p key={index}>{item}</p>
                           ))}
                         </div>
                       </Stack>
                     )}
 
-                    {!!user?.interests?.length && (
+                    {!!user?.profile.interests?.length && (
                       <Stack flexDirection="column" spacing={1}>
                         <span className={styles.infoTitle}>
                           {t('interests')}
                         </span>
 
-                        <div>{user.interests.join(', ')}</div>
+                        <div>{user.profile.interests.join(', ')}</div>
                       </Stack>
                     )}
 
-                    {!!user?.location?.length && (
+                    {!!user?.profile.location?.length && (
                       <Stack flexDirection="column" spacing={1}>
                         <span className={styles.infoTitle}>
                           {t('location')}
@@ -133,7 +137,7 @@ export function Profile({ user }: { user: User }) {
 
                         <Stack alignItems="center" spacing={1}>
                           <Icon name="mapPin" width={16} height={16} />{' '}
-                          {user.location}
+                          {user.profile.location}
                         </Stack>
                       </Stack>
                     )}

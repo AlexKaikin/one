@@ -1,5 +1,4 @@
-import { ROLES, USER_STATUSES } from '@/constants';
-
+import { ROLES, USER_STATUSES } from '@/constants'
 
 export type User = {
   id: string
@@ -10,11 +9,7 @@ export type User = {
   password: string
   role: ROLES
   status: USER_STATUSES
-  following: User[]
-  followers: User[]
-  about: string
-  interests: string[]
-  location: string
+  profile: Profile
   createdAt: string
   updatedAt: string
 }
@@ -30,3 +25,14 @@ export type UserResponse =
       password: string
     }
   | { message: string }
+
+export type Profile = {
+  id: string
+  following: User[]
+  followers: User[]
+  about: string
+  interests: string[]
+  location: string
+  createdAt: string
+  updatedAt: string
+}

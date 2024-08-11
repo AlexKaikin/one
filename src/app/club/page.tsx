@@ -7,7 +7,8 @@ import { Profile } from './_elements'
 
 async function getUserById(id: string) {
   try {
-    const { data } = await UserService.getOne(id, {} as UrlParams)
+    const urlParams = { searchParams: { populate: 'profile' } } as UrlParams
+    const { data } = await UserService.getOne(id, urlParams)
 
     return data
   } catch (error) {
