@@ -1,0 +1,23 @@
+.users {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: calc(var(--spacing) * 2);
+  position: relative;
+
+  @media only screen and (max-width: 1400px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  @media only screen and (max-width: 576px) {
+    grid-template-columns: 1fr 1fr;
+    gap: calc(var(--spacing) / 2);
+  }
+}

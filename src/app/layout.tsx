@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 import { Providers } from '@/providers'
 import { Layout } from '@/ui'
 import '../assets/styles/globals.css'
-import { Footer, Header } from './_elements'
+import { Header } from './_elements'
 
 const font = Noto_Sans({
   weight: '500',
@@ -33,7 +33,6 @@ export default function RootLayout({
             <Header />
           </Suspense>
           <Layout>{children}</Layout>
-          <Footer />
         </Providers>
       </body>
     </html>

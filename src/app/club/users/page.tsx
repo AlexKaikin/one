@@ -1,9 +1,40 @@
-import { Page, PageContent } from '@/ui'
+import { ApiError } from '@/helpers'
+import { UserService } from '@/services'
+import { UrlParams } from '@/types'
+import { Page, PageContent, Pagination } from '@/ui'
+import { User } from './_elements'
+import styles from './page.module.css'
 
-export default function UsersPage() {
+async function getUsers(urlParams: UrlParams) {
+  try {
+    const response = await UserService.getAll(urlParams)
+    const users = response.data
+    const totalCount = response.headers['x-total-count']
+
+    return { users, totalCount }
+  } catch (error) {
+    ApiError(error)
+  }
+}
+
+export default async function UsersPage(urlParams: UrlParams) {
+  const data = await getUsers(urlParams)
+
+  if (!data) return null
+
+  const { users, totalCount } = data
+
   return (
     <Page>
-      <PageContent>Coming soon</PageContent>
+      <PageContent>
+        <div className={styles.users}>
+          {users.map(user => (
+            <User key={user.id} user={user} />
+          ))}
+        </div>
+        
+        <Pagination totalCount={totalCount} />
+      </PageContent>
     </Page>
   )
 }

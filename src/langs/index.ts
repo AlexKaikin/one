@@ -289,7 +289,7 @@ export const translate = {
     aboutMe: 'О себе',
     interests: 'Интересы',
     location: 'Расположение',
-    edit: 'Редактировать',
+    edit: 'Изменить',
     more: 'Больше',
     followers: 'Подписки',
     following: 'Подписан',

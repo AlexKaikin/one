@@ -5,6 +5,11 @@
   box-shadow: 0 0 10px 10px color-mix(in srgb, var(--text), transparent 95%);
   border-radius: var(--radius);
   padding: var(--spacing);
+
+  @media only screen and (max-width: 576px) {
+    font-size: 12px;
+    gap: calc(var(--spacing));
+  }
 }
 
 .action {

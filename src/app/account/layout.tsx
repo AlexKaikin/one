@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Aside } from '@/ui'
 import { AccountMenu } from './_elements'
 
 export const metadata: Metadata = {
@@ -14,9 +13,7 @@ export default function AccountLayout({
 }>) {
   return (
     <>
-      <Aside>
-        <AccountMenu />
-      </Aside>
+      <AccountMenu />
       {children}
     </>
   )

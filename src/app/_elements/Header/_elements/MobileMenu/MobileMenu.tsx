@@ -88,7 +88,7 @@ export function MobileMenu() {
         </MenuItem>
       </SubMenu>
 
-      <SubMenu trigger={t('account')}>
+      <SubMenu trigger={t('account')} href={'/account'}>
         {!data?.user && (
           <>
             <MenuItem>

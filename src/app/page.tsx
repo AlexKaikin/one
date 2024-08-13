@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import imgUrl from '@/assets/images/home/friends-posing-party.jpg'
 import { useTranslation } from '@/store'
 import { Button, Page, PageContent, Stack, Typography } from '@/ui'
+import { Footer } from './_elements'
 import styles from './page.module.css'
 
 export default function Home() {
@@ -14,47 +15,51 @@ export default function Home() {
   const { status } = useSession()
 
   return (
-    <Page>
-      <PageContent className={styles.container}>
-        <div className={styles.col}>
-          <Stack
-            isWide
-            flexDirection="column"
-            justifyContent="center"
-             spacing={2}
-          >
-            <Typography variant="h1">{t('homeTitle')}</Typography>
-            <Typography variant="h5">{t('homeSubTitle')}</Typography>
-            <Typography variant="p">{t('homeDescription')}</Typography>
+    <Stack flexDirection='column'>
+      <Page>
+        <PageContent className={styles.container}>
+          <div className={styles.col}>
+            <Stack
+              isWide
+              flexDirection="column"
+              justifyContent="center"
+              spacing={2}
+            >
+              <Typography variant="h1">{t('homeTitle')}</Typography>
+              <Typography variant="h5">{t('homeSubTitle')}</Typography>
+              <Typography variant="p">{t('homeDescription')}</Typography>
 
-            {status === 'unauthenticated' && (
-              <Stack flexDirection="row" spacing={1}>
-                <Button onClick={() => router.push('/register')}>
-                  {t('registration')}
-                </Button>
+              {status === 'unauthenticated' && (
+                <Stack flexDirection="row" spacing={1}>
+                  <Button onClick={() => router.push('/register')}>
+                    {t('registration')}
+                  </Button>
 
-                <Button
-                  variant="outlined"
-                  onClick={() => router.push('/login')}
-                >
-                  {t('login')}
-                </Button>
-              </Stack>
-            )}
-          </Stack>
+                  <Button
+                    variant="outlined"
+                    onClick={() => router.push('/login')}
+                  >
+                    {t('login')}
+                  </Button>
+                </Stack>
+              )}
+            </Stack>
 
-          <Stack isWide className={styles.imgContainer}>
-            <Image
-              src={imgUrl}
-              className={styles.img}
-              alt="community"
-              sizes="(max-width: 1800px) 50vw"
-              fill
-              priority
-            />
-          </Stack>
-        </div>
-      </PageContent>
-    </Page>
+            <Stack isWide className={styles.imgContainer}>
+              <Image
+                src={imgUrl}
+                className={styles.img}
+                alt="community"
+                sizes="(max-width: 1800px) 50vw"
+                fill
+                priority
+              />
+            </Stack>
+          </div>
+        </PageContent>
+      </Page>
+
+      <Footer />
+    </Stack>
   )
 }
