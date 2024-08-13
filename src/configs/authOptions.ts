@@ -1,7 +1,9 @@
-import bcrypt from 'bcrypt'
-import CredentialsProvider from 'next-auth/providers/credentials'
-import { UserModel } from '@/app/api/users/model'
-import { connectDB } from '@/configs'
+import bcrypt from 'bcrypt';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { UserModel } from '@/app/api/users/model';
+import { connectDB } from '@/configs';
+import { Session } from 'next-auth';
+
 
 export const authOptions = {
   providers: [
@@ -52,7 +54,7 @@ export const authOptions = {
 
       return token
     },
-    async session({ session, token }: { session: any; token: any }) {
+    async session({ session, token }: { session: Session; token: any }) {
       if (token) {
         session.user.lastName = token.lastName
         session.user.firstName = token.firstName

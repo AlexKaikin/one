@@ -1,28 +1,31 @@
 import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
 import { authOptions } from '@/configs'
 import { ApiError } from '@/helpers'
 import { UserService } from '@/services'
 import { UrlParams } from '@/types'
-import { Profile } from './_elements'
+import { User } from '../_elements'
 
-async function getUserById(id: string) {
+async function getUser(id: string) {
   try {
     const urlParams = { searchParams: { populate: 'profile' } } as UrlParams
     const { data } = await UserService.getOne(id, urlParams)
-
     return data
   } catch (error) {
     ApiError(error)
   }
 }
 
-export default async function MyProfilePage() {
+export default async function UserPage(urlParams: UrlParams) {
   const session = await getServerSession(authOptions)
-  const data = await getUserById(session!.user.id)
 
-  if (!data) {
-    return null
+  if (session?.user.id === urlParams.params!.user!) {
+    redirect('/club')
   }
 
-  return <Profile user={data} />
+  const user = await getUser(urlParams.params!.user!)
+
+  if (!user) return null
+
+  return <User user={user} />
 }

@@ -18,7 +18,7 @@ async function getUserById(id: string) {
 
 export default async function ProfileSettingsPage() {
   const session = await getServerSession(authOptions)
-  const data = await getUserById(session?.user?.id)
+  const data = await getUserById(session!.user.id)
 
   if (!data) {
     return null

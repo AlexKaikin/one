@@ -17,7 +17,7 @@ async function getUser(id: string, urlParams: UrlParams) {
 
 export default async function Account(urlParams: UrlParams) {
   const session = await getServerSession(authOptions)
-  const user = await getUser(session.user.id, urlParams)
+  const user = await getUser(session!.user.id, urlParams)
 
   if (!user) {
     return null

@@ -2,7 +2,7 @@ import { ApiError } from '@/helpers'
 import { UserService } from '@/services'
 import { UrlParams } from '@/types'
 import { Page, PageContent, Pagination } from '@/ui'
-import { User } from './_elements'
+import { UserPreview } from './_elements'
 import styles from './page.module.css'
 
 async function getUsers(urlParams: UrlParams) {
@@ -29,10 +29,10 @@ export default async function UsersPage(urlParams: UrlParams) {
       <PageContent>
         <div className={styles.users}>
           {users.map(user => (
-            <User key={user.id} user={user} />
+            <UserPreview key={user.id} user={user} />
           ))}
         </div>
-        
+
         <Pagination totalCount={totalCount} />
       </PageContent>
     </Page>

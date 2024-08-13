@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth';
+import NextAuth, { DefaultSession } from 'next-auth';
 import { Roles } from '@/entities';
 
 
@@ -11,9 +11,6 @@ declare module 'next-auth' {
       email: string
       role: Roles
       avatarUrl: string
-      about: string
-      interests: string[]
-      location: string
-    }
+    } & DefaultSession['user']
   }
 }
