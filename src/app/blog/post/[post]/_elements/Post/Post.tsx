@@ -16,7 +16,7 @@ export function Post({ post, comments }: Props) {
   const { toggleFavorite, favoritesItems } = useFavoritePosts()
   const { t, tAPI } = useTranslation()
   const findFavorite = favoritesItems.find(item => item.id === post.id)
-  const { title, text, category, viewsCount, createdAt, imageUrls } = post
+  const { title, category, viewsCount, createdAt, imageUrls } = post
 
   return (
     <div className={styles.container}>

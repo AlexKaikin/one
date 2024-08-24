@@ -11,7 +11,7 @@ export function Comment({ comment }: { comment: CommentType }) {
     <Stack flexDirection="row" spacing={2} className={styles.comment}>
       <div className={styles.imgContainer}>
         <Image
-          src={user.avatarUrl || defautAvatar}
+          src={user.profile.avatarUrl || defautAvatar}
           width={70}
           height={70}
           alt="avatar"

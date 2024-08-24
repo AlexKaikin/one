@@ -7,10 +7,9 @@ import { User } from '@/types'
 
 const schema = new Schema(
   {
-    lastName: { type: String, require: true },
+    lastName: { type: String, default: '' },
     firstName: { type: String, require: true },
     email: { type: String, require: true },
-    avatarUrl: { type: String, default: '' },
     password: { type: String, require: true },
     profile: { type: SchemaTypes.ObjectId, ref: 'Profile' },
     role: {

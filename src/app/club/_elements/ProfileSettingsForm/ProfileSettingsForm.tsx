@@ -1,12 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 import defaulAvatarUrl from '@/assets/images/user/defaultAvatar.png'
+import { PROFILE_TYPES } from '@/constants'
 import '@/services'
-import { UserService } from '@/services'
+import { ProfileService } from '@/services'
 import { useTranslation } from '@/store'
 import { Profile, User } from '@/types'
 import {
@@ -24,47 +26,50 @@ import {
   FormFile,
 } from '@/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
-import styles from './ProfileSettings.module.css'
+import styles from './ProfileSettingsForm.module.css'
+
+type Props = {
+  defaultValues: Profile
+  onSubmit: (
+    data: Profile & { files: FileList | null; destroyImageUrls: string[] }
+  ) => void
+  loading: boolean
+}
 
 const schema = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  profile: z.object({
-    id: z.string(),
-    location: z.string().optional(),
-    about: z.string().optional(),
-    interests: z.string().optional(),
-  }),
+  companyName: z.string().optional(),
+  location: z.string().optional(),
+  about: z.string().optional(),
+  interests: z.string().optional(),
   avatarUrl: z.string().optional().nullable(),
+  type: z.string(),
+  user: z.object({
+    id: z.string(),
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
+  }),
   files: z
     .instanceof(typeof window === 'undefined' ? File : FileList)
     .optional(),
   destroyImageUrls: z.string().array().optional(),
 })
 
-export function ProfileSettings({ defaultValues }: { defaultValues: User }) {
-  const [loading, setLoading] = useState(false)
+export function ProfileSettingsForm(props: Props) {
+  const { defaultValues, onSubmit, loading } = props
   const [filePreviews, setFilePreviews] = useState<string[]>([
     defaultValues.avatarUrl || defaulAvatarUrl.src,
   ])
 
   const { t } = useTranslation()
-  const { notify } = useNotify()
 
   const formMethods = useForm<
-    User & {
+    Omit<Profile, 'interests'> & {
       files: FileList | null
       destroyImageUrls: string[]
-      profile: Omit<Profile, 'interests'> & { interests: string }
+      interests: string
     }
   >({
-    defaultValues: {
-      ...defaultValues,
-      profile: {
-        ...defaultValues.profile,
-        interests: defaultValues.profile.interests.join(', '),
-      },
-    },
+    defaultValues,
     resolver: zodResolver(schema),
   })
   const { formState, getValues, setValue, reset } = formMethods
@@ -109,33 +114,16 @@ export function ProfileSettings({ defaultValues }: { defaultValues: User }) {
     setValue('avatarUrl', defaulAvatarUrl.src as unknown as string)
   }
 
-  const handleSubmit = async (
-    data: User & { files: FileList | null; destroyImageUrls: string[] }
-  ) => {
-    if (!!data.files?.length) {
-      setLoading(true)
-    }
-
-    try {
-      const { files, destroyImageUrls, ...rest } = data
-
-      await UserService.update(defaultValues.id, data as unknown as User)
-
-      reset(rest)
-      notify({ type: 'success', message: 'Completed successfully' })
-    } catch (error) {
-      notify({ type: 'error', message: 'Update error' })
-    } finally {
-      setLoading(false)
-    }
-  }
+  useEffect(() => {
+    reset(defaultValues)
+  }, [defaultValues, reset])
 
   return (
     <Page>
       <PageContent>
         <Form
           formMethods={formMethods}
-          onSubmit={handleSubmit}
+          onSubmit={onSubmit}
           className={styles.form}
         >
           <div className={styles.avatar}>
@@ -175,18 +163,30 @@ export function ProfileSettings({ defaultValues }: { defaultValues: User }) {
 
           <Stack flexDirection="column" spacing={2} isWide>
             <Stack flexDirection="row" spacing={2}>
-              <FormInput name="firstName" label={t('firstName')} />
-
-              <FormInput name="lastName" label={t('lastName')} />
+              {defaultValues.type === PROFILE_TYPES.USER ? (
+                <>
+                  <FormInput name="user.firstName" label={t('firstName')} />
+                  <FormInput name="user.lastName" label={t('lastName')} />
+                </>
+              ) : (
+                <FormInput name="companyName" label={t('name')} />
+              )}
             </Stack>
 
-            <FormTextarea name="profile.about" label={t('aboutMe')} />
+            <FormTextarea
+              name="about"
+              label={t(
+                defaultValues.type === PROFILE_TYPES.USER
+                  ? 'aboutMe'
+                  : 'description'
+              )}
+            />
 
             <FormInput
-              name="profile.interests"
+              name="interests"
               label={`${t('interests')} (${t('separatedByCommas')})`}
             />
-            <FormInput name="profile.location" label={t('location')} />
+            <FormInput name="location" label={t('location')} />
             {/* <FormCheckbox name="private" label="Hidden profile" /> */}
             <Stack
               flexDirection="row"

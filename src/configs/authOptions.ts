@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
+import { Session } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { UserModel } from '@/app/api/users/model';
 import { connectDB } from '@/configs';
-import { Session } from 'next-auth';
 
 
 export const authOptions = {
@@ -50,6 +50,7 @@ export const authOptions = {
         token.email = user.email
         token.id = user.id
         token.role = user.role
+        token.profile = user.profile
       }
 
       return token
@@ -61,6 +62,7 @@ export const authOptions = {
         session.user.email = token.email
         session.user.id = token.id
         session.user.role = token.role
+        session.user.profile = token.profile
       }
 
       return session

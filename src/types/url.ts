@@ -2,6 +2,8 @@ export type UrlParams = {
   params?: {
     id?: string
     user?: string
+    profile?: string
+    group?: string
     post?: string
     product?: string
     category?: string
@@ -21,5 +23,7 @@ export type UrlParams = {
     post?: string
     status?: string
     user?: string
+    id_nin?: string
+    type?: string
   }
 }

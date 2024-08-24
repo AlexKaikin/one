@@ -58,20 +58,36 @@ export function MenuWithContext({
     if (open && portalRef.current && height && width) {
       const portalRect = portalRef.current.getBoundingClientRect()
 
+      setStyle(prev => ({
+        ...prev,
+        top: portalRect.top + 'px',
+      }))
+
       if (portalRect.right > width) {
-        setStyle(prev => ({ ...prev, right: `10px` }))
+        setStyle(prev => ({
+          ...prev,
+          right: `10px`,
+        }))
       }
 
       if (portalRect.bottom > height) {
-        setStyle(prev => ({ ...prev, bottom: `50px` }))
+        setStyle(prev => ({
+          ...prev,
+          top: 'auto',
+          bottom: `50px`,
+        }))
       }
 
       if (portalRect.left < 0) {
-        setStyle(prev => ({ ...prev, left: `10px` }))
+        setStyle(prev => ({
+          ...prev,
+
+          left: `10px`,
+        }))
       }
 
       if (portalRect.top < 0) {
-        setStyle(prev => ({ ...prev, top: `10px` }))
+        setStyle(prev => ({ ...prev, top: '10px' }))
       }
     }
   }, [height, width, open, setStyle])

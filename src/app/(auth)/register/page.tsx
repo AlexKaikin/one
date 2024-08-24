@@ -23,12 +23,11 @@ import styles from './page.module.css'
 
 function getSchema(t: Function) {
   const required_error = t('required')
+  const message = required_error
 
   const schema = z.object({
-    email: z
-      .string({ required_error })
-      .min(1, { message: required_error })
-      .email('no correct'),
+    email: z.string({ required_error }).min(1, { message }).email('no correct'),
+    firstName: z.string({ required_error }).min(1, { message }),
     password: z
       .string({ required_error })
       .min(8, { message: t('min8') })
@@ -72,6 +71,7 @@ export default function Register() {
               onSubmit={handleSubmit}
             >
               <FormInput name="email" label={t('email')} />
+              <FormInput name="firstName" label={t('firstName')} />
               <FormInput
                 name="password"
                 label={t('password')}

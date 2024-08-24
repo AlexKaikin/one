@@ -1,17 +1,24 @@
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/configs'
+import { PROFILE_TYPES } from '@/constants'
 import { ApiError } from '@/helpers'
-import { UserService } from '@/services'
+import { ProfileService } from '@/services'
 import { UrlParams } from '@/types'
 import { Page, PageContent, Pagination } from '@/ui'
-import { UserPreview } from './_elements'
+import { ProfilePreview } from './_elements'
 import styles from './page.module.css'
 
 async function getUsers(urlParams: UrlParams) {
   try {
-    const response = await UserService.getAll(urlParams)
-    const users = response.data
+    const session = await getServerSession(authOptions)
+    urlParams.searchParams.populate = 'user'
+    urlParams.searchParams.type = PROFILE_TYPES.USER
+    urlParams.searchParams.id_nin = session!.user.profile
+    const response = await ProfileService.getAll(urlParams)
+    const profiles = response.data
     const totalCount = response.headers['x-total-count']
 
-    return { users, totalCount }
+    return { profiles, totalCount }
   } catch (error) {
     ApiError(error)
   }
@@ -22,14 +29,14 @@ export default async function UsersPage(urlParams: UrlParams) {
 
   if (!data) return null
 
-  const { users, totalCount } = data
+  const { profiles, totalCount } = data
 
   return (
     <Page>
       <PageContent>
         <div className={styles.users}>
-          {users.map(user => (
-            <UserPreview key={user.id} user={user} />
+          {profiles.map(profile => (
+            <ProfilePreview key={profile.id} profile={profile} />
           ))}
         </div>
 

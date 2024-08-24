@@ -4,24 +4,21 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import defaultAvatar from '@/assets/images/user/defaultAvatar.png'
+import { PROFILE_TYPES } from '@/constants'
 import { useTranslation } from '@/store'
-import { User } from '@/types'
+import { Profile as ProfileType } from '@/types'
 import { Button, Icon, Page, PageContent, Spoiler, Stack } from '@/ui'
 import { CreatePost } from '../CreatePost/CreatePost'
 import { Following } from '../Following/Following'
 import styles from './Profile.module.css'
 
-export function Profile({ user }: { user: User }) {
+export function Profile({ profile }: { profile: ProfileType }) {
   const { t } = useTranslation()
   const router = useRouter()
   const { data } = useSession()
-  const isMyProfile = user.id === data?.user.id
-  const isFollower = user?.profile.followers?.find(
-    ({ id }) => id === data?.user.id
-  )
-  const isFollowing = user?.profile.following?.find(
-    ({ id }) => id === data?.user.id
-  )
+  const isMyProfile = profile.user.id === data?.user.id
+  const isFollower = profile.followers?.find(({ id }) => id === data?.user.id)
+  const isFollowing = profile.following?.find(({ id }) => id === data?.user.id)
 
   return (
     <Page>
@@ -34,7 +31,7 @@ export function Profile({ user }: { user: User }) {
                   <Image
                     fill
                     sizes="(max-width: 1800px) 50vw"
-                    src={user.avatarUrl || defaultAvatar}
+                    src={profile.avatarUrl || defaultAvatar}
                     alt="avatar"
                     priority
                     className={styles.img}
@@ -43,11 +40,18 @@ export function Profile({ user }: { user: User }) {
 
                 <div className={styles.info}>
                   <div className={styles.nicname}>
-                    {data?.user.firstName} {data?.user.lastName}
+                    {profile.type === PROFILE_TYPES.USER ? (
+                      <>
+                        {' '}
+                        {profile.user.firstName} {profile.user.lastName}
+                      </>
+                    ) : (
+                      profile.companyName
+                    )}
                   </div>
 
                   <div className={styles.actions}>
-                    {!isMyProfile && user && isFollower && (
+                    {!isMyProfile && profile && isFollower && (
                       <Button
                         variant="outlined"
                         size="small"
@@ -57,7 +61,7 @@ export function Profile({ user }: { user: User }) {
                       </Button>
                     )}
 
-                    {!isMyProfile && user && !isFollower && (
+                    {!isMyProfile && profile && !isFollower && (
                       <Button
                         size="small"
                         // onClick={() => follow(user!)}
@@ -71,7 +75,7 @@ export function Profile({ user }: { user: User }) {
                         color="primary"
                         size="small"
                         onClick={() =>
-                          router.push(`/club/messenger/${user?.id}`)
+                          router.push(`/club/messenger/${profile.id}`)
                         }
                       >
                         <Icon name="message" width={14} height={14} />
@@ -90,7 +94,9 @@ export function Profile({ user }: { user: User }) {
                           height={16}
                         />
                       }
-                      onClick={() => router.push('/club/profile-settings')}
+                      onClick={() =>
+                        router.push(`/club/profile-settings/${profile.id}`)
+                      }
                     >
                       {t('edit')}
                     </Button>
@@ -100,36 +106,36 @@ export function Profile({ user }: { user: User }) {
               <div className={styles.about}>
                 <Spoiler
                   hideShadow
-                  maxHeight={50}
+                  maxHeight={55}
                   hideLabel={t('hide')}
                   showLabel={t('more')}
                   labelSize="small"
                   color="secondary"
                 >
                   <div className={styles.more}>
-                    {!!user?.profile.about?.length && (
+                    {!!profile.about?.length && (
                       <Stack flexDirection="column" spacing={1}>
                         <span className={styles.infoTitle}>{t('aboutMe')}</span>
 
                         <div>
-                          {user.profile.about.split('\n').map((item, index) => (
+                          {profile.about.split('\n').map((item, index) => (
                             <p key={index}>{item}</p>
                           ))}
                         </div>
                       </Stack>
                     )}
 
-                    {!!user?.profile.interests?.length && (
+                    {!!profile.interests?.length && (
                       <Stack flexDirection="column" spacing={1}>
                         <span className={styles.infoTitle}>
                           {t('interests')}
                         </span>
 
-                        <div>{user.profile.interests.join(', ')}</div>
+                        <div>{profile.interests}</div>
                       </Stack>
                     )}
 
-                    {!!user?.profile.location?.length && (
+                    {!!profile.location?.length && (
                       <Stack flexDirection="column" spacing={1}>
                         <span className={styles.infoTitle}>
                           {t('location')}
@@ -137,18 +143,18 @@ export function Profile({ user }: { user: User }) {
 
                         <Stack alignItems="center" spacing={1}>
                           <Icon name="mapPin" width={16} height={16} />{' '}
-                          {user.profile.location}
+                          {profile.location}
                         </Stack>
                       </Stack>
                     )}
                   </div>
                 </Spoiler>
 
-                <Following user={user} />
+                {/* <Following user={user} /> */}
               </div>
             </div>
 
-            <CreatePost />
+          <CreatePost profile={profile} />
           </div>
         </Stack>
       </PageContent>

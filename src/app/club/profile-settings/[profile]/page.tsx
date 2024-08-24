@@ -1,11 +1,12 @@
 import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
 import { authOptions } from '@/configs'
 import { ApiError } from '@/helpers'
 import { ProfileService } from '@/services'
 import { UrlParams } from '@/types'
 import { ProfileSettings } from './_elements/ProfileSettings/ProfileSettings'
 
-async function getUserById(id: string) {
+async function getProfile(id: string) {
   try {
     const urlParams = { searchParams: { populate: 'user' } } as UrlParams
     const { data } = await ProfileService.getOne(id, urlParams)
@@ -16,13 +17,16 @@ async function getUserById(id: string) {
   }
 }
 
-export default async function ProfileSettingsPage() {
+export default async function ProfileSettingsPage(urlParams: UrlParams) {
   const session = await getServerSession(authOptions)
-  const data = await getUserById(session!.user.profile)
 
-  if (!data) {
-    return null
+  if (session?.user.profile === urlParams.params!.profile!) {
+    redirect('/club/profile-settings')
   }
 
-  return <ProfileSettings defaultValues={data} />
+  const profile = await getProfile(urlParams.params!.profile!)
+
+  if (!profile) return null
+
+  return <ProfileSettings defaultValues={profile} />
 }

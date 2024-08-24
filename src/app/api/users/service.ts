@@ -1,11 +1,10 @@
-import bcrypt from 'bcrypt';
-import { NextRequest } from 'next/server';
-import { ROLES } from '@/constants';
-import { deleteFiles, uploadFiles } from '@/helpers';
-import { Profile, User } from '@/types';
-import { ProfileModel } from '../profiles/model';
-import { UserModel } from './model';
-
+import bcrypt from 'bcrypt'
+import { NextRequest } from 'next/server'
+import { ROLES } from '@/constants'
+import { deleteFiles, ensureSpaceAfterComma, uploadFiles } from '@/helpers'
+import { Profile, User } from '@/types'
+import { ProfileModel } from '../profiles/model'
+import { UserModel } from './model'
 
 const adminEmails = process.env.NEXT_PUBLIC_ADMIN_EMAILS?.split(',')
 
@@ -15,6 +14,7 @@ export const UserService = {
 
     const newUser = {
       email: data.get('email'),
+      firstName: data.get('firstName'),
       password: data.get('password'),
     }
 
@@ -26,20 +26,23 @@ export const UserService = {
 
     const password = data.get('password') as string
     const hashPassword = await bcrypt.hash(password, 3)
-    const profile = (await ProfileModel.create({})) as unknown as Profile & {
-      _id: string
-    }
 
-    await UserModel.create({
+    const user = await UserModel.create({
       ...newUser,
       password: hashPassword,
       role: getRole(newUser.email as string),
-      profile: profile._id,
     })
+
+    const profile = await ProfileModel.create({ user: user._id })
+
+    user.profile = profile._id // предполагаем, что поле profile существует в UserModel
+    await user.save()
   },
   getAll: async (request: NextRequest) => {
     const { query, fields, pagination } = await getFindParams(request)
-    const users = (await UserModel.find(query, fields, pagination)) as User[]
+    const users = (await UserModel.find(query, fields, pagination).populate(
+      getPopulate(request)
+    )) as User[]
     const total = await UserModel.countDocuments(query)
 
     return { users, total }
@@ -79,18 +82,19 @@ export const UserService = {
     const updateProfile: any = {}
 
     if (email) updatedUser.email = email
-    if (lastName) updatedUser.lastName = lastName
+    updatedUser.lastName = lastName
     if (firstName) updatedUser.firstName = firstName
     if (status) updatedUser.status = status
     if (role) updatedUser.role = role
-    if (avatarUrls.length) updatedUser.avatarUrl = avatarUrls[0]
 
+    if (avatarUrls.length) updateProfile.avatarUrl = avatarUrls[0]
     if (location) updateProfile.location = location
     if (about) updateProfile.about = about
-    if (interests) updateProfile.interests = (interests as string).split(',').map(item => item.trim())
+    if (interests)
+      updateProfile.interests = ensureSpaceAfterComma(interests as string)
 
     if (destroyImageUrls.length && !files.length) {
-      updatedUser.avatarUrl = null
+      updateProfile.avatarUrl = null
     }
 
     await ProfileModel.findByIdAndUpdate(profileId, updateProfile)
@@ -115,8 +119,11 @@ async function getFindParams(request: NextRequest) {
   const sort = searchParams.get('_sort') || 'createdAt'
   const order = searchParams.get('_order') || 'desc'
   const sortParams = { [sort]: order }
+  const id_nin = searchParams.get('id_nin')
 
-  const query: any = {}
+  const query: any = {
+    _id: { $nin: id_nin?.split(' ') || [] },
+  }
 
   const fields = ''
   const pagination = { skip, limit, sort: sortParams }

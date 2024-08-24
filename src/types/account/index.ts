@@ -1,10 +1,9 @@
-import { ROLES, USER_STATUSES } from '@/constants'
+import { PROFILE_TYPES, ROLES, USER_STATUSES } from '@/constants'
 
 export type User = {
   id: string
   lastName: string
   firstName: string
-  avatarUrl: string
   email: string
   password: string
   role: ROLES
@@ -28,11 +27,20 @@ export type UserResponse =
 
 export type Profile = {
   id: string
+  companyName: string
+  type: PROFILE_TYPES
+  avatarUrl: string
   following: User[]
   followers: User[]
   about: string
-  interests: string[]
+  interests: string
   location: string
+  user: User
   createdAt: string
   updatedAt: string
 }
+
+export type ProfileRegistration = Omit<
+  Profile,
+  'id' | 'createdAt' | 'updatedAt'
+>

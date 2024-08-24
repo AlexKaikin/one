@@ -1,24 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/configs';
-import { UserService } from '../service';
+import { ProfileService } from '../service';
 
 
 type Params = {
-  user: string
+  profile: string
 }
 
 export async function GET(request: NextRequest, context: { params: Params }) {
   try {
     await connectDB()
 
-    const id = context.params.user
-    const user = await UserService.getOne(id, request)
+    const id = context.params.profile
+    const profile = await ProfileService.getOne(id, request)
     
-    if (!user) {
+    if (!profile) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 })
     }
 
-    return NextResponse.json(user)
+    return NextResponse.json(profile)
   } catch (error) {
     return NextResponse.json(
       { message: 'Something went wrong' },
@@ -31,14 +31,14 @@ export async function PATCH(request: NextRequest, context: { params: Params }) {
   try {
     await connectDB()
 
-    const id = context.params.user
-    const user = await UserService.update(id, request)
+    const id = context.params.profile
+    const profile = await ProfileService.update(id, request)
 
-    if (!user) {
+    if (!profile) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 })
     }
 
-    return NextResponse.json(user)
+    return NextResponse.json(profile)
   } catch (error) {
     return NextResponse.json(
       { message: 'Something went wrong' },
@@ -50,14 +50,14 @@ export async function PATCH(request: NextRequest, context: { params: Params }) {
 export async function DELETE(_: Request, context: { params: Params }) {
   try {
     await connectDB()
-    const id = context.params.user
-    const user = await UserService.getOne(id)
+    const id = context.params.profile
+    const profile = await ProfileService.getOne(id)
 
-    if (!user) {
+    if (!profile) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 })
     }
 
-    return NextResponse.json(user)
+    return NextResponse.json(profile)
   } catch (error) {
     return NextResponse.json(
       { message: 'Something went wrong' },

@@ -17,6 +17,11 @@ export enum USER_STATUSES {
   BLOCKED = 'blocked',
 }
 
+export enum PROFILE_TYPES {
+  GROUP = 'group',
+  USER = 'user',
+}
+
 export enum MODERATION_STATUSES {
   MODERATION = 'moderation',
   APPROVED = 'approved',
@@ -55,6 +60,7 @@ export enum ROUTES {
 
   CLUB = 'club',
   MESSAGES = 'messages',
+  PROFILES = 'profiles',
 
   ADMIN = 'admin',
 }

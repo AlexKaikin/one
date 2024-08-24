@@ -1,2 +1,2 @@
 export { User } from './User/User'
-export { UserPreview } from './UserPreview/UserPreview'
+export { ProfilePreview } from './ProfilePreview/ProfilePreview'

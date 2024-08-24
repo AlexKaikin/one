@@ -2,14 +2,15 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { authOptions } from '@/configs'
 import { ApiError } from '@/helpers'
-import { UserService } from '@/services'
+import { ProfileService } from '@/services'
 import { UrlParams } from '@/types'
 import { User } from '../_elements'
 
 async function getUser(id: string) {
   try {
-    const urlParams = { searchParams: { populate: 'profile' } } as UrlParams
-    const { data } = await UserService.getOne(id, urlParams)
+    const urlParams = { searchParams: { populate: 'user' } } as UrlParams
+    const { data } = await ProfileService.getOne(id, urlParams)
+
     return data
   } catch (error) {
     ApiError(error)
@@ -19,13 +20,13 @@ async function getUser(id: string) {
 export default async function UserPage(urlParams: UrlParams) {
   const session = await getServerSession(authOptions)
 
-  if (session?.user.id === urlParams.params!.user!) {
+  if (session?.user.profile === urlParams.params!.user!) {
     redirect('/club')
   }
 
-  const user = await getUser(urlParams.params!.user!)
+  const profile = await getUser(urlParams.params!.user!)
 
-  if (!user) return null
+  if (!profile) return null
 
-  return <User user={user} />
+  return <User user={profile} />
 }

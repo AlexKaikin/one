@@ -10,7 +10,7 @@ declare module 'next-auth' {
       firstName: string
       email: string
       role: Roles
-      avatarUrl: string
+      profile: Profile
     } & DefaultSession['user']
   }
 }

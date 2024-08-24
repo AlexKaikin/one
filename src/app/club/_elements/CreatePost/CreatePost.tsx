@@ -1,8 +1,10 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
+import { useSession } from 'next-auth/react'
 import { z } from 'zod'
 import { useTranslation } from '@/store'
+import { Profile } from '@/types'
 import { Form, FormTextarea, Icon, IconButton, useNotify } from '@/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import styles from './CreatePost.module.css'
@@ -13,7 +15,9 @@ const schema = z.object({
     .min(1, { message: 'Enter your post' }),
 })
 
-export function CreatePost() {
+export function CreatePost({ profile }: { profile: Profile }) {
+  const { data } = useSession()
+  const isMyProfile = profile.user.id === data?.user.id
   const { t } = useTranslation()
   const { notify } = useNotify()
 
@@ -30,6 +34,10 @@ export function CreatePost() {
     } catch (error) {
       notify({ type: 'error', message: t('globalError') })
     }
+  }
+
+  if (!isMyProfile) {
+    return null
   }
 
   return (
