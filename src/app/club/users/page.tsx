@@ -5,7 +5,7 @@ import { ApiError } from '@/helpers'
 import { ProfileService } from '@/services'
 import { UrlParams } from '@/types'
 import { Page, PageContent, Pagination } from '@/ui'
-import { ProfilePreview } from './_elements'
+import { ProfilePreview } from '../_elements'
 import styles from './page.module.css'
 
 async function getUsers(urlParams: UrlParams) {

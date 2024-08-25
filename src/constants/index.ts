@@ -61,6 +61,7 @@ export enum ROUTES {
   CLUB = 'club',
   MESSAGES = 'messages',
   PROFILES = 'profiles',
+  NOTES = 'notes',
 
   ADMIN = 'admin',
 }

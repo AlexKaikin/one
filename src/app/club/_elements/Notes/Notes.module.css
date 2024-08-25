@@ -1,0 +1,101 @@
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 2);
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 2);
+  position: relative;
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+  background-color: color-mix(in srgb, var(--text), transparent 95%);
+  border-radius: var(--radius);
+  padding: var(--spacing);
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing);
+}
+
+.headerInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) / 2);
+}
+
+.name {
+  color: var(--text);
+}
+
+.date {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing);
+  opacity: 0.5;
+}
+
+.delete {
+  opacity: 0.5;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+  width: 100%;
+}
+
+.avatar {
+  flex: 0 0 50px;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+    transform: translateY(0px);
+  }
+}
+
+.time {
+  display: flex;
+  justify-content: flex-start;
+  opacity: 0.5;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing);
+}
+
+.like {
+  padding: var(--spacing);
+  border-radius: var(--radius);
+}

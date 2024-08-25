@@ -23,6 +23,7 @@ export type UrlParams = {
     post?: string
     status?: string
     user?: string
+    profile?: string
     id_nin?: string
     type?: string
   }

@@ -18,6 +18,8 @@ import IconFilter from '@/assets/svg/filter.svg'
 import IconFlag from '@/assets/svg/flag.svg'
 import IconFolder from '@/assets/svg/folder.svg'
 import IconGalaxy from '@/assets/svg/galaxy.svg'
+import IconHandThumbsUp from '@/assets/svg/handThumbsUp.svg'
+import IconHandThumbsUpFill from '@/assets/svg/handThumbsUpFill.svg'
 import IconHeart from '@/assets/svg/heart.svg'
 import IconList from '@/assets/svg/list.svg'
 import IconListCheck from '@/assets/svg/listCheck.svg'
@@ -80,6 +82,8 @@ export type IconType =
   | 'filePen'
   | 'send'
   | 'upload'
+  | 'handThumbsUp'
+  | 'handThumbsUpFill'
 
 export function Icon({ name, ...rest }: Props) {
   const icons = {
@@ -121,6 +125,8 @@ export function Icon({ name, ...rest }: Props) {
     filePen: <IconFilePen {...rest} />,
     send: <IconSend {...rest} />,
     upload: <IconUpload {...rest} />,
+    handThumbsUp: <IconHandThumbsUp {...rest} />,
+    handThumbsUpFill: <IconHandThumbsUpFill {...rest} />,
   }
   const icon = icons[name]
   return icon

@@ -1,11 +1,11 @@
 import { PROFILE_TYPES } from '@/constants'
 import { ApiError } from '@/helpers'
-import { ProfileService, UserService } from '@/services'
+import { ProfileService } from '@/services'
 import { UrlParams } from '@/types'
 import { Page, PageContent, PageHeader, Pagination } from '@/ui'
-import { ProfilePreview } from '../users/_elements'
 import styles from '../users/page.module.css'
 import { AddGroupButton } from './_elements/AddGroupButton/AddGroupButton'
+import { ProfilePreview } from '../_elements'
 
 async function getUsers(urlParams: UrlParams) {
   try {

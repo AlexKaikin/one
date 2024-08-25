@@ -6,13 +6,19 @@ import { useRouter } from 'next/navigation'
 import defaultAvatar from '@/assets/images/user/defaultAvatar.png'
 import { PROFILE_TYPES } from '@/constants'
 import { useTranslation } from '@/store'
-import { Profile as ProfileType } from '@/types'
+import { Note, Profile as ProfileType } from '@/types'
 import { Button, Icon, Page, PageContent, Spoiler, Stack } from '@/ui'
-import { CreatePost } from '../CreatePost/CreatePost'
+import { CreateNote } from '../CreateNote/CreateNote'
 import { Following } from '../Following/Following'
 import styles from './Profile.module.css'
+import { Notes } from '../Notes/Notes'
 
-export function Profile({ profile }: { profile: ProfileType }) {
+type Props = {
+  profile: ProfileType
+  noteValues: { notes: Note[]; totalCount: string }
+}
+
+export function Profile({ profile, noteValues }: Props) {
   const { t } = useTranslation()
   const router = useRouter()
   const { data } = useSession()
@@ -154,7 +160,8 @@ export function Profile({ profile }: { profile: ProfileType }) {
               </div>
             </div>
 
-          <CreatePost profile={profile} />
+            <CreateNote profile={profile} />
+            <Notes notes={noteValues.notes} />
           </div>
         </Stack>
       </PageContent>

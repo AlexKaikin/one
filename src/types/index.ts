@@ -15,3 +15,4 @@ export type {
   CreateReview,
 } from './shop'
 export type { Post, Comment, CreateComment } from './blog'
+export type { Note, CreateNote } from './club'

@@ -14,7 +14,7 @@ const schema = new Schema(
       require: true,
     },
     companyName: { type: String, default: '' },
-    avatarUrl: { type: String, default: '' },
+    avatarUrl: { type: String },
     location: { type: String, default: '' },
     about: { type: String, default: '' },
     interests: { type: String, default: '' },
