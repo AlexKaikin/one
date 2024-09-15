@@ -1,9 +1,8 @@
-import { ApiError } from '@/helpers';
-import { PostService, CommentService } from '@/services';
-import { UrlParams } from '@/types';
-import { Page, PageContent } from '@/ui';
-import { Post } from './_elements';
-
+import { ApiError } from '@/helpers'
+import { PostService, CommentService } from '@/services'
+import { UrlParams } from '@/types'
+import { Page, PageContent } from '@/ui'
+import { Post } from './_elements'
 
 async function getPost(id: string) {
   try {
