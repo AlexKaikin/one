@@ -18,7 +18,7 @@ import styles from './Message.module.css'
 
 export const Message = memo(function Message({ index }: { index: number }) {
   const { data: session } = useSession()
-  const { messages, setChats, setLastMessageEntry, setFirstUnreadMessageEntry, activeChat } = useContext(
+  const { messages, setLastMessageEntry, setFirstUnreadMessageEntry } = useContext(
     MessengerContext
   ) as MessengerContextType
   const {
@@ -26,7 +26,6 @@ export const Message = memo(function Message({ index }: { index: number }) {
     firstUnreadMessageId,
     nextMessageId,
     prevMessageId,
-    messagesRead,
     setPrevMessageId,
     setNextMessageId,
     setMessagesRead,
@@ -34,33 +33,10 @@ export const Message = memo(function Message({ index }: { index: number }) {
   const isLastMessage = index === messages.length - 1
   const { ref, inView, entry } = useInView({ threshold: 0.1, triggerOnce: !isLastMessage })
   const { id, text, createdAt, sender, read } = messages[index]
-  const { id: senderId, lastName, firstName } = sender
-
-  const isMyMessage = senderId === session?.user.id
+  const { firstName } = sender
   const isFirstUnreadMessage = firstUnreadMessageId === messages[index].id
-
   const isMessageRead = !read.includes(session?.user.id as unknown as User) && inView && isInitialized
-  const isLastMessageUnread =
-    isLastMessage && !isMyMessage && inView && !read.includes(session?.user.id as unknown as User)
   const last10messageIds = messages.slice(-10).map(({ id }) => id)
-
-  // useEffect(() => {
-  //   if (isLastMessageUnread && activeChat?.lastMessage?.id === messages[index].id) {
-  //     const checker = (value: Chat) => {
-  //       return {
-  //         ...value.lastMessage,
-  //         read: value.id === activeChat.id || value.lastMessage.read,
-  //       }
-  //     }
-
-  //     // setChats(prev =>
-  //     //   prev.map(chat => ({
-  //     //     ...chat,
-  //     //     lastMessage: chat.lastMessage ? checker(chat) : chat.lastMessage,
-  //     //   }))
-  //     // )
-  //   }
-  // }, [activeChat?.id, activeChat?.lastMessage?.id, index, isLastMessageUnread, messages, setChats])
 
   useEffect(() => {
     if (isMessageRead) {

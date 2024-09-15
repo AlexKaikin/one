@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import Pusher from 'pusher-js'
 import { PUSHER_APP_CLUSTER, PUSHER_APP_KEY } from '@/constants'
@@ -51,7 +51,6 @@ function getUpdatedChatsByMessage(chats: Chat[], message: Message): Chat[] {
 
   const updatedChats = chats?.map(chat => (chat.id === chatIdOfMessage ? { ...chat, ...updatedMessage } : chat))
   const sortedChats = sortChats(updatedChats as Chat[])
-  console.log('sortedChats', sortedChats)
 
   return sortedChats
 }

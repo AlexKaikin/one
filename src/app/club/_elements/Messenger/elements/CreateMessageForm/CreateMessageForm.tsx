@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { toFormData } from 'axios'
 import { useSearchParams } from 'next/navigation'
@@ -17,29 +17,26 @@ const schema = z.object({
   sender: z.string(),
   chat: z.string(),
   read: z.string().array(),
-  text: z
-    .string({ required_error: 'Enter your post' })
-    .min(1, { message: 'Enter your post' }),
+  text: z.string({ required_error: 'Enter your post' }).min(1, { message: 'Enter your post' }),
 })
 
 export function CreateMessageForm({ userId }: { userId: string }) {
-  const { setIsScrollToLastMessage } = useContext(
-    TriggersContext
-  ) as TriggersContextType
+  const { setIsScrollToLastMessage } = useContext(TriggersContext) as TriggersContextType
   const searchParams = useSearchParams()
   const { t } = useTranslation()
   const { notify } = useNotify()
 
-  const formMethods = useForm<any>({
-    defaultValues: {
+  const defaultValues = useMemo(
+    () => ({
       text: '',
       sender: userId,
       chat: searchParams.get('chat'),
       read: [userId],
-    },
-    resolver: zodResolver(schema),
-  })
+    }),
+    [searchParams, userId]
+  )
 
+  const formMethods = useForm<any>({ defaultValues, resolver: zodResolver(schema) })
   const { reset, watch } = formMethods
 
   const handleSubmit = async (data: any) => {
@@ -60,14 +57,14 @@ export function CreateMessageForm({ userId }: { userId: string }) {
     }
   }
 
+  useEffect(() => {
+    reset(defaultValues)
+  }, [defaultValues, reset])
+
   return (
     <Form id="messageForm" formMethods={formMethods} onSubmit={handleSubmit}>
       <div className={styles.field}>
-        <FormTextarea
-          name="text"
-          placeholder={t('new') + '...'}
-          onKeyDown={onKeyDown}
-        />
+        <FormTextarea name="text" placeholder={t('new') + '...'} onKeyDown={onKeyDown} />
 
         {!!watch('text').length && (
           <div className={styles.control}>

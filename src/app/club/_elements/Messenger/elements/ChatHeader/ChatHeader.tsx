@@ -27,16 +27,27 @@ export function ChatHeader() {
   const [isFetching, setIsFetching] = useState(true)
 
   useEffect(() => {
-    if (!session || !chatId) {
-      return
-    }
-
     setNextMessageId(null)
     setPrevMessageId(null)
     setIsLoadingChat(isFetching)
     setLastMessageEntry(undefined)
     setIsAutoScroll(true)
+  }, [
+    isFetching,
+    setIsAutoScroll,
+    setIsLoadingChat,
+    setLastMessageEntry,
+    setMessages,
+    setNextMessageId,
+    setPrevMessageId,
+  ])
 
+  useEffect(() => {
+    if (!session || !chatId) {
+      return
+    }
+    setIsFetching(true)
+    
     const getChat = async () => {
       const response = await ChatService.getOne(chatId, {
         searchParams: {},
@@ -65,21 +76,7 @@ export function ChatHeader() {
     }
 
     getChat()
-  }, [
-    chatId,
-    isFetching,
-    session,
-    setActiveChat,
-    setActiveUser,
-    setFirstUnreadMessageId,
-    setIsAutoScroll,
-    setIsFetchedFirstMessages,
-    setIsLoadingChat,
-    setLastMessageEntry,
-    setMessages,
-    setNextMessageId,
-    setPrevMessageId,
-  ])
+  }, [chatId, session, setActiveChat, setActiveUser, setFirstUnreadMessageId, setIsFetchedFirstMessages, setMessages])
 
   if (isFetching || !activeUser) {
     return (
