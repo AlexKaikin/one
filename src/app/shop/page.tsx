@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { ApiError } from '@/helpers'
 import { ProductService } from '@/services'
 import { UrlParams } from '@/types'

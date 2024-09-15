@@ -1,9 +1,5 @@
-import { Page, PageContent } from '@/ui'
+import { Messenger } from '../_elements'
 
 export default function MessengerPage() {
-  return (
-    <Page>
-      <PageContent>Coming soon</PageContent>
-    </Page>
-  )
+  return <Messenger />
 }

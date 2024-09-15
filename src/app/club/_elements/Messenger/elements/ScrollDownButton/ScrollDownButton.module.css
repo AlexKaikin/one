@@ -1,0 +1,22 @@
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.button {
+  position: absolute;
+  right: calc(var(--spacing) * 1);
+  top: calc(var(--spacing) * -5);
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

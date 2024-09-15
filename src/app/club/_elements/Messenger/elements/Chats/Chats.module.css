@@ -1,0 +1,79 @@
+.chats {
+  width: 300px;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing);
+}
+
+.user {
+  display: flex;
+  padding: calc(var(--spacing) * 2);
+  border-radius: var(--radius);
+  color: initial;
+  gap: var(--spacing);
+}
+
+.active {
+  background-color: color-mix(in srgb, var(--text), transparent 90%);
+}
+
+.infoMessage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  color: color-mix(in srgb, var(--text), transparent 50%);
+  gap: var(--spacing);
+}
+
+.fragmentMessage {
+  max-width: 135px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.unreadMessage {
+  width: var(--spacing);
+  height: var(--spacing);
+  background-color: var(--primary);
+  border-radius: 50%;
+}
+
+.avatar {
+  flex: 0 0 50px;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  gap: calc(var(--spacing) / 2);
+  color: var(--text);
+}
+
+.infoName {
+  display: flex;
+  justify-content: space-between;
+}
+
+.time {
+  color: color-mix(in srgb, var(--text), transparent 50%);
+}

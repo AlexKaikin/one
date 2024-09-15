@@ -5,13 +5,14 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import defaultAvatar from '@/assets/images/user/defaultAvatar.png'
 import { PROFILE_TYPES } from '@/constants'
+import { ChatService } from '@/services'
 import { useTranslation } from '@/store'
 import { Note, Profile as ProfileType } from '@/types'
 import { Button, Icon, Page, PageContent, Spoiler, Stack } from '@/ui'
 import { CreateNote } from '../CreateNote/CreateNote'
 import { Following } from '../Following/Following'
-import styles from './Profile.module.css'
 import { Notes } from '../Notes/Notes'
+import styles from './Profile.module.css'
 
 type Props = {
   profile: ProfileType
@@ -25,6 +26,14 @@ export function Profile({ profile, noteValues }: Props) {
   const isMyProfile = profile.user.id === data?.user.id
   const isFollower = profile.followers?.find(({ id }) => id === data?.user.id)
   const isFollowing = profile.following?.find(({ id }) => id === data?.user.id)
+
+  const sendMessage = async () => {
+    try {
+      const response = await ChatService.getOneByUserId(profile.user.id)
+
+      router.push(`/club/messenger?chat=${response.data.id}`)
+    } catch (error) {}
+  }
 
   return (
     <Page>
@@ -76,15 +85,13 @@ export function Profile({ profile, noteValues }: Props) {
                       </Button>
                     )}
 
-                    {!isMyProfile && isFollower && isFollowing && (
+                    {!isMyProfile && (
                       <Button
                         color="primary"
                         size="small"
-                        onClick={() =>
-                          router.push(`/club/messenger/${profile.id}`)
-                        }
+                        onClick={sendMessage}
                       >
-                        <Icon name="message" width={14} height={14} />
+                        <Icon name="message" width={18} height={18} />
                       </Button>
                     )}
                   </div>

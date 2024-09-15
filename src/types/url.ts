@@ -12,8 +12,8 @@ export type UrlParams = {
     comment?: string
   }
   searchParams: {
-    _page?: string
-    _limit?: string
+    page?: string
+    limit?: string
     category?: string
     q?: string
     by?: string
@@ -24,6 +24,9 @@ export type UrlParams = {
     status?: string
     user?: string
     profile?: string
+    chat?: string
+    prev?: string
+    next?: string
     id_nin?: string
     type?: string
   }

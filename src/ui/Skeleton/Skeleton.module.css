@@ -1,0 +1,16 @@
+.skeleton {
+  height: 10px;
+  width: 10px;
+  animation: skeleton-fade 1500ms linear infinite;
+}
+
+@keyframes skeleton-fade {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

@@ -43,14 +43,14 @@
 }
 
 .reviews {
-  opacity: 0.5;
+  color: color-mix(in srgb, var(--text), transparent 50%);
 }
 
 .meta {
   display: flex;
   flex-wrap: wrap;
   gap: calc(var(--spacing) * 2);
-  opacity: 0.5;
+  color: color-mix(in srgb, var(--text), transparent 50%);
 
   @media only screen and (max-width: 576px) {
     gap: var(--spacing);

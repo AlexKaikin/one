@@ -27,7 +27,7 @@
   height: 16px;
   background-color: color-mix(in srgb, var(--bg) 90%, var(--text) 10%);
   border: 2px solid color-mix(in srgb, var(--bg) 90%, var(--text) 10%);
-  border-radius: var(--radius);
+  border-radius: calc(var(--radius) / 2);
 }
 
 .checkbox:checked::before {
@@ -40,7 +40,7 @@
   height: 16px;
   background-color: var(--primary);
   border: 2px solid var(--primary);
-  border-radius: var(--radius);
+  border-radius: calc(var(--radius) / 2);
 }
 
 .checkbox:checked::after {

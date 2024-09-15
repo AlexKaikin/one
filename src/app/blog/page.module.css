@@ -16,4 +16,12 @@
   padding: var(--spacing);
 }
 
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-gap: 20px;
 
+  @media only screen and (max-width: 576px) {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}

@@ -1,0 +1,17 @@
+.messenger {
+  display: flex;
+  flex-direction: row;
+  gap: calc(var(--spacing) * 2);
+  width: 100%;
+  height: calc(100vh - 88px);
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing);
+  height: 100%;
+  width: 100%;
+}

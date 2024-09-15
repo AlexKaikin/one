@@ -29,7 +29,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  opacity: 0.5;
+  color: color-mix(in srgb, var(--text), transparent 50%);
 
   @media only screen and (max-width: 576px) {
     gap: 10px;

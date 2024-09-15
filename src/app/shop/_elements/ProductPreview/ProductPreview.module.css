@@ -23,7 +23,7 @@
 
 .price {
   white-space: nowrap;
-  opacity: 0.5;
+  color: color-mix(in srgb, var(--text), transparent 50%);
 }
 
 .info {

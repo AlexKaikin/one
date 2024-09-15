@@ -1,3 +1,17 @@
+if (
+  !process.env.NEXT_PUBLIC_PUSHER_APP_ID ||
+  !process.env.NEXT_PUBLIC_PUSHER_KEY ||
+  !process.env.NEXT_PUBLIC_PUSHER_SECRET ||
+  !process.env.NEXT_PUBLIC_PUSHER_CLUSTER
+) {
+  throw new Error('Переменные окружения не найдены.')
+}
+
+export const PUSHER_APP_ID = process.env.NEXT_PUBLIC_PUSHER_APP_ID
+export const PUSHER_APP_KEY = process.env.NEXT_PUBLIC_PUSHER_KEY
+export const PUSHER_APP_SECRET = process.env.NEXT_PUBLIC_PUSHER_SECRET
+export const PUSHER_APP_CLUSTER = process.env.NEXT_PUBLIC_PUSHER_CLUSTER
+
 export const SCREEN_SIZES = {
   SM: 576,
   MD: 768,
@@ -60,6 +74,7 @@ export enum ROUTES {
 
   CLUB = 'club',
   MESSAGES = 'messages',
+  CHATS = 'chats',
   PROFILES = 'profiles',
   NOTES = 'notes',
 
