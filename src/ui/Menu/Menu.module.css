@@ -1,7 +1,12 @@
+.menu {
+  display: flex;
+}
+
 .trigger {
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .triggerButton {
@@ -15,8 +20,7 @@
   flex-direction: row;
   justify-content: space-between;
   gap: var(--spacing);
-  padding: calc(var(--spacing) / 2) calc(var(--spacing) / 2)
-    calc(var(--spacing) / 2) var(--spacing);
+  padding: calc(var(--spacing) / 2) calc(var(--spacing) / 2) calc(var(--spacing) / 2) var(--spacing);
 }
 
 .menuItems {
@@ -50,8 +54,7 @@
 }
 
 .menuItem {
-  padding: calc(var(--spacing) / 2) var(--spacing) calc(var(--spacing) / 2)
-    var(--spacing);
+  padding: calc(var(--spacing) / 2) var(--spacing) calc(var(--spacing) / 2) var(--spacing);
 }
 
 .sidebar {

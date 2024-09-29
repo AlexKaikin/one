@@ -4,7 +4,7 @@ import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCompareProducts, useTranslation } from '@/store'
-import { Button, Page, PageContent, Rating, Spoiler, Stack } from '@/ui'
+import { Button, Page, PageContent, Rating, Spoiler, Stack, Typography } from '@/ui'
 import { Characteristic } from '../_elements/Characteristic/Characteristic'
 import styles from './page.module.css'
 
@@ -15,7 +15,17 @@ export default function ComparePage() {
   if (!compareItems.length)
     return (
       <Page>
-        <PageContent>{t('empty')}</PageContent>
+        <PageContent>
+          <div className={styles.empty}>
+            <Stack flexDirection="column" spacing={2} alignItems="center">
+              <Typography variant="h2">No products</Typography>
+              <Typography variant="p" align="center">
+                It looks like you haven&rsquo;t added anything to the comparison yet.
+              </Typography>
+              <Button href="/shop">Go shop</Button>
+            </Stack>
+          </div>
+        </PageContent>
       </Page>
     )
 
@@ -26,16 +36,9 @@ export default function ComparePage() {
           {compareItems?.map(product => (
             <div key={product.id} className={styles.product}>
               <div className={styles.imgContainer}>
-                <Image
-                  src={product.imageUrls[0]}
-                  fill
-                  sizes="(max-width: 1800px) 50vw"
-                  alt={product.title}
-                />
+                <Image src={product.imageUrls[0]} fill sizes="(max-width: 1800px) 50vw" alt={product.title} />
               </div>
-              <Link href={`/shop/product/${product.id}`}>
-                {tAPI('title', product)}
-              </Link>
+              <Link href={`/shop/product/${product.id}`}>{tAPI('title', product)}</Link>
 
               <Stack spacing={1}>
                 {!!product.rating ? (
@@ -54,18 +57,10 @@ export default function ComparePage() {
                 <Characteristic value="year" product={product} />
               </div>
 
-              <Spoiler
-                maxHeight={150}
-                showLabel={t('show')}
-                hideLabel={t('hide')}
-              >
+              <Spoiler maxHeight={150} showLabel={t('show')} hideLabel={t('hide')}>
                 {tAPI('description', product)}
               </Spoiler>
-              <Button
-                color="error"
-                onClick={() => toggleCompare(product)}
-                isFullWidth
-              >
+              <Button color="error" onClick={() => toggleCompare(product)} isFullWidth>
                 {t('exclude')}
               </Button>
             </div>

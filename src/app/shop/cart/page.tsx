@@ -18,6 +18,7 @@ import {
   Page,
   PageContent,
   Stack,
+  Typography,
   useNotify,
   Widget,
   WidgetGroup,
@@ -70,33 +71,41 @@ export default function CartPage() {
     }
   }
 
+  if (!cartItems.length) {
+    return (
+      <Page>
+        <PageContent>
+          <div className={styles.empty}>
+            <Stack flexDirection="column" spacing={2} alignItems="center">
+              <Typography variant="h2">Your cart is empty</Typography>
+              <Typography variant="p" align="center">
+                Looks like you haven&rsquo;t added anything to your cart yet.
+              </Typography>
+              <Button href="/shop">Go shop</Button>
+            </Stack>
+          </div>
+        </PageContent>
+      </Page>
+    )
+  }
+
   return (
     <Page>
       <PageContent>
         <div className={styles.container}>
           <div className={styles.products}>
-            {cartItems?.map(product => (
-              <Product key={product.id} product={product} />
-            ))}
+            {cartItems?.map(product => <Product key={product.id} product={product} />)}
           </div>
 
           <div>
-            <Form
-              id="orderForm"
-              formMethods={formMethods}
-              onSubmit={handleSubmit}
-              className={styles.form}
-            >
+            <Form id="orderForm" formMethods={formMethods} onSubmit={handleSubmit} className={styles.form}>
               <Stack flexDirection="column">
                 {!session?.user && (
                   <div className={styles.notification}>
                     <Icon name="exclamation" />
                     <Stack flexWrap="wrap" spacing={1}>
-                      {t('onlyAuthorized')}.
-                      <Link href={'/register?from=shop/cart'}>
-                        {t('registration')}
-                      </Link>{' '}
-                      |<Link href={'/login?from=shop/cart'}>{t('login')}</Link>
+                      {t('onlyAuthorized')}.<Link href={'/register?from=shop/cart'}>{t('registration')}</Link> |
+                      <Link href={'/login?from=shop/cart'}>{t('login')}</Link>
                     </Stack>
                   </div>
                 )}
@@ -108,36 +117,12 @@ export default function CartPage() {
                   >
                     <Widget title={t('receivingAddress')}>
                       <Stack flexDirection="column" spacing={2}>
-                        <FormInput
-                          name="region"
-                          label={t('country')}
-                          disabled={!session?.user}
-                        />
-                        <FormInput
-                          name="city"
-                          label={t('city')}
-                          disabled={!session?.user}
-                        />
-                        <FormInput
-                          name="street"
-                          label={t('street')}
-                          disabled={!session?.user}
-                        />
-                        <FormInput
-                          name="home"
-                          label={t('house')}
-                          disabled={!session?.user}
-                        />
-                        <FormInput
-                          label={t('apartment')}
-                          disabled={!session?.user}
-                        />
-                        <FormInput
-                          name="index"
-                          type="number"
-                          label={t('postalCode')}
-                          disabled={!session?.user}
-                        />
+                        <FormInput name="region" label={t('country')} disabled={!session?.user} />
+                        <FormInput name="city" label={t('city')} disabled={!session?.user} />
+                        <FormInput name="street" label={t('street')} disabled={!session?.user} />
+                        <FormInput name="home" label={t('house')} disabled={!session?.user} />
+                        <FormInput label={t('apartment')} disabled={!session?.user} />
+                        <FormInput name="index" type="number" label={t('postalCode')} disabled={!session?.user} />
                       </Stack>
                     </Widget>
                   </WidgetGroup>
@@ -150,67 +135,30 @@ export default function CartPage() {
                     <WidgetGroup>
                       <Widget title={t('recipientDetails')}>
                         <Stack flexDirection="column" spacing={2}>
-                          <FormInput
-                            name="surname"
-                            label={t('lastName')}
-                            disabled={!session?.user}
-                          />
-                          <FormInput
-                            name="name"
-                            label={t('firstName')}
-                            disabled={!session?.user}
-                          />
-                          <FormInput
-                            name="middleName"
-                            label={t('middleName')}
-                            disabled={!session?.user}
-                          />
+                          <FormInput name="surname" label={t('lastName')} disabled={!session?.user} />
+                          <FormInput name="name" label={t('firstName')} disabled={!session?.user} />
+                          <FormInput name="middleName" label={t('middleName')} disabled={!session?.user} />
                         </Stack>
                       </Widget>
 
                       <Widget title={t('summery')}>
-                        <Stack
-                          flexDirection="column"
-                          spacing={2}
-                          className={cn(styles.widget)}
-                        >
-                          <Stack
-                            flexDirection="row"
-                            justifyContent="space-between"
-                            spacing={1}
-                          >
-                            <div>{t('total')}</div>{' '}
-                            <span className={styles.divider}></span>{' '}
+                        <Stack flexDirection="column" spacing={2} className={cn(styles.widget)}>
+                          <Stack flexDirection="row" justifyContent="space-between" spacing={1}>
+                            <div>{t('total')}</div> <span className={styles.divider}></span>{' '}
                             <div>{cartItems.length}</div>
                           </Stack>
 
-                          <Stack
-                            flexDirection="row"
-                            justifyContent="space-between"
-                            spacing={1}
-                          >
-                            <div>{t('discount')}</div>{' '}
-                            <span className={styles.divider}></span>{' '}
-                            <div>0%</div>
+                          <Stack flexDirection="row" justifyContent="space-between" spacing={1}>
+                            <div>{t('discount')}</div> <span className={styles.divider}></span> <div>0%</div>
                           </Stack>
 
-                          <Stack
-                            flexDirection="row"
-                            justifyContent="space-between"
-                            spacing={1}
-                          >
-                            <div>{t('amount')}</div>{' '}
-                            <span className={styles.divider}></span>{' '}
-                            <div>${totalCost}</div>
+                          <Stack flexDirection="row" justifyContent="space-between" spacing={1}>
+                            <div>{t('amount')}</div> <span className={styles.divider}></span> <div>${totalCost}</div>
                           </Stack>
 
                           <br />
 
-                          <Stack
-                            flexDirection="row"
-                            alignItems="flex-end"
-                            spacing={1}
-                          >
+                          <Stack flexDirection="row" alignItems="flex-end" spacing={1}>
                             <FormInput label={t('coupon')} />
                             <Button type="button">{t('apply')}</Button>
                           </Stack>

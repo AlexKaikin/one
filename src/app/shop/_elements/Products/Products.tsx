@@ -1,8 +1,7 @@
 'use client'
 
-import { useTranslation } from '@/store'
 import { Product } from '@/types'
-import { Pagination } from '@/ui'
+import { Button, Pagination, Stack, Typography } from '@/ui'
 import { ProductPreview } from '../ProductPreview/ProductPreview'
 import styles from './Products.module.css'
 
@@ -12,10 +11,19 @@ type Props = {
 }
 
 export function Products({ products, totalCount }: Props) {
-  const { t } = useTranslation()
 
   if (!products.length) {
-    return <>{t('empty')}</>
+    return (
+      <div className={styles.empty}>
+        <Stack flexDirection="column" spacing={2} alignItems="center">
+          <Typography variant="h2">No products</Typography>
+          <Typography variant="p" align="center">
+            No products found, please come back later.
+          </Typography>
+          <Button href="/">Go home</Button>
+        </Stack>
+      </div>
+    )
   }
 
   return (

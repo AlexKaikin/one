@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: calc(var(--spacing) / 2);
+
   padding: var(--spacing) calc(var(--spacing) * 2);
   border-radius: var(--radius);
   background-color: var(--primary);
@@ -87,4 +87,12 @@
 
 .fullWidth {
   width: 100%;
+}
+
+.spacing0 {
+  gap: 0;
+}
+
+.spacing1 {
+  gap: calc(var(--spacing) / 2);
 }

@@ -1,26 +1,113 @@
 .shopMenu {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: calc(var(--spacing) * 2);
+  align-items: flex-end;
+  gap: var(--spacing);
+  width: 100%;
 
   @media (max-width: 768px) {
     position: fixed;
     left: 0;
     bottom: 0;
     z-index: 1;
-    align-items: flex-end;
-    justify-content: space-around;
-    background-color: var(--bg);
-    padding: calc(var(--spacing) / 2);
+    gap: 0;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: color-mix(in srgb, var(--bg) 95%, var(--text) 5%);
+    width: 100%;
+    height: 70px;
+  }
+}
+
+.buttonContainer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 768px) {
     width: 100%;
   }
 }
 
+.nap {
+  width: 100%;
+  height: auto;
+}
+
 .button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 30px;
+  background-color: color-mix(in srgb, var(--bg) 95%, var(--text) 5%);
+  cursor: pointer;
+
   @media (max-width: 768px) {
+    align-items: center;
     flex-direction: column;
     gap: 0;
     font-size: 0.7rem;
+    padding: 0px;
+  }
+
+  &.active {
+    background-color: transparent;
+
+    @media (max-width: 768px) {
+      position: relative;
+      top: 0px;
+      display: flex;
+      align-items: center;
+      left: 0;
+      right: 0;
+      width: 100px;
+    }
+  }
+}
+
+.iconContainer {
+  @media (max-width: 768px) {
+    &.active {
+      border-radius: 30px;
+      background-color: var(--bg);
+      border: 10px solid var(--bg);
+    }
+  }
+}
+
+.icon {
+  padding: 10px;
+
+  border-radius: 50%;
+
+  @media (max-width: 768px) {
+    padding-bottom: 0px;
+
+    &.active {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: var(--primary);
+      color: var(--light);
+    }
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    background-color: color-mix(in srgb, var(--bg) 95%, var(--text) 5%);
+    padding: 10px;
+    padding-top: 0px;
   }
 }

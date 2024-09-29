@@ -15,14 +15,16 @@ html[data-theme='light'] {
   --radius: 10px;
 
   --bg: rgb(255, 255, 255);
-  --text: var(--dark);
+  --heading: var(--dark);
+  --text: color-mix(in srgb, var(--dark), transparent 20%);
   --border: 1px solid rgba(0, 0, 0, 0.2);
   --shadow: 0 0 200px 1px rgba(0, 0, 0, 0.1);
 }
 
 html[data-theme='dark'] {
   --bg: rgb(13 20 33);
-  --text: var(--light);
+  --heading: var(--light);
+  --text: color-mix(in srgb, var(--light), transparent 20%);
   --border: 1px solid rgba(255, 255, 255, 0.1);
   --shadow: 0 0 200px 1px rgba(255, 255, 255, 0.1);
 }

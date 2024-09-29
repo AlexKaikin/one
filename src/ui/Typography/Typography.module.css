@@ -30,6 +30,7 @@
 .h6 {
   font-size: var(--size);
   margin-bottom: calc(var(--spacing) * 2);
+  color: var(--heading);
 
   &:last-of-type {
     margin-bottom: 0;
