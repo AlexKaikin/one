@@ -16,4 +16,6 @@
   width: 100%;
   max-width: 1600px;
   flex-wrap: wrap;
+  font-size: .9rem;
+  color: color-mix(in srgb, var(--text), transparent 40%);
 }

@@ -42,12 +42,25 @@
 }
 
 .name {
-  margin-bottom: calc(var(--spacing));
+  color: var(--text-heading);
+  font-weight: 700;
 }
 
 .date {
   display: flex;
+  align-items: center;
   justify-content: center;
+  gap: var(--spacing);
+
+  .line {
+    height: 1px;
+    width: 100%;
+    background-color: color-mix(in srgb, var(--text), transparent 80%);
+  }
+
+  .text {
+    white-space: nowrap;
+  }
 }
 
 .time {
@@ -65,5 +78,5 @@
 }
 
 .my {
- background-color: color-mix(in srgb, var(--text), transparent 95%);
+  background-color: color-mix(in srgb, var(--text), transparent 95%);
 }

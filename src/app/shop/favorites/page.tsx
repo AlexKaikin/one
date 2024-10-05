@@ -1,9 +1,11 @@
-'use client'
+'use client';
 
-import { useFavoriteProducts } from '@/store'
-import { Button, Page, PageContent, Stack, Typography } from '@/ui'
+import { useFavoriteProducts } from '@/store';
+import { Button, Page, PageContent, Stack, Typography } from '@/ui';
+import imageSrc from '../../../assets/images/common/empty-favorites.png'
 import { Products } from '../_elements'
-import styles from './page.module.css'
+import Image from 'next/image';
+
 
 export default function FavoritesPage() {
   const { favoritesItems } = useFavoriteProducts()
@@ -12,15 +14,21 @@ export default function FavoritesPage() {
     return (
       <Page>
         <PageContent>
-          <div className={styles.empty}>
+          <Stack alignItems="center" justifyContent="center" isWide>
             <Stack flexDirection="column" spacing={2} alignItems="center">
-              <Typography variant="h2">No favorites products</Typography>
+              <div>
+                <Image height={300} width={300} src={imageSrc} alt="No favorites" />
+              </div>
+
+              <Typography variant="h2" align="center">No favorites products</Typography>
+
               <Typography variant="p" align="center">
                 It looks like you haven&rsquo;t added anything to your favorites yet.
               </Typography>
+
               <Button href="/shop">Go shop</Button>
             </Stack>
-          </div>
+          </Stack>
         </PageContent>
       </Page>
     )

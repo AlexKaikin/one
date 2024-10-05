@@ -15,30 +15,25 @@ export default function Home() {
   const { status } = useSession()
 
   return (
-    <Stack flexDirection='column'>
+    <Stack flexDirection="column">
       <Page>
         <PageContent className={styles.container}>
           <div className={styles.col}>
-            <Stack
-              isWide
-              flexDirection="column"
-              justifyContent="center"
-              spacing={2}
-            >
-              <Typography variant="h1">{t('homeTitle')}</Typography>
-              <Typography variant="h5">{t('homeSubTitle')}</Typography>
+            <Stack isWide flexDirection="column" justifyContent="center" spacing={2}>
+              <Stack flexDirection='column'>
+                <Typography variant="h1">{t('homeTitle')}</Typography>
+                <Typography variant="p" italic>
+                  {t('homeSubTitle')}
+                </Typography>
+              </Stack>
+
               <Typography variant="p">{t('homeDescription')}</Typography>
 
               {status === 'unauthenticated' && (
                 <Stack flexDirection="row" spacing={1}>
-                  <Button onClick={() => router.push('/register')}>
-                    {t('registration')}
-                  </Button>
+                  <Button onClick={() => router.push('/register')}>{t('registration')}</Button>
 
-                  <Button
-                    variant="outlined"
-                    onClick={() => router.push('/login')}
-                  >
+                  <Button variant="outlined" onClick={() => router.push('/login')}>
                     {t('login')}
                   </Button>
                 </Stack>

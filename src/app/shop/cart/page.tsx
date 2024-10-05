@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form'
 import cn from 'classnames'
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
@@ -24,6 +25,7 @@ import {
   WidgetGroup,
 } from '@/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
+import imageSrc from '../../../assets/images/shop/cart-empty.png'
 import { Product } from './_elements'
 import styles from './page.module.css'
 
@@ -75,15 +77,23 @@ export default function CartPage() {
     return (
       <Page>
         <PageContent>
-          <div className={styles.empty}>
+          <Stack alignItems="center" justifyContent="center" isWide>
             <Stack flexDirection="column" spacing={2} alignItems="center">
-              <Typography variant="h2">Your cart is empty</Typography>
+              <div>
+                <Image height={300} width={300} src={imageSrc} alt="Cart empty" />
+              </div>
+
+              <Typography variant="h2" align="center">Your cart is empty</Typography>
+
               <Typography variant="p" align="center">
                 Looks like you haven&rsquo;t added anything to your cart yet.
               </Typography>
-              <Button href="/shop">Go shop</Button>
+
+              <Button href="/shop" endIcon={<Icon name="chevronRight" height={16} width={16} />}>
+                Go shop
+              </Button>
             </Stack>
-          </div>
+          </Stack>
         </PageContent>
       </Page>
     )

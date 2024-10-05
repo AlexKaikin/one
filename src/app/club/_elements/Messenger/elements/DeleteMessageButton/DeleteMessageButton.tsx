@@ -1,11 +1,12 @@
-'use client'
+'use client';
 
-import { useContext } from 'react'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { MessageService } from '@/services'
-import { Icon, IconButton, useNotify } from '@/ui'
-import { MessengerContext, MessengerContextType } from '../../context'
+import { useContext } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { MessageService } from '@/services';
+import { Icon, IconButton, useNotify } from '@/ui';
+import { MessengerContext, MessengerContextType } from '../../context';
+
 
 type Props = {
   id: string
@@ -16,6 +17,7 @@ export function DeleteMessageButton({ id, sender }: Props) {
   const { setMessages } = useContext(MessengerContext) as MessengerContextType
   const { data } = useSession()
   const { notify } = useNotify()
+  const color = 'color-mix(in srgb, var(--text), transparent 50%)'
 
   const remove = async () => {
     try {
@@ -31,10 +33,8 @@ export function DeleteMessageButton({ id, sender }: Props) {
   }
 
   return (
-    <div>
-      <IconButton onClick={remove}>
-        <Icon name="trash" width={16} height={16} />
-      </IconButton>
-    </div>
+    <IconButton onClick={remove}>
+      <Icon name="trash" width={16} height={16} color={color} />
+    </IconButton>
   )
 }

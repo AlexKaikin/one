@@ -1,13 +1,13 @@
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
-import { Noto_Sans } from 'next/font/google'
+import { Jost } from 'next/font/google'
 import { cookies } from 'next/headers'
 import { Providers } from '@/providers'
 import { Layout } from '@/ui'
 import '../assets/styles/globals.css'
 import { Header } from './_elements'
 
-const font = Noto_Sans({
+const font = Jost({
   weight: '500',
   subsets: ['latin'],
   display: 'swap',

@@ -94,14 +94,14 @@ export const Message = memo(function Message({ index }: { index: number }) {
 
       <div className={styles.message}>
         {!isTodayEqualYesterday(messages, index) && (
-          <div className={styles.date}>{dayjs(createdAt).format('D MMMM YYYY')}</div>
+          <div className={styles.date}>
+            <div className={styles.line}></div>
+            <div className={styles.text}>{dayjs(createdAt).format('D MMMM YYYY')}</div>
+            <div className={styles.line}></div>
+          </div>
         )}
 
-        <div
-          className={cn(styles.card, {
-            [styles['my']]: sender.id !== session?.user.id,
-          })}
-        >
+        <div className={cn(styles.card, { [styles['my']]: sender.id !== session?.user.id })}>
           <div className={styles.avatar}>
             <Image
               fill
@@ -115,9 +115,8 @@ export const Message = memo(function Message({ index }: { index: number }) {
 
           <div className={cn(styles.content)}>
             <div className={styles.header}>
-              <Stack spacing={1}>
+              <Stack alignItems="center" spacing={1}>
                 <div className={styles.name}>{firstName}</div>
-
                 <div className={styles.time}>{dayjs(createdAt).format('H:mm')}</div>
               </Stack>
 

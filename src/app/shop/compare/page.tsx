@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useCompareProducts, useTranslation } from '@/store'
 import { Button, Page, PageContent, Rating, Spoiler, Stack, Typography } from '@/ui'
+import imageSrc from '../../../assets/images/shop/compare-products.png'
 import { Characteristic } from '../_elements/Characteristic/Characteristic'
 import styles from './page.module.css'
 
@@ -16,15 +17,23 @@ export default function ComparePage() {
     return (
       <Page>
         <PageContent>
-          <div className={styles.empty}>
+          <Stack alignItems="center" justifyContent="center" isWide>
             <Stack flexDirection="column" spacing={2} alignItems="center">
-              <Typography variant="h2">No products</Typography>
+              <div>
+                <Image height={300} width={300} src={imageSrc} alt="Cart empty" />
+              </div>
+
+              <Typography variant="h2" align="center">
+                No products
+              </Typography>
+
               <Typography variant="p" align="center">
                 It looks like you haven&rsquo;t added anything to the comparison yet.
               </Typography>
+
               <Button href="/shop">Go shop</Button>
             </Stack>
-          </div>
+          </Stack>
         </PageContent>
       </Page>
     )

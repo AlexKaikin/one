@@ -71,7 +71,7 @@ export default function Register() {
               onSubmit={handleSubmit}
             >
               <FormInput name="email" label={t('email')} />
-              <FormInput name="firstName" label={t('firstName')} />
+              <FormInput name="Name" label={t('name')} />
               <FormInput
                 name="password"
                 label={t('password')}

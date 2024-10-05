@@ -3,13 +3,13 @@ html[data-theme='light'] {
   --dark: black;
   --light: white;
   --gray: #eff2f5;
-  --gold: #ebcd27;
-  --primary: #3861fb;
+  --gold: #d3c577;
+  --primary: #99947c;
   --secondary: color-mix(in srgb, var(--primary), transparent 90%);
   --success: rgb(86, 143, 69);
   --warning: rgb(143, 126, 69);
   --error: rgb(143, 69, 69);
-  --info: #566fdc;
+  --info: #969ec1;
 
   --spacing: 10px;
   --radius: 10px;
@@ -17,6 +17,7 @@ html[data-theme='light'] {
   --bg: rgb(255, 255, 255);
   --heading: var(--dark);
   --text: color-mix(in srgb, var(--dark), transparent 20%);
+  --text-heading: var(--dark);
   --border: 1px solid rgba(0, 0, 0, 0.2);
   --shadow: 0 0 200px 1px rgba(0, 0, 0, 0.1);
 }
@@ -25,6 +26,7 @@ html[data-theme='dark'] {
   --bg: rgb(13 20 33);
   --heading: var(--light);
   --text: color-mix(in srgb, var(--light), transparent 20%);
+  --text-heading: var(--light);
   --border: 1px solid rgba(255, 255, 255, 0.1);
   --shadow: 0 0 200px 1px rgba(255, 255, 255, 0.1);
 }

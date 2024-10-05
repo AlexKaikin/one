@@ -8,14 +8,19 @@ type Props = {
   variant: fontVariants
   tag?: fontVariants
   align?: CSSProperties['textAlign']
+  italic?: boolean
 } & HTMLAttributes<HTMLElement>
 
 export function Typography(props: Props) {
-  const { children, variant, align = 'left', tag = variant, ...restProps } = props
+  const { children, variant, align = 'left', italic, tag = variant, ...restProps } = props
   const CustomTag: ElementType = `${tag}`
 
   return (
-    <CustomTag className={cn(styles[variant])} {...restProps} style={{ textAlign: align }}>
+    <CustomTag
+      className={cn(styles[variant], { [styles['italic']]: italic })}
+      {...restProps}
+      style={{ textAlign: align }}
+    >
       {children}
     </CustomTag>
   )

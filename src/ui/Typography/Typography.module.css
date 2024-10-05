@@ -1,9 +1,11 @@
 .h1 {
   --size: 2rem;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .h2 {
   --size: 1.8rem;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .h3 {
@@ -31,6 +33,7 @@
   font-size: var(--size);
   margin-bottom: calc(var(--spacing) * 2);
   color: var(--heading);
+  text-transform: uppercase;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -43,4 +46,8 @@
   &:last-of-type {
     margin-bottom: 0;
   }
+}
+
+.italic {
+  font-style: italic;
 }

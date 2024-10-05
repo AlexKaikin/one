@@ -40,6 +40,7 @@ export function Stack(props: Props) {
         overflow,
         gap: spacing ? `calc(var(--spacing) * ${spacing})` : '0',
         width: isWide ? '100%' : 'auto',
+        height: isWide ? '100%' : 'auto',
         ...style,
       }}
       {...rest}

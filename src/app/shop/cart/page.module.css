@@ -62,10 +62,3 @@
     opacity: 0.5;
   }
 }
-
-.empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}

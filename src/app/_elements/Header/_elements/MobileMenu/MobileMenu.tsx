@@ -15,7 +15,7 @@ export function MobileMenu() {
   const { data } = useSession()
 
   return (
-    <Menu trigger={<Icon name="list" width={25} height={25} />}>
+    <Menu trigger={<Icon name="twoLineHorizontal" />}>
       <MenuItem>
         <Link href={'/'}>{t('home')}</Link>
       </MenuItem>
@@ -47,9 +47,7 @@ export function MobileMenu() {
       <SubMenu trigger={t('blog')} href={'/blog'}>
         <SubMenu trigger={t('posts')} href={'/blog'}>
           <MenuItem>
-            <Link href={'/blog/category/instructions'}>
-              {t('instructions')}
-            </Link>
+            <Link href={'/blog/category/instructions'}>{t('instructions')}</Link>
           </MenuItem>
 
           <MenuItem>
