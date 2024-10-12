@@ -1,25 +1,18 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { isAxiosError } from 'axios'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { z } from 'zod'
-import { UserService } from '@/services'
-import { useTranslation } from '@/store'
-import { UserRegistration } from '@/types'
-import {
-  Button,
-  Form,
-  FormInput,
-  Page,
-  PageContent,
-  Stack,
-  Typography,
-} from '@/ui'
-import { zodResolver } from '@hookform/resolvers/zod'
-import styles from './page.module.css'
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { isAxiosError } from 'axios';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+import { UserService } from '@/services';
+import { useTranslation } from '@/store';
+import { UserRegistration } from '@/types';
+import { Button, Form, FormInput, Page, PageContent, Stack, Typography } from '@/ui';
+import { zodResolver } from '@hookform/resolvers/zod';
+import styles from './page.module.css';
+
 
 function getSchema(t: Function) {
   const required_error = t('required')
@@ -42,7 +35,7 @@ export default function Register() {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
   const formMethods = useForm<UserRegistration>({
-    defaultValues: { email: '', password: '' },
+    defaultValues: { email: '', password: '', firstName: '' },
     resolver: zodResolver(getSchema(t)),
   })
 
@@ -71,7 +64,7 @@ export default function Register() {
               onSubmit={handleSubmit}
             >
               <FormInput name="email" label={t('email')} />
-              <FormInput name="Name" label={t('name')} />
+              <FormInput name="firstName" label={t('name')} />
               <FormInput
                 name="password"
                 label={t('password')}

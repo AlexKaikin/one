@@ -1,13 +1,6 @@
 'use client'
 
-import {
-  ReactNode,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react'
+import { ReactNode, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import cn from 'classnames'
 import Link from 'next/link'
@@ -34,14 +27,8 @@ export function Menu(props: MenuProps) {
   )
 }
 
-export function MenuWithContext({
-  trigger,
-  href,
-  active,
-  children,
-}: MenuProps) {
-  const { open, style, setStyle, handleCloseMenu, handleToggleMenu } =
-    useContext(MenuContext) as MenuContextType
+export function MenuWithContext({ trigger, href, active, children }: MenuProps) {
+  const { open, style, setStyle, handleCloseMenu, handleToggleMenu } = useContext(MenuContext) as MenuContextType
   const { height, width } = useWindowDimensions()
   const ref = useRef<any | null>(null)
   const portalRef = useRef<any | null>(null)
@@ -58,32 +45,18 @@ export function MenuWithContext({
     if (open && portalRef.current && height && width) {
       const portalRect = portalRef.current.getBoundingClientRect()
 
-      setStyle(prev => ({
-        ...prev,
-        top: portalRect.top + 'px',
-      }))
+      setStyle(prev => ({ ...prev, top: 40 + 'px' }))
 
       if (portalRect.right > width) {
-        setStyle(prev => ({
-          ...prev,
-          right: `10px`,
-        }))
+        setStyle(prev => ({ ...prev, right: `10px` }))
       }
 
       if (portalRect.bottom > height) {
-        setStyle(prev => ({
-          ...prev,
-          top: 'auto',
-          bottom: `50px`,
-        }))
+        setStyle(prev => ({ ...prev, top: `-40px` }))
       }
 
       if (portalRect.left < 0) {
-        setStyle(prev => ({
-          ...prev,
-
-          left: `10px`,
-        }))
+        setStyle(prev => ({ ...prev, left: `10px` }))
       }
 
       if (portalRect.top < 0) {
@@ -96,11 +69,7 @@ export function MenuWithContext({
     <div ref={ref} className={styles.menu}>
       <div className={styles.trigger}>
         {href ? (
-          <Link
-            href={href || '#'}
-            onClick={handleCloseMenu}
-            className={cn({ [styles.activeLink]: active })}
-          >
+          <Link href={href || '#'} onClick={handleCloseMenu} className={cn({ [styles.activeLink]: active })}>
             {trigger}
           </Link>
         ) : (
@@ -111,12 +80,7 @@ export function MenuWithContext({
 
         {!!href && (
           <IconButton variant="clean" onClick={handleToggleMenu}>
-            <Icon
-              name="arrowDropDown"
-              width={16}
-              height={16}
-              className={styles.icon}
-            />
+            <Icon name="arrowDropDown" width={16} height={16} className={styles.icon} />
           </IconButton>
         )}
       </div>

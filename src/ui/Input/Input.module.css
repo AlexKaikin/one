@@ -32,7 +32,7 @@
   outline: none;
   border: 0;
   width: 100%;
-  padding: calc(var(--spacing));
+  /* padding: calc(var(--spacing)); */
 }
 
 .left {

@@ -1,22 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import {
-  useCart,
-  useFavoriteProducts,
-  useCompareProducts,
-  useTranslation,
-} from '@/store'
+import { useCart, useFavoriteProducts, useCompareProducts, useTranslation } from '@/store'
 import { Product } from '@/types'
-import {
-  Button,
-  Icon,
-  IconButton,
-  Input,
-  Stack,
-  Typography,
-  useNotify,
-} from '@/ui'
+import { Button, Icon, IconButton, Input, Stack, Typography, useNotify } from '@/ui'
 import styles from './Actions.module.css'
 
 export function Actions({ product }: { product: Product }) {
@@ -93,20 +80,25 @@ export function Actions({ product }: { product: Product }) {
           <div className={styles.quantityTitle}>{t('quantity')}</div>
 
           <div className={styles.quantityContent}>
-            <IconButton onClick={decriment}>
-              <Icon name="minus" />
-            </IconButton>
-
             <Input
               type="number"
               onChange={quantityChange}
               value={quantity}
               align="center"
+              color="var(--bg)"
+              startAdornment={
+                <IconButton onClick={decriment} spacing={0.5}>
+                  <Icon name="minus" />
+                </IconButton>
+              }
+              endAdornment={
+                <IconButton onClick={increment} spacing={0.5}>
+                  <Icon name="plus" />
+                </IconButton>
+              }
+              border="2px solid color-mix(in srgb, var(--text), transparent 70%)"
+              spacing={0}
             />
-
-            <IconButton onClick={increment}>
-              <Icon name="plus" />
-            </IconButton>
           </div>
         </Stack>
 
@@ -119,24 +111,15 @@ export function Actions({ product }: { product: Product }) {
       {message && <Typography variant="p">{message}</Typography>}
 
       <Stack flexDirection="row" spacing={1} justifyContent="flex-start">
-        <IconButton
-          color={findCompare ? 'primary' : 'secondary'}
-          onClick={toggleCompareProduct}
-        >
+        <IconButton color={findCompare ? 'primary' : 'secondary'} onClick={toggleCompareProduct}>
           <Icon name="barChart" width={20} height={20} />
         </IconButton>
 
-        <IconButton
-          color={findFavorite ? 'primary' : 'secondary'}
-          onClick={toggleFavoriteProduct}
-        >
+        <IconButton color={findFavorite ? 'primary' : 'secondary'} onClick={toggleFavoriteProduct}>
           <Icon name="bookmark" width={20} height={20} />
         </IconButton>
 
-        <Button
-          endIcon={<Icon name="cart" width={20} height={20} />}
-          onClick={addToCart}
-        >
+        <Button endIcon={<Icon name="cart" width={20} height={20} />} onClick={addToCart}>
           {t('add')}
         </Button>
       </Stack>

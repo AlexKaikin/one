@@ -1,4 +1,5 @@
-import { PROFILE_TYPES, ROLES, USER_STATUSES } from '@/constants'
+import { PROFILE_TYPES, ROLES, USER_STATUSES } from '@/constants';
+
 
 export type User = {
   id: string
@@ -16,6 +17,7 @@ export type User = {
 export type UserRegistration = {
   email: string
   password: string
+  firstName: string
 }
 
 export type UserResponse =
@@ -40,7 +42,4 @@ export type Profile = {
   updatedAt: string
 }
 
-export type ProfileRegistration = Omit<
-  Profile,
-  'id' | 'createdAt' | 'updatedAt'
->
+export type ProfileRegistration = Omit<Profile, 'id' | 'createdAt' | 'updatedAt'>

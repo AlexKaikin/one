@@ -9,10 +9,12 @@ type Props = ComponentProps<'button'> & {
   color?: Color
   variant?: Variant
   children: ReactNode
+  spacing?: number
 }
 
 function ForwardRef(props: Props, ref: Ref<HTMLButtonElement>) {
-  const { color, variant, children, ...rest } = props
+  const { color, variant, spacing, children, ...rest } = props
+  const padding = `calc(var(--spacing) * ${spacing || 1})`
 
   return (
     <button
@@ -21,6 +23,7 @@ function ForwardRef(props: Props, ref: Ref<HTMLButtonElement>) {
         [styles[color || 'primary']]: color,
         [styles[variant || 'contained']]: variant,
       })}
+      style={{ padding }}
       {...rest}
     >
       {children}

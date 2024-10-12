@@ -12,13 +12,6 @@
   width: 200px;
 }
 
-.quantity__number {
-  margin: 0 10px;
-  display: inline-block;
-  width: 25px;
-  text-align: center;
-}
-
 .priceNumber {
   font-size: 2rem;
   line-height: 44px;
