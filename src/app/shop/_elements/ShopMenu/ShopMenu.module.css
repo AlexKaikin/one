@@ -19,7 +19,7 @@
       bottom: 0;
       background-color: color-mix(in srgb, var(--bg) 95%, var(--text) 5%);
       width: 100%;
-      height: 65px;
+      height: 60px;
     }
   }
 }
@@ -43,7 +43,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 10px 0 0;
+  padding: 5px 10px;
+  padding-right: 20px;
   border-radius: 10px;
   background-color: color-mix(in srgb, var(--bg) 95%, var(--text) 5%);
   cursor: pointer;
@@ -86,14 +87,14 @@
 
 .icon {
   display: flex;
-  padding: 10px;
+  padding: 7px;
   border-radius: 10px;
   background-color: color-mix(in srgb, var(--bg) 95%, var(--text) 5%);
 
   &.active {
     display: flex;
     align-items: center;
-    padding: 10px;
+    /* padding: 10px; */
     background-color: var(--primary);
     color: var(--light);
   }

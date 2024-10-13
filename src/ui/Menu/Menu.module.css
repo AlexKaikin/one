@@ -35,8 +35,7 @@
   border-radius: var(--radius);
   overflow: auto;
   max-height: 80vh;
-  padding-top: var(--spacing);
-  padding-bottom: var(--spacing);
+  padding: var(--spacing);
 
   &::before {
     content: '';
@@ -54,7 +53,7 @@
 }
 
 .menuItem {
-  padding: calc(var(--spacing) / 2) var(--spacing) calc(var(--spacing) / 2) var(--spacing);
+  padding: var(--spacing);
 }
 
 .sidebar {

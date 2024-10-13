@@ -36,6 +36,8 @@ export type CartItem = {
   quantity: number
   inStock: number
   category: string
+  description: string
+  translations: { ru: { title: string } }
 }
 
 export type Order = {
@@ -70,7 +72,7 @@ export type Review = {
   updatedAt: string
 }
 
-export type CreateReview = Omit<
-  Review,
-  'id' | 'status' | 'createdAt' | 'updatedAt' | 'product' | 'user'
-> & { product: string; user: string }
+export type CreateReview = Omit<Review, 'id' | 'status' | 'createdAt' | 'updatedAt' | 'product' | 'user'> & {
+  product: string
+  user: string
+}

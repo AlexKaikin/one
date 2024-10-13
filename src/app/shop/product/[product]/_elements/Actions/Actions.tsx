@@ -50,8 +50,8 @@ export function Actions({ product }: { product: Product }) {
   }
 
   function addToCart() {
-    const { id, imageUrls, title, price, inStock, category } = product
-    setCart({ id, imageUrls, title, price, quantity, cost, inStock, category })
+    const { id, imageUrls, title, price, inStock, category, description, translations } = product
+    setCart({ id, imageUrls, title, price, quantity, cost, inStock, category, description, translations })
     notify({ type: 'info', message: t('addedToCart') })
   }
 

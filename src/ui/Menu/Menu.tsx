@@ -52,7 +52,7 @@ export function MenuWithContext({ trigger, href, active, children }: MenuProps) 
       }
 
       if (portalRect.bottom > height) {
-        setStyle(prev => ({ ...prev, top: `-40px` }))
+        setStyle(prev => ({ ...prev, top: `-70px` }))
       }
 
       if (portalRect.left < 0) {

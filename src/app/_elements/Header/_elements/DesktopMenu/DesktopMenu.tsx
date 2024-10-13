@@ -75,8 +75,7 @@ export function DesktopMenu() {
       <Link
         href={'/'}
         className={cn({
-          [styles.active]:
-            (pathname.indexOf('/') >= 0 && '/' !== '/') || pathname === '/',
+          [styles.active]: (pathname.indexOf('/') >= 0 && '/' !== '/') || pathname === '/',
         })}
       >
         {t('home')}
@@ -169,10 +168,7 @@ function SubMenuItem({ link }: { link: Link }) {
 
   return (
     <MenuItem>
-      <Link
-        href={link.url}
-        className={cn({ [styles.active]: pathname === link.url })}
-      >
+      <Link href={link.url} className={cn({ [styles.active]: pathname === link.url })}>
         {link.title}
       </Link>
     </MenuItem>
